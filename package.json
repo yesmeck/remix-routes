@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "camel-case": "^4.1.2",
+    "chokidar": "^3.5.2",
     "meow": "^10.1.2",
     "pluralize": "^8.0.0"
   }

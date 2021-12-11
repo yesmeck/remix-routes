@@ -3,6 +3,7 @@ import { camelCase } from 'camel-case';
 import { readConfig } from '@remix-run/dev/config.js';
 import * as fs from 'fs';
 import * as path from 'path';
+import chokidar from 'chokidar';
 
 const helpText = `
 Usage
@@ -28,7 +29,7 @@ interface PathInfo {
   fullPath: string;
 }
 
-async function build(flags: { watch?: boolean }) {
+async function build() {
   const config = await readConfig();
   const paths: Array<PathInfo> = [];
   const handleRoutesRecursive = (parentId?: string, parentPath: string = '') => {
@@ -51,6 +52,15 @@ async function build(flags: { watch?: boolean }) {
   }
   handleRoutesRecursive();
   generate(paths);
+}
+
+function watch() {
+  const remixRoot = process.cwd()
+  chokidar.watch([path.join(remixRoot, 'app/routes/**/*.{ts,tsx}'), path.join(remixRoot, 'remix.config.js')]).on('change', () => {
+    console.log('change');
+    build();
+  });
+  console.log('Watching for routes changes...');
 }
 
 function generate(paths: Array<PathInfo>) {
@@ -94,7 +104,6 @@ function generateDefinition(functionName: string, paramNames: string[]) {
   return `export declare function ${functionName}(${typedParams.join(', ')}): string;`;
 }
 
-
 function parse(
   path: string,
 ): [string[], string[]] {
@@ -113,4 +122,9 @@ function parse(
 }
 
 
-build(cli.flags);
+if (cli.flags.watch) {
+  watch();
+} else {
+  build();
+}
+
