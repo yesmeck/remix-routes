@@ -122,7 +122,7 @@ function parse(
     console.log(route.path, segment, paramOrAction);
     if (paramOrAction) {
       if (paramOrAction.startsWith(':')) {
-        paramNames.push(paramOrAction);
+        paramNames.push(paramOrAction.replace(':', ''));
       } else {
         segments.unshift(paramOrAction);
       }

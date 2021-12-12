@@ -3,8 +3,8 @@
 exports[`build 1`] = `
 "export declare function adminPath(): string;
 export declare function adminEpisodesPath(): string;
-export declare function adminEpisodePath(:id: string | number): string;
-export declare function adminEpisodeCommentPath(:id: string | number): string;
+export declare function adminEpisodePath(id: string | number): string;
+export declare function adminEpisodeCommentPath(id: string | number): string;
 export declare function newAdminEpisodePath(): string;"
 `;
 
@@ -17,11 +17,11 @@ export function adminEpisodesPath() {
   return '/admin/episodes';
 }
 
-export function adminEpisodePath(:id) {
+export function adminEpisodePath(id) {
   return '/admin' + '/episodes' + '/' + id;
 }
 
-export function adminEpisodeCommentPath(:id) {
+export function adminEpisodeCommentPath(id) {
   return '/admin' + '/episodes' + '/' + id + '/comments';
 }
 
