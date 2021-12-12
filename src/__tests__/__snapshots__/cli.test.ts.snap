@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`build 1`] = `
-"export declare function adminPath(): string;
+"export declare function chatPath(season: string | number, episode: string | number, slug: string | number): string;
+export declare function chatPath(season: string | number, episode: string | number): string;
+export declare function adminPath(): string;
 export declare function adminEpisodesPath(): string;
 export declare function adminEpisodePath(id: string | number): string;
 export declare function adminEpisodeCommentsPath(id: string | number): string;
@@ -11,7 +13,15 @@ export declare function jokesPath(jokeId: string | number): string;"
 `;
 
 exports[`build 2`] = `
-"export function adminPath() {
+"export function chatPath(season, episode, slug) {
+  return '/chats' + '/' + season + '/' + episode + '/' + slug;
+}
+
+export function chatPath(season, episode) {
+  return '/chats' + '/' + season + '/' + episode;
+}
+
+export function adminPath() {
   return '/admin';
 }
 

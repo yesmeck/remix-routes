@@ -116,18 +116,19 @@ function parse(
 ): [string[], string[]] {
   const segments: string[] = [];
   const paramNames: string[] = [];
+  console.log(routes);
   routes.forEach(route => {
     if (route.path?.startsWith(':')) {
       return paramNames.push(route.path.replace(':', ''));
     }
-    const [segment, paramOrAction] = route.path!.split('/');
-    if (paramOrAction) {
+    const [segment, ...paramOrActions] = route.path!.split('/');
+    paramOrActions.forEach(paramOrAction => {
       if (paramOrAction.startsWith(':')) {
         paramNames.push(paramOrAction.replace(':', ''));
       } else {
         segments.unshift(paramOrAction);
       }
-    }
+    });
     if (route.index) {
       return segments.push(segment);
     }
