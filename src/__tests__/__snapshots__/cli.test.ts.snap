@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`build 1`] = `
+"export declare function adminPath(): string;
+export declare function adminEpisodesPath(): string;
+export declare function adminEpisodesIdPath(id: string | number): string;
+export declare function adminEpisodesNewPath(): string;
+export declare function adminCommentsPath(): string;"
+`;
+
+exports[`build 2`] = `
+"export function adminPath() {
+  return '/admin';
+}
+export function adminEpisodesPath() {
+  return '/admin' + '/episodes';
+}
+export function adminEpisodesIdPath(id) {
+  return '/admin' + '/episodes' + '/' + id;
+}
+export function adminEpisodesNewPath() {
+  return '/admin' + '/episodes' + '/new';
+}
+export function adminCommentsPath() {
+  return '/admin' + '/comments';
+}"
+`;
+
+exports[`build 3`] = `"{\\"name\\":\\".remix-routes\\",\\"main\\":\\"index.js\\",\\"types\\":\\"index.d.ts\\"}"`;

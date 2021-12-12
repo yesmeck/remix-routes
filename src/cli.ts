@@ -14,7 +14,6 @@ Options
 `;
 
 const cli = meow(helpText, {
-  importMeta: import.meta,
   flags: {
     watch: {
       type: "boolean",
@@ -29,8 +28,8 @@ interface PathInfo {
   fullPath: string;
 }
 
-async function build() {
-  const config = await readConfig();
+export async function build(remixRoot: string) {
+  const config = await readConfig(remixRoot);
   const paths: Array<PathInfo> = [];
   const handleRoutesRecursive = (parentId?: string, parentPath: string = '') => {
     let routes = Object.values(config.routes).filter(
@@ -54,11 +53,10 @@ async function build() {
   generate(paths);
 }
 
-function watch() {
-  const remixRoot = process.cwd()
+function watch(remixRoot: string) {
   chokidar.watch([path.join(remixRoot, 'app/routes/**/*.{ts,tsx}'), path.join(remixRoot, 'remix.config.js')]).on('change', () => {
     console.log('change');
-    build();
+    build(remixRoot);
   });
   console.log('Watching for routes changes...');
 }
@@ -121,10 +119,12 @@ function parse(
   return [segments, paramNames];
 }
 
+const remixRoot = process.env.REMIX_ROOT || process.cwd()
 
-if (cli.flags.watch) {
-  watch();
-} else {
-  build();
+if (require.main === module) {
+  if (cli.flags.watch) {
+    watch(remixRoot);
+  } else {
+    build(remixRoot);
+  }
 }
-

@@ -15,21 +15,23 @@
     "watch": "tsc --watch",
     "build": "tsc",
     "prepack": "npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Wei Zhu",
-  "license": "ISC",
-  "type": "module",
+  "license": "MIT",
   "devDependencies": {
     "@remix-run/dev": "^1.0.6",
+    "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
+    "jest": "^27.4.4",
+    "ts-jest": "^27.1.1",
     "typescript": "^4.5.3"
   },
   "dependencies": {
     "camel-case": "^4.1.2",
     "chokidar": "^3.5.2",
-    "meow": "^10.1.2",
+    "meow": "9.0.0",
     "pluralize": "^8.0.0"
   }
 }
