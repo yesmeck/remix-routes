@@ -1,9 +1,11 @@
 import meow from 'meow';
 import { camelCase } from 'camel-case';
-import { readConfig } from '@remix-run/dev/config.js';
+import pluralize from 'pluralize';
 import * as fs from 'fs';
 import * as path from 'path';
 import chokidar from 'chokidar';
+import type { ConfigRoute } from '@remix-run/dev/config/routes';
+import { readConfig } from '@remix-run/dev/config';
 
 const helpText = `
 Usage
@@ -31,19 +33,21 @@ interface PathInfo {
 export async function build(remixRoot: string) {
   const config = await readConfig(remixRoot);
   const paths: Array<PathInfo> = [];
-  const handleRoutesRecursive = (parentId?: string, parentPath: string = '') => {
+  const handleRoutesRecursive = (parentId?: string, parentPath: ConfigRoute[] = []) => {
     let routes = Object.values(config.routes).filter(
       route => route.parentId === parentId
     );
     routes.forEach(route => {
       let currentPath = parentPath
       if (route.path) {
-        currentPath = [currentPath, route.path].join('/');
+        currentPath = [...currentPath, route]
+        console.log(currentPath);
+        const fullPath = currentPath.reduce((acc, curr) => [acc, curr.path].join('/'), '');
         const [segments, paramsNames] = parse(currentPath);
         paths.push({
           segments,
           paramsNames,
-          fullPath: currentPath,
+          fullPath: fullPath,
         });
       }
       handleRoutesRecursive(route.id, currentPath);
@@ -109,17 +113,26 @@ function generateDefinition(functionName: string, paramNames: string[]) {
 }
 
 function parse(
-  path: string,
+  routes: ConfigRoute[],
 ): [string[], string[]] {
   const segments: string[] = [];
   const paramNames: string[] = [];
-  path.split('/').forEach(segment => {
-    if (segment.startsWith(':')) {
-      const paramName = segment.slice(1);
-      segments.push(paramName);
-      paramNames.push(paramName);
-    } else {
+  routes.forEach(route => {
+    const [segment, paramOrAction] = route.path!.split('/');
+    console.log(route.path, segment, paramOrAction);
+    if (paramOrAction) {
+      if (paramOrAction.startsWith(':')) {
+        paramNames.push(paramOrAction);
+      } else {
+        segments.unshift(paramOrAction);
+      }
+    }
+    if (route.index) {
       segments.push(segment);
+    } else {
+      segments.push(
+        pluralize(segment, 1)
+      );
     }
   });
   return [segments, paramNames];

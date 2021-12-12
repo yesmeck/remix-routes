@@ -4,6 +4,7 @@ specifiers:
   '@remix-run/dev': ^1.0.6
   '@types/jest': ^27.0.3
   '@types/node': ^16.11.12
+  '@types/pluralize': ^0.0.29
   camel-case: ^4.1.2
   chokidar: ^3.5.2
   jest: ^27.4.4
@@ -22,6 +23,7 @@ devDependencies:
   '@remix-run/dev': 1.0.6
   '@types/jest': 27.0.3
   '@types/node': 16.11.12
+  '@types/pluralize': 0.0.29
   jest: 27.4.4
   ts-jest: 27.1.1_dc33159234d58f1c7ac35b6119da0e94
   typescript: 4.5.3
@@ -785,6 +787,10 @@ packages:
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
+
+  /@types/pluralize/0.0.29:
+    resolution: {integrity: sha512-BYOID+l2Aco2nBik+iYS4SZX0Lf20KPILP5RGmM1IgzdwNdTs0eebiFriOPcej1sX9mLnSoiNte5zcFxssgpGA==}
+    dev: true
 
   /@types/prettier/2.4.2:
     resolution: {integrity: sha512-ekoj4qOQYp7CvjX8ZDBgN86w3MqQhLE1hczEJbEIjgFEumDy+na/4AJAbLXfgEWFNB2pKadM5rPFtuSGMWK7xA==}
