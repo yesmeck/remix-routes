@@ -42,7 +42,7 @@ export async function build(remixRoot: string) {
       if (route.path) {
         currentPath = [...currentPath, route]
         const fullPath = currentPath.reduce((acc, curr) => [acc, curr.path].join('/'), '');
-        const [segments, paramsNames] = parse(currentPath);
+        const [segments, paramsNames] = parse(remixRoot, currentPath);
         paths.push({
           segments,
           paramsNames,
@@ -111,11 +111,15 @@ function generateDefinition(functionName: string, paramNames: string[]) {
 }
 
 function parse(
+  remixRoot: string,
   routes: ConfigRoute[],
 ): [string[], string[]] {
   const segments: string[] = [];
   const paramNames: string[] = [];
   routes.forEach(route => {
+    if (route.path?.startsWith(':')) {
+      return paramNames.push(route.path.replace(':', ''));
+    }
     const [segment, paramOrAction] = route.path!.split('/');
     if (paramOrAction) {
       if (paramOrAction.startsWith(':')) {
@@ -125,19 +129,26 @@ function parse(
       }
     }
     if (route.index) {
-      segments.push(segment);
-    } else {
-      segments.push(
-        pluralize(segment, 1)
-      );
+      return segments.push(segment);
     }
+
+    const { dir, name, ext } = path.parse(route.file);
+    const indexFile = path.join(dir, name, 'index' + ext);
+    if (fs.existsSync(path.join(remixRoot, 'app', indexFile))) {
+      return segments.push(segment);
+    }
+
+    segments.push(
+      pluralize(segment, 1)
+    );
   });
   return [segments, paramNames];
 }
 
-const remixRoot = process.env.REMIX_ROOT || process.cwd()
 
 if (require.main === module) {
+  const remixRoot = process.env.REMIX_ROOT || process.cwd()
+
   if (cli.flags.watch) {
     watch(remixRoot);
   } else {

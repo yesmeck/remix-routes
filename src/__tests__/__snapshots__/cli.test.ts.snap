@@ -4,8 +4,10 @@ exports[`build 1`] = `
 "export declare function adminPath(): string;
 export declare function adminEpisodesPath(): string;
 export declare function adminEpisodePath(id: string | number): string;
-export declare function adminEpisodeCommentPath(id: string | number): string;
-export declare function newAdminEpisodePath(): string;"
+export declare function adminEpisodeCommentsPath(id: string | number): string;
+export declare function newAdminEpisodePath(): string;
+export declare function jokesPath(): string;
+export declare function jokesPath(jokeId: string | number): string;"
 `;
 
 exports[`build 2`] = `
@@ -21,12 +23,20 @@ export function adminEpisodePath(id) {
   return '/admin' + '/episodes' + '/' + id;
 }
 
-export function adminEpisodeCommentPath(id) {
+export function adminEpisodeCommentsPath(id) {
   return '/admin' + '/episodes' + '/' + id + '/comments';
 }
 
 export function newAdminEpisodePath() {
   return '/admin/episodes/new';
+}
+
+export function jokesPath() {
+  return '/jokes';
+}
+
+export function jokesPath(jokeId) {
+  return '/jokes' + '/' + jokeId;
 }
 "
 `;
