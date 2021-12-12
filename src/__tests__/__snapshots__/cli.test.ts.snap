@@ -12,18 +12,23 @@ exports[`build 2`] = `
 "export function adminPath() {
   return '/admin';
 }
+
 export function adminEpisodesPath() {
-  return '/admin' + '/episodes';
+  return '/admin/episodes';
 }
+
 export function adminEpisodesIdPath(id) {
   return '/admin' + '/episodes' + '/' + id;
 }
+
 export function adminEpisodesNewPath() {
-  return '/admin' + '/episodes' + '/new';
+  return '/admin/episodes/new';
 }
+
 export function adminCommentsPath() {
-  return '/admin' + '/comments';
-}"
+  return '/admin/comments';
+}
+"
 `;
 
 exports[`build 3`] = `"{\\"name\\":\\".remix-routes\\",\\"main\\":\\"index.js\\",\\"types\\":\\"index.d.ts\\"}"`;

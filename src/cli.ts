@@ -87,14 +87,20 @@ function generate(paths: Array<PathInfo>) {
 }
 
 function generateHelpers(functionName: string, paramNames: string[], originalPath: string) {
-  return `export function ${functionName}(${paramNames.join(', ')}) {
-  return ${originalPath.split('/').filter(Boolean).map(segment => {
-    if (segment.startsWith(':')) {
-      return `'/' + ${segment.slice(1)}`;
-    }
-    return `'/${segment}'`;
-  }).join(' + ')};
-}`;
+  const code = [];
+  code.push(`export function ${functionName}(${paramNames.join(', ')}) {`)
+  if (paramNames.length <= 0) {
+    code.push(`  return '${originalPath}';`);
+  } else {
+    code.push(`  return ${originalPath.split('/').filter(Boolean).map(segment => {
+      if (segment.startsWith(':')) {
+        return `'/' + ${segment.slice(1)}`;
+      }
+      return `'/${segment}'`;
+    }).join(' + ')};`)
+  }
+  code.push('}');
+  return code.join('\n') + '\n';
 }
 
 function generateDefinition(functionName: string, paramNames: string[]) {
