@@ -41,7 +41,6 @@ export async function build(remixRoot: string) {
       let currentPath = parentPath
       if (route.path) {
         currentPath = [...currentPath, route]
-        console.log(currentPath);
         const fullPath = currentPath.reduce((acc, curr) => [acc, curr.path].join('/'), '');
         const [segments, paramsNames] = parse(currentPath);
         paths.push({
@@ -59,7 +58,6 @@ export async function build(remixRoot: string) {
 
 function watch(remixRoot: string) {
   chokidar.watch([path.join(remixRoot, 'app/routes/**/*.{ts,tsx}'), path.join(remixRoot, 'remix.config.js')]).on('change', () => {
-    console.log('change');
     build(remixRoot);
   });
   console.log('Watching for routes changes...');
@@ -119,7 +117,6 @@ function parse(
   const paramNames: string[] = [];
   routes.forEach(route => {
     const [segment, paramOrAction] = route.path!.split('/');
-    console.log(route.path, segment, paramOrAction);
     if (paramOrAction) {
       if (paramOrAction.startsWith(':')) {
         paramNames.push(paramOrAction.replace(':', ''));
