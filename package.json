@@ -1,6 +1,6 @@
 {
   "name": "remix-routes",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "watch": "tsc --watch",
+    "prebuild": "rm -rf lib",
     "build": "tsc",
     "prepack": "npm run build",
     "test": "jest"
