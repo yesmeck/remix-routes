@@ -42,7 +42,7 @@ export async function build(remixRoot: string) {
       if (route.path) {
         currentPath = [...currentPath, route]
         const fullPath = currentPath.reduce((acc, curr) => [acc, curr.path].join('/'), '');
-        const [segments, paramsNames] = parse(remixRoot, currentPath);
+        const [segments, paramsNames] = parse(currentPath);
         const functionName = camelCase([segments, 'path'].join('_'));
         helpers[functionName] = helpers[functionName] || [];
         helpers[functionName].push({
@@ -137,10 +137,7 @@ function generateDefinition(functionName: string, helpers: Helper[]) {
   return code.join('\n') + '\n';
 }
 
-function parse(
-  remixRoot: string,
-  routes: ConfigRoute[],
-): [string[], string[]] {
+function parse(routes: ConfigRoute[]): [string[], string[]] {
   const segments: string[] = [];
   const paramNames: string[] = [];
   routes.forEach((route, index) => {
@@ -166,9 +163,12 @@ function parse(
       return segments.push(segment);
     }
 
-    segments.push(
-      pluralize(segment, 1)
-    );
+    const singularSegment = pluralize.singular(segment)
+    if (singularSegment) {
+      segments.push(singularSegment);
+    } else {
+      segments.push(segment);
+    }
   });
   return [segments, paramNames];
 }
