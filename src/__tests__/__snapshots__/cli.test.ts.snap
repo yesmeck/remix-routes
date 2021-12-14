@@ -4,6 +4,8 @@ exports[`build 1`] = `
 "export declare function chatPath(season: string | number, episode: string | number, slug: string | number);
 export declare function chatPath(season: string | number, episode: string | number);
 
+export declare function creditsPath();
+
 export declare function adminPath();
 
 export declare function adminEpisodesPath();
@@ -28,6 +30,10 @@ exports[`build 2`] = `
   if (args.length === 2) {
     return '/chats' + '/' + season + '/' + episode;
   }
+}
+
+export function creditsPath() {
+  return '/credits';
 }
 
 export function adminPath() {
