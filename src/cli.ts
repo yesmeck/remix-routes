@@ -143,7 +143,7 @@ function parse(
 ): [string[], string[]] {
   const segments: string[] = [];
   const paramNames: string[] = [];
-  routes.forEach(route => {
+  routes.forEach((route, index) => {
     if (route.path?.startsWith(':')) {
       return paramNames.push(route.path.replace(':', ''));
     }
@@ -159,10 +159,12 @@ function parse(
       return segments.push(segment);
     }
 
-    const { dir, name, ext } = path.parse(route.file);
-    const indexFile = path.join(dir, name, 'index' + ext);
-    if (fs.existsSync(path.join(remixRoot, 'app', indexFile))) {
-      return segments.push(segment);
+    if (index === routes.length - 1) {
+      const { dir, name, ext } = path.parse(route.file);
+      const indexFile = path.join(dir, name, 'index' + ext);
+      if (fs.existsSync(path.join(remixRoot, 'app', indexFile))) {
+        return segments.push(segment);
+      }
     }
 
     segments.push(
