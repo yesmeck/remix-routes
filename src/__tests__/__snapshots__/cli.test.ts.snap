@@ -1,24 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`build 1`] = `
-"export declare function chatPath(season: string | number, episode: string | number, slug: string | number): string;
-export declare function chatPath(season: string | number, episode: string | number): string;
-export declare function adminPath(): string;
-export declare function adminEpisodesPath(): string;
-export declare function adminEpisodePath(id: string | number): string;
-export declare function adminEpisodeCommentsPath(id: string | number): string;
-export declare function newAdminEpisodePath(): string;
-export declare function jokesPath(): string;
-export declare function jokesPath(jokeId: string | number): string;"
+"export declare function chatPath(season: string | number, episode: string | number, slug: string | number);
+export declare function chatPath(season: string | number, episode: string | number);
+
+export declare function adminPath();
+
+export declare function adminEpisodesPath();
+
+export declare function adminEpisodePath(id: string | number);
+
+export declare function adminEpisodeCommentsPath(id: string | number);
+
+export declare function newAdminEpisodePath();
+
+export declare function jokesPath();
+export declare function jokesPath(jokeId: string | number);
+"
 `;
 
 exports[`build 2`] = `
-"export function chatPath(season, episode, slug) {
-  return '/chats' + '/' + season + '/' + episode + '/' + slug;
-}
-
-export function chatPath(season, episode) {
-  return '/chats' + '/' + season + '/' + episode;
+"export function chatPath(...args) {
+  if (args.length === 3) {
+    return '/chats' + '/' + season + '/' + episode + '/' + slug;
+  }
+  if (args.length === 2) {
+    return '/chats' + '/' + season + '/' + episode;
+  }
 }
 
 export function adminPath() {
@@ -41,12 +49,13 @@ export function newAdminEpisodePath() {
   return '/admin/episodes/new';
 }
 
-export function jokesPath() {
-  return '/jokes';
-}
-
-export function jokesPath(jokeId) {
-  return '/jokes' + '/' + jokeId;
+export function jokesPath(...args) {
+  if (args.length === 0) {
+    return '/jokes';
+  }
+  if (args.length === 1) {
+    return '/jokes' + '/' + jokeId;
+  }
 }
 "
 `;

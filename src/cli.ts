@@ -24,7 +24,7 @@ const cli = meow(helpText, {
   }
 });
 
-interface PathInfo {
+interface Helper {
   segments: string[];
   paramsNames: string[];
   fullPath: string;
@@ -32,7 +32,7 @@ interface PathInfo {
 
 export async function build(remixRoot: string) {
   const config = await readConfig(remixRoot);
-  const paths: Array<PathInfo> = [];
+  const helpers: Record<string, Helper[]> = {};
   const handleRoutesRecursive = (parentId?: string, parentPath: ConfigRoute[] = []) => {
     let routes = Object.values(config.routes).filter(
       route => route.parentId === parentId
@@ -43,7 +43,9 @@ export async function build(remixRoot: string) {
         currentPath = [...currentPath, route]
         const fullPath = currentPath.reduce((acc, curr) => [acc, curr.path].join('/'), '');
         const [segments, paramsNames] = parse(remixRoot, currentPath);
-        paths.push({
+        const functionName = camelCase([segments, 'path'].join('_'));
+        helpers[functionName] = helpers[functionName] || [];
+        helpers[functionName].push({
           segments,
           paramsNames,
           fullPath: fullPath,
@@ -53,7 +55,7 @@ export async function build(remixRoot: string) {
     });
   }
   handleRoutesRecursive();
-  generate(paths);
+  generate(helpers);
 }
 
 function watch(remixRoot: string) {
@@ -63,16 +65,15 @@ function watch(remixRoot: string) {
   console.log('Watching for routes changes...');
 }
 
-function generate(paths: Array<PathInfo>) {
+function generate(paths: Record<string, Helper[]>) {
   const jsCode: string[] = [];
   const tsCode: string[] = [];
-  paths.forEach(path => {
-    const functionName = camelCase([...path.segments, 'path'].join('_'));
+  Object.entries(paths).forEach(([functionName, helpers]) => {
     jsCode.push(
-      generateHelpers(functionName, path.paramsNames, path.fullPath)
+      generateHelpers(functionName, helpers)
     );
     tsCode.push(
-      generateDefinition(functionName, path.paramsNames)
+      generateDefinition(functionName, helpers)
     );
   });
   const outputPath = path.join(process.cwd(), 'node_modules', '.remix-routes');
@@ -88,26 +89,52 @@ function generate(paths: Array<PathInfo>) {
   }));
 }
 
-function generateHelpers(functionName: string, paramNames: string[], originalPath: string) {
+function generateHelpers(functionName: string, helpers: Helper[]) {
   const code = [];
-  code.push(`export function ${functionName}(${paramNames.join(', ')}) {`)
-  if (paramNames.length <= 0) {
-    code.push(`  return '${originalPath}';`);
+  if (helpers.length === 1) {
+    const helper = helpers[0];
+    const paramNames = helper.paramsNames;
+    code.push(`export function ${functionName}(${paramNames.join(', ')}) {`)
+    if (paramNames.length <= 0) {
+      code.push(`  return '${helper.fullPath}';`);
+    } else {
+      code.push(`  return ${helper.fullPath.split('/').filter(Boolean).map(segment => {
+        if (segment.startsWith(':')) {
+          return `'/' + ${segment.slice(1)}`;
+        }
+        return `'/${segment}'`;
+      }).join(' + ')};`)
+    }
+    code.push('}');
   } else {
-    code.push(`  return ${originalPath.split('/').filter(Boolean).map(segment => {
-      if (segment.startsWith(':')) {
-        return `'/' + ${segment.slice(1)}`;
+    code.push(`export function ${functionName}(...args) {`);
+    helpers.forEach(helper => {
+      code.push(`  if (args.length === ${helper.paramsNames.length}) {`);
+      if (helper.paramsNames.length <= 0) {
+        code.push(`    return '${helper.fullPath}';`);
+      } else {
+        code.push(`    return ${helper.fullPath.split('/').filter(Boolean).map(segment => {
+          if (segment.startsWith(':')) {
+            return `'/' + ${segment.slice(1)}`;
+          }
+          return `'/${segment}'`;
+        }).join(' + ')};`)
       }
-      return `'/${segment}'`;
-    }).join(' + ')};`)
+      code.push('  }');
+    });
+    code.push('}');
   }
-  code.push('}');
   return code.join('\n') + '\n';
 }
 
-function generateDefinition(functionName: string, paramNames: string[]) {
-  const typedParams = paramNames.map(paramName => `${paramName}: string | number`);
-  return `export declare function ${functionName}(${typedParams.join(', ')}): string;`;
+function generateDefinition(functionName: string, helpers: Helper[]) {
+  const code: string[] = [];
+  helpers.forEach(helper => {
+    const paramNames = helper.paramsNames;
+    const typedParams = paramNames.map(paramName => `${paramName}: string | number`);
+    code.push(`export declare function ${functionName}(${typedParams.join(', ')});`);
+  });
+  return code.join('\n') + '\n';
 }
 
 function parse(
@@ -116,7 +143,6 @@ function parse(
 ): [string[], string[]] {
   const segments: string[] = [];
   const paramNames: string[] = [];
-  console.log(routes);
   routes.forEach(route => {
     if (route.path?.startsWith(':')) {
       return paramNames.push(route.path.replace(':', ''));
