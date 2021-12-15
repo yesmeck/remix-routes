@@ -136,7 +136,7 @@ function generateDefinition(functionName: string, helpers: Helper[]) {
   helpers.forEach(helper => {
     const paramNames = helper.paramsNames;
     const typedParams = paramNames.map(paramName => `${paramName}: string | number`);
-    code.push(`export declare function ${functionName}(${typedParams.join(', ')});`);
+    code.push(`export declare function ${functionName}(${typedParams.join(', ')}): string;`);
   });
   return code.join('\n') + '\n';
 }
