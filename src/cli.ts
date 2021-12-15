@@ -80,6 +80,10 @@ function generate(paths: Record<string, Helper[]>) {
   if (!fs.existsSync(outputPath)) {
     fs.mkdirSync(outputPath);
   }
+  jsCode.push(`export function rootPath() {
+  return '/';
+}`);
+  tsCode.push(`export declare function rootPath(): string;`);
   fs.writeFileSync(path.join(outputPath, 'index.js'), jsCode.join('\n'));
   fs.writeFileSync(path.join(outputPath, 'index.d.ts'), tsCode.join('\n'));
   fs.writeFileSync(path.join(outputPath, 'package.json'), JSON.stringify({

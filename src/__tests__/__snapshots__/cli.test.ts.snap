@@ -21,7 +21,8 @@ export declare function newAdminEpisodePath();
 export declare function jokesPath();
 
 export declare function jokePath(jokeId: string | number);
-"
+
+export declare function rootPath(): string;"
 `;
 
 exports[`build 2`] = `
@@ -69,7 +70,10 @@ export function jokesPath() {
 export function jokePath(jokeId) {
   return '/jokes' + '/' + jokeId;
 }
-"
+
+export function rootPath() {
+  return '/';
+}"
 `;
 
 exports[`build 3`] = `"{\\"name\\":\\".remix-routes\\",\\"main\\":\\"index.js\\",\\"types\\":\\"index.d.ts\\"}"`;
