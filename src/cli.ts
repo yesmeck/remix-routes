@@ -128,9 +128,11 @@ async function list(remixRoot: string) {
 }
 
 function warnNotSupported(files: string[]) {
-  const warning = chalk.hex('#FFA500');
-  console.warn(warning('Paths start with digital are not supported, I suggest renaming them to letters, for example: 404.tsx => not_found.tsx\n'));
-  files.forEach(file => console.log('  ' + file));
+  if (files.length > 0) {
+    const warning = chalk.hex('#FFA500');
+    console.warn(warning('Paths start with digital are not supported, I suggest renaming them to letters, for example: 404.tsx => not_found.tsx\n'));
+    files.forEach(file => console.log('  ' + file));
+  }
 }
 
 function generateHelpers(functionName: string, helpers: Helper[]) {
