@@ -6,6 +6,7 @@ import * as path from 'path';
 import chokidar from 'chokidar';
 import type { ConfigRoute } from '@remix-run/dev/config/routes';
 import { readConfig } from '@remix-run/dev/config';
+import Table from 'cli-table';
 
 const helpText = `
 Usage
@@ -17,6 +18,10 @@ Options
 
 const cli = meow(helpText, {
   flags: {
+    list: {
+      type: "boolean",
+      alias: "l"
+    },
     watch: {
       type: "boolean",
       alias: "w"
@@ -30,7 +35,7 @@ interface Helper {
   fullPath: string;
 }
 
-export async function build(remixRoot: string) {
+async function buildHelpers(remixRoot: string) {
   const config = await readConfig(remixRoot);
   const helpers: Record<string, Helper[]> = {};
   const handleRoutesRecursive = (parentId?: string, parentPath: ConfigRoute[] = []) => {
@@ -55,6 +60,11 @@ export async function build(remixRoot: string) {
     });
   }
   handleRoutesRecursive();
+  return helpers;
+}
+
+export async function build(remixRoot: string) {
+  const helpers = await buildHelpers(remixRoot);
   generate(helpers);
 }
 
@@ -91,6 +101,22 @@ function generate(paths: Record<string, Helper[]>) {
     "main": "index.js",
     "types": "index.d.ts"
   }));
+}
+
+async function list(remixRoot: string) {
+  const helpers = await buildHelpers(remixRoot);
+  const row: Record<string, { path: string }> = {};
+  const table = new Table({
+    head: ['helper', 'path']
+  });
+  Object.entries(helpers).forEach(([functionName, helpers]) => {
+    helpers.forEach(help => {
+      table.push(
+        [`${functionName}(${help.paramsNames.join(', ')})`, help.fullPath]
+      );
+    });
+  });
+  console.table(table.toString());
 }
 
 function generateHelpers(functionName: string, helpers: Helper[]) {
@@ -146,7 +172,7 @@ function parse(routes: ConfigRoute[]): [string[], string[]] {
   const paramNames: string[] = [];
   routes.forEach((route, index) => {
     if (route.path?.startsWith(':')) {
-      return paramNames.push(route.path.replace(':', ''));
+      return paramNames.push(...route.path.split('/').map(param => param.replace(':', '')));
     }
     let hasParamOrAction = false;
     const [segment, ...paramOrActions] = route.path!.split('/');
@@ -179,11 +205,18 @@ function parse(routes: ConfigRoute[]): [string[], string[]] {
 
 
 if (require.main === module) {
-  const remixRoot = process.env.REMIX_ROOT || process.cwd()
+  (async function () {
+    const remixRoot = process.env.REMIX_ROOT || process.cwd()
 
-  if (cli.flags.watch) {
-    watch(remixRoot);
-  } else {
-    build(remixRoot);
-  }
+    if (cli.flags.list) {
+      await list(remixRoot);
+      process.exit(0);
+    }
+
+    if (cli.flags.watch) {
+      watch(remixRoot);
+    } else {
+      build(remixRoot);
+    }
+  })();
 }

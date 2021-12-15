@@ -2,11 +2,13 @@ lockfileVersion: 5.3
 
 specifiers:
   '@remix-run/dev': ^1.0.6
+  '@types/cli-table': ^0.3.0
   '@types/jest': ^27.0.3
   '@types/node': ^16.11.12
   '@types/pluralize': ^0.0.29
   camel-case: ^4.1.2
   chokidar: ^3.5.2
+  cli-table: ^0.3.11
   jest: ^27.4.4
   meow: 9.0.0
   pluralize: ^8.0.0
@@ -16,11 +18,13 @@ specifiers:
 dependencies:
   camel-case: 4.1.2
   chokidar: 3.5.2
+  cli-table: 0.3.11
   meow: 9.0.0
   pluralize: 8.0.0
 
 devDependencies:
   '@remix-run/dev': 1.0.6
+  '@types/cli-table': 0.3.0
   '@types/jest': 27.0.3
   '@types/node': 16.11.12
   '@types/pluralize': 0.0.29
@@ -699,6 +703,10 @@ packages:
       '@types/responselike': 1.0.0
     dev: true
 
+  /@types/cli-table/0.3.0:
+    resolution: {integrity: sha512-QnZUISJJXyhyD6L1e5QwXDV/A5i2W1/gl6D6YMc8u0ncPepbv/B4w3S+izVvtAg60m6h+JP09+Y/0zF2mojlFQ==}
+    dev: true
+
   /@types/debug/4.1.7:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
@@ -1219,6 +1227,13 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
+  /cli-table/0.3.11:
+    resolution: {integrity: sha512-IqLQi4lO0nIB4tcdTpN4LCB9FI3uqrJZK7RC515EnhZ6qBaglkIgICb1wjeAqpdoOabm1+SuQtkXIPdYC93jhQ==}
+    engines: {node: '>= 0.2.0'}
+    dependencies:
+      colors: 1.0.3
+    dev: false
+
   /cliui/7.0.4:
     resolution: {integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==}
     dependencies:
@@ -1260,6 +1275,11 @@ packages:
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
     dev: true
+
+  /colors/1.0.3:
+    resolution: {integrity: sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=}
+    engines: {node: '>=0.1.90'}
+    dev: false
 
   /combined-stream/1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
