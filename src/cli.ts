@@ -7,6 +7,7 @@ import chokidar from 'chokidar';
 import type { ConfigRoute } from '@remix-run/dev/config/routes';
 import { readConfig } from '@remix-run/dev/config';
 import Table from 'cli-table';
+import chalk from 'chalk';
 
 const helpText = `
 Usage
@@ -35,9 +36,10 @@ interface Helper {
   fullPath: string;
 }
 
-async function buildHelpers(remixRoot: string) {
+async function buildHelpers(remixRoot: string): Promise<[Record<string, Helper[]>, string[]]> {
   const config = await readConfig(remixRoot);
   const helpers: Record<string, Helper[]> = {};
+  const notSupported: string[] = [];
   const handleRoutesRecursive = (parentId?: string, parentPath: ConfigRoute[] = []) => {
     let routes = Object.values(config.routes).filter(
       route => route.parentId === parentId
@@ -49,23 +51,29 @@ async function buildHelpers(remixRoot: string) {
         const fullPath = currentPath.reduce((acc, curr) => [acc, curr.path].join('/'), '');
         const [segments, paramsNames] = parse(currentPath);
         const functionName = camelCase([segments, 'path'].join('_'));
-        helpers[functionName] = helpers[functionName] || [];
-        helpers[functionName].push({
+        const helper = {
           segments,
           paramsNames,
           fullPath: fullPath,
-        });
+        }
+        if (!/^\d/.test(functionName)) {
+          helpers[functionName] = helpers[functionName] || [];
+          helpers[functionName].push(helper);
+        } else {
+          notSupported.push(route.file);
+        }
       }
       handleRoutesRecursive(route.id, currentPath);
     });
   }
   handleRoutesRecursive();
-  return helpers;
+  return [helpers, notSupported];
 }
 
 export async function build(remixRoot: string) {
-  const helpers = await buildHelpers(remixRoot);
+  const [helpers, notSupported] = await buildHelpers(remixRoot);
   generate(helpers);
+  warnNotSupported(notSupported);
 }
 
 function watch(remixRoot: string) {
@@ -104,8 +112,7 @@ function generate(paths: Record<string, Helper[]>) {
 }
 
 async function list(remixRoot: string) {
-  const helpers = await buildHelpers(remixRoot);
-  const row: Record<string, { path: string }> = {};
+  const [helpers, notSupported] = await buildHelpers(remixRoot);
   const table = new Table({
     head: ['helper', 'path']
   });
@@ -117,6 +124,13 @@ async function list(remixRoot: string) {
     });
   });
   console.table(table.toString());
+  warnNotSupported(notSupported);
+}
+
+function warnNotSupported(files: string[]) {
+  const warning = chalk.hex('#FFA500');
+  console.warn(warning('Paths start with digital are not supported, I suggest renaming them to letters, for example: 404.tsx => not_found.tsx\n'));
+  files.forEach(file => console.log('  ' + file));
 }
 
 function generateHelpers(functionName: string, helpers: Helper[]) {
