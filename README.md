@@ -7,13 +7,13 @@
 - Using pnpm:
 
 ```bash
-$ yanr add remix-routes
+$ pnpm add remix-routes
 ```
 
 - Using yarn:
 
 ```bash
-$ yanr add remix-routes
+$ yarn add remix-routes
 ```
 
 - Using npm:
@@ -28,12 +28,10 @@ $ npm add remix-routes
 
 ```json
 {
-  // ...
   "scripts": {
     "build": "remix-routes && remix build",
     "dev": "concurrently \"remix-routes -w\" \"remix dev\""
   }
-  // ...
 }
 ```
 
@@ -50,6 +48,14 @@ export const action: ActionFunction = async ({ request }) => {
 
   return redirect($path('/posts/:id', { id: post.id })); // <-- It's type safe.
 };
+```
+
+Appending query string:
+
+```typescript
+import { $path } from 'remix-routes';
+
+$path('/posts', { limit: 10 });
 ```
 
 ## API
