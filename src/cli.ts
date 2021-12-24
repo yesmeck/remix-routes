@@ -1,13 +1,9 @@
 import meow from 'meow';
-import { camelCase } from 'camel-case';
-import pluralize from 'pluralize';
 import * as fs from 'fs';
 import * as path from 'path';
 import chokidar from 'chokidar';
 import type { ConfigRoute } from '@remix-run/dev/config/routes';
 import { readConfig } from '@remix-run/dev/config';
-import Table from 'cli-table';
-import chalk from 'chalk';
 
 const helpText = `
 Usage
@@ -19,10 +15,6 @@ Options
 
 const cli = meow(helpText, {
   flags: {
-    list: {
-      type: "boolean",
-      alias: "l"
-    },
     watch: {
       type: "boolean",
       alias: "w"
@@ -30,16 +22,11 @@ const cli = meow(helpText, {
   }
 });
 
-interface Helper {
-  segments: string[];
-  paramsNames: string[];
-  fullPath: string;
-}
+type RoutesInfo = Record<string, string[]>;
 
-async function buildHelpers(remixRoot: string): Promise<[Record<string, Helper[]>, string[]]> {
+async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
   const config = await readConfig(remixRoot);
-  const helpers: Record<string, Helper[]> = {};
-  const notSupported: string[] = [];
+  const routesInfo: RoutesInfo = {};
   const handleRoutesRecursive = (parentId?: string, parentPath: ConfigRoute[] = []) => {
     let routes = Object.values(config.routes).filter(
       route => route.parentId === parentId
@@ -49,31 +36,19 @@ async function buildHelpers(remixRoot: string): Promise<[Record<string, Helper[]
       if (route.path) {
         currentPath = [...currentPath, route]
         const fullPath = currentPath.reduce((acc, curr) => [acc, curr.path].join('/'), '');
-        const [segments, paramsNames] = parse(currentPath);
-        const functionName = camelCase([segments, 'path'].join('_'));
-        const helper = {
-          segments,
-          paramsNames,
-          fullPath: fullPath,
-        }
-        if (!/^\d/.test(functionName)) {
-          helpers[functionName] = helpers[functionName] || [];
-          helpers[functionName].push(helper);
-        } else {
-          notSupported.push(route.file);
-        }
+        const paramsNames = parse(currentPath);
+        routesInfo[fullPath] = paramsNames;
       }
       handleRoutesRecursive(route.id, currentPath);
     });
   }
   handleRoutesRecursive();
-  return [helpers, notSupported];
+  return routesInfo;
 }
 
 export async function build(remixRoot: string) {
-  const [helpers, notSupported] = await buildHelpers(remixRoot);
-  generate(helpers);
-  warnNotSupported(notSupported);
+  const routesInfo = await buildHelpers(remixRoot);
+  generate(routesInfo);
 }
 
 function watch(remixRoot: string) {
@@ -83,27 +58,16 @@ function watch(remixRoot: string) {
   console.log('Watching for routes changes...');
 }
 
-function generate(paths: Record<string, Helper[]>) {
-  const jsCode: string[] = [];
-  const tsCode: string[] = [];
-  Object.entries(paths).forEach(([functionName, helpers]) => {
-    jsCode.push(
-      generateHelpers(functionName, helpers)
-    );
-    tsCode.push(
-      generateDefinition(functionName, helpers)
-    );
-  });
+function generate(routesInfo: RoutesInfo) {
+  const jsCode = generateHelpers(routesInfo);
+  const tsCode = generateDefinition(routesInfo);
   const outputPath = path.join(process.cwd(), 'node_modules', '.remix-routes');
+  console.log(outputPath);
   if (!fs.existsSync(outputPath)) {
     fs.mkdirSync(outputPath);
   }
-  jsCode.push(`export function rootPath() {
-  return '/';
-}`);
-  tsCode.push(`export declare function rootPath(): string;`);
-  fs.writeFileSync(path.join(outputPath, 'index.js'), jsCode.join('\n'));
-  fs.writeFileSync(path.join(outputPath, 'index.d.ts'), tsCode.join('\n'));
+  fs.writeFileSync(path.join(outputPath, 'index.js'), jsCode);
+  fs.writeFileSync(path.join(outputPath, 'index.d.ts'), tsCode);
   fs.writeFileSync(path.join(outputPath, 'package.json'), JSON.stringify({
     "name": ".remix-routes",
     "main": "index.js",
@@ -111,123 +75,70 @@ function generate(paths: Record<string, Helper[]>) {
   }));
 }
 
-async function list(remixRoot: string) {
-  const [helpers, notSupported] = await buildHelpers(remixRoot);
-  const table = new Table({
-    head: ['helper', 'path']
-  });
-  Object.entries(helpers).forEach(([functionName, helpers]) => {
-    helpers.forEach(help => {
-      table.push(
-        [`${functionName}(${help.paramsNames.join(', ')})`, help.fullPath]
-      );
-    });
-  });
-  console.table(table.toString());
-  warnNotSupported(notSupported);
-}
+function generateHelpers(routesInfo: RoutesInfo) {
+  return `
+const routes = ${JSON.stringify(routesInfo, null, 2)};
 
-function warnNotSupported(files: string[]) {
-  if (files.length > 0) {
-    const warning = chalk.hex('#FFA500');
-    console.warn(warning('Paths start with digital are not supported, I suggest renaming them to letters, for example: 404.tsx => not_found.tsx\n'));
-    files.forEach(file => console.log('  ' + file));
-  }
-}
-
-function generateHelpers(functionName: string, helpers: Helper[]) {
-  const code = [];
-  if (helpers.length === 1) {
-    const helper = helpers[0];
-    const paramNames = helper.paramsNames;
-    code.push(`export function ${functionName}(${paramNames.join(', ')}) {`)
-    if (paramNames.length <= 0) {
-      code.push(`  return '${helper.fullPath}';`);
-    } else {
-      code.push(`  return ${helper.fullPath.split('/').filter(Boolean).map(segment => {
-        if (segment.startsWith(':')) {
-          return `'/' + ${segment.slice(1)}`;
-        }
-        return `'/${segment}'`;
-      }).join(' + ')};`)
+export function $path(route, ...paramsOrQuery) {
+  const { paramsNames } = routesInfo[route];
+  let path = route;
+  let query = paramsOrQuery[0];
+  if (paramsNames.length > 0) {
+    const params = paramsOrQuery[0];
+    let query = paramsOrQuery[1];
+    paramsNames.forEach((name, index) => {
+      path.replace(':' + name, params[name]);
     }
-    code.push('}');
-  } else {
-    code.push(`export function ${functionName}(...args) {`);
-    helpers.forEach(helper => {
-      code.push(`  if (args.length === ${helper.paramsNames.length}) {`);
-      if (helper.paramsNames.length <= 0) {
-        code.push(`    return '${helper.fullPath}';`);
-      } else {
-        code.push(`    return ${helper.fullPath.split('/').filter(Boolean).map(segment => {
-          if (segment.startsWith(':')) {
-            return `'/' + ${segment.slice(1)}`;
-          }
-          return `'/${segment}'`;
-        }).join(' + ')};`)
-      }
-      code.push('  }');
-    });
-    code.push('}');
   }
-  return code.join('\n') + '\n';
-}
-
-function generateDefinition(functionName: string, helpers: Helper[]) {
-  const code: string[] = [];
-  helpers.forEach(helper => {
-    const paramNames = helper.paramsNames;
-    const typedParams = paramNames.map(paramName => `${paramName}: string | number`);
-    code.push(`export declare function ${functionName}(${typedParams.join(', ')}): string;`);
+  if (!query) {
+    return path;
+  }
+  const searchParams = new URLSearchParams('');
+  Object.entries(query).forEach(([key, value]) => {
+    searchParams.append(key, value);
   });
-  return code.join('\n') + '\n';
+  return path + '?' + searchParams.toString();
+}
+`;
 }
 
-function parse(routes: ConfigRoute[]): [string[], string[]] {
-  const segments: string[] = [];
+function generateDefinition(routesInfo: RoutesInfo) {
+  const code: string[] = [];
+  Object.entries(routesInfo).forEach(([route, paramsNames]) => {
+    const lines = ['export declare function $path(']
+    lines.push(`  route: ${JSON.stringify(route)},`)
+    if (paramsNames.length > 0) {
+      const paramsType = paramsNames.map(paramName => `${paramName}: string | number`);
+      lines.push(`  params: { ${paramsType.join('; ')} },`)
+    }
+    lines.push(`  query?: Record<string, string | number>`)
+    lines.push(`): string;`);
+    code.push(lines.join('\n'));
+  });
+  code.push('\n');
+  return code.join('\n');
+}
+
+function parse(routes: ConfigRoute[]) {
   const paramNames: string[] = [];
-  routes.forEach((route, index) => {
+  routes.forEach((route) => {
     if (route.path?.startsWith(':')) {
       return paramNames.push(...route.path.split('/').map(param => param.replace(':', '')));
     }
-    let hasParamOrAction = false;
-    const [segment, ...paramOrActions] = route.path!.split('/');
+    const [_, ...paramOrActions] = route.path!.split('/');
     paramOrActions.forEach(paramOrAction => {
-      hasParamOrAction = true;
       if (paramOrAction.startsWith(':')) {
         paramNames.push(paramOrAction.replace(':', ''));
-      } else {
-        segments.unshift(paramOrAction);
       }
     });
-
-    if (route.index) {
-      return segments.push(segment);
-    }
-
-    if (index === routes.length - 1 && !hasParamOrAction) {
-      return segments.push(segment);
-    }
-
-    const singularSegment = pluralize.singular(segment)
-    if (singularSegment) {
-      segments.push(singularSegment);
-    } else {
-      segments.push(segment);
-    }
   });
-  return [segments, paramNames];
+  return paramNames;
 }
 
 
 if (require.main === module) {
   (async function () {
     const remixRoot = process.env.REMIX_ROOT || process.cwd()
-
-    if (cli.flags.list) {
-      await list(remixRoot);
-      process.exit(0);
-    }
 
     if (cli.flags.watch) {
       watch(remixRoot);

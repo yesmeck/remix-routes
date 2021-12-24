@@ -1,79 +1,116 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`build 1`] = `
-"export declare function chatPath(season: string | number, episode: string | number, slug: string | number): string;
-export declare function chatPath(season: string | number, episode: string | number): string;
+"export declare function path(
+  route: \\"/chats/:season/:episode/:slug\\",
+  params: { season: string | number; episode: string | number; slug: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/chats/:season/:episode\\",
+  params: { season: string | number; episode: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/blog/rss.xml\\",
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/s/:query\\",
+  params: { query: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/credits\\",
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/admin\\",
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/admin/episodes\\",
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/admin/episodes/:id\\",
+  params: { id: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/admin/episodes/:id/comments\\",
+  params: { id: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/admin/episodes/new\\",
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/jokes\\",
+  query?: Record<string, string | number>
+): string;
+export declare function path(
+  route: \\"/jokes/:jokeId\\",
+  params: { jokeId: string | number },
+  query?: Record<string, string | number>
+): string;
 
-export declare function sPath(query: string | number): string;
-
-export declare function creditsPath(): string;
-
-export declare function adminPath(): string;
-
-export declare function adminEpisodesPath(): string;
-
-export declare function adminEpisodePath(id: string | number): string;
-
-export declare function adminEpisodeCommentsPath(id: string | number): string;
-
-export declare function newAdminEpisodePath(): string;
-
-export declare function jokesPath(): string;
-
-export declare function jokePath(jokeId: string | number): string;
-
-export declare function rootPath(): string;"
+"
 `;
 
 exports[`build 2`] = `
-"export function chatPath(...args) {
-  if (args.length === 3) {
-    return '/chats' + '/' + season + '/' + episode + '/' + slug;
+"
+  const routes = {
+  \\"/chats/:season/:episode/:slug\\": [
+    \\"season\\",
+    \\"episode\\",
+    \\"slug\\"
+  ],
+  \\"/chats/:season/:episode\\": [
+    \\"season\\",
+    \\"episode\\"
+  ],
+  \\"/blog/rss.xml\\": [],
+  \\"/s/:query\\": [
+    \\"query\\"
+  ],
+  \\"/credits\\": [],
+  \\"/admin\\": [],
+  \\"/admin/episodes\\": [],
+  \\"/admin/episodes/:id\\": [
+    \\"id\\"
+  ],
+  \\"/admin/episodes/:id/comments\\": [
+    \\"id\\"
+  ],
+  \\"/admin/episodes/new\\": [],
+  \\"/jokes\\": [],
+  \\"/jokes/:jokeId\\": [
+    \\"jokeId\\"
+  ]
+};
+  export function path(route, ...paramsOrQuery) {
+    const { paramsNames } = routesInfo[route];
+    let path = route;
+    let query = paramsOrQuery[0];
+    if (paramsNames.length > 0) {
+      const params = paramsOrQuery[0];
+      let query = paramsOrQuery[1];
+      paramsNames.forEach((name, index) => {
+        path.replace(':' + name, params[name]);
+      }
+    }
+    if (!query) {
+      return path;
+    }
+    const searchParams = new URLSearchParams('');
+    Object.entries(query).forEach(([key, value]) => {
+      searchParams.append(key, value);
+    });
+    return path + '?' + searchParams.toString();
   }
-  if (args.length === 2) {
-    return '/chats' + '/' + season + '/' + episode;
-  }
-}
-
-export function sPath(query) {
-  return '/s' + '/' + query;
-}
-
-export function creditsPath() {
-  return '/credits';
-}
-
-export function adminPath() {
-  return '/admin';
-}
-
-export function adminEpisodesPath() {
-  return '/admin/episodes';
-}
-
-export function adminEpisodePath(id) {
-  return '/admin' + '/episodes' + '/' + id;
-}
-
-export function adminEpisodeCommentsPath(id) {
-  return '/admin' + '/episodes' + '/' + id + '/comments';
-}
-
-export function newAdminEpisodePath() {
-  return '/admin/episodes/new';
-}
-
-export function jokesPath() {
-  return '/jokes';
-}
-
-export function jokePath(jokeId) {
-  return '/jokes' + '/' + jokeId;
-}
-
-export function rootPath() {
-  return '/';
-}"
+"
 `;
 
 exports[`build 3`] = `"{\\"name\\":\\".remix-routes\\",\\"main\\":\\"index.js\\",\\"types\\":\\"index.d.ts\\"}"`;
