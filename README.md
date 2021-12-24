@@ -55,7 +55,8 @@ Appending query string:
 ```typescript
 import { $path } from 'remix-routes';
 
-$path('/posts', { limit: 10 });
+$path('/posts/:id', { id: 6 }, { version: 18 }); // => /posts/6?version=18
+$path('/posts', { limit: 10 }); // => /posts?limit=10
 ```
 
 ## API
