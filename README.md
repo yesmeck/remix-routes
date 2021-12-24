@@ -1,6 +1,6 @@
 # remix-routes
 
-`remix-routes` automatically generates type definition files for manipulating internal links in your Remix apps.
+`remix-routes` automatically generates typesafe helper function for manipulating internal links in your Remix apps.
 
 ![Screenshot](https://user-images.githubusercontent.com/465125/147367217-0b8e8a04-0152-48e8-ba65-32c34605a4a5.png)
 
