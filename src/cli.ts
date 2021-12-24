@@ -104,7 +104,10 @@ export function $path(route, ...paramsOrQuery) {
 
 function generateDefinition(routesInfo: RoutesInfo) {
   const code: string[] = [];
-  Object.entries(routesInfo).forEach(([route, paramsNames]) => {
+  Object.entries({
+    '/': [],
+    ...routesInfo,
+  }).forEach(([route, paramsNames]) => {
     const lines = ['export declare function $path(']
     lines.push(`  route: ${JSON.stringify(route)},`)
     if (paramsNames.length > 0) {
