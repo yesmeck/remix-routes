@@ -2,6 +2,8 @@
 
 `remix-routes` automatically generates type definition files for manipulating internal links in your Remix apps.
 
+![Screenshot](https://user-images.githubusercontent.com/465125/147367091-cb86b8f1-2fe8-4c9f-bd58-7de0cc1c8da5.png)
+
 ## Installation
 
 - Using pnpm:
