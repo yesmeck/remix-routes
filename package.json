@@ -16,7 +16,8 @@
     "prebuild": "rm -rf lib",
     "build": "tsc",
     "prepack": "npm run build",
-    "test": "jest"
+    "test": "jest",
+    "semantic-release": "semantic-release"
   },
   "keywords": [],
   "author": "Wei Zhu",
@@ -29,10 +30,15 @@
     "@types/pluralize": "^0.0.29",
     "jest": "^27.4.4",
     "ts-jest": "^27.1.1",
-    "typescript": "^4.5.3"
+    "typescript": "^4.5.3",
+    "semantic-release": "^18.0.1"
   },
   "dependencies": {
     "chokidar": "^3.5.2",
     "meow": "9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yesmeck/remix-routes.git"
   }
 }
