@@ -3,15 +3,16 @@ name: Release
 on: push
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2.0.1
         with:
           version: 6.20.3
       - name: Use Node.js
-      - uses: actions/setup-node@v2
+        uses: actions/setup-node@v2
         with:
           node-version: "16"
           cache: "pnpm"
