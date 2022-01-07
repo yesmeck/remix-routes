@@ -80,7 +80,7 @@ function generateHelpers(routesInfo: RoutesInfo) {
   return `
 const routes = ${JSON.stringify(routesInfo, null, 2)};
 
-export function $path(route, ...paramsOrQuery) {
+function $path(route, ...paramsOrQuery) {
   const { paramsNames } = routes[route];
   let path = route;
   let query = paramsOrQuery[0];
