@@ -1,1 +1,1 @@
-export * from '.remix-routes'
+export * from '.remix-routes/types'

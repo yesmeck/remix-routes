@@ -64,7 +64,8 @@ export declare function $path(
 `;
 
 exports[`build 2`] = `
-"const routes = {
+"
+const routes = {
   \\"/chats/:season/:episode/:slug\\": [
     \\"season\\",
     \\"episode\\",
@@ -74,52 +75,85 @@ exports[`build 2`] = `
     \\"season\\",
     \\"episode\\"
   ],
-  \\"/blog/rss.xml\\": [],
   \\"/s/:query\\": [
     \\"query\\"
   ],
-  \\"/credits\\": [],
-  \\"/admin\\": [],
-  \\"/admin/episodes\\": [],
   \\"/admin/episodes/:id\\": [
     \\"id\\"
   ],
   \\"/admin/episodes/:id/comments\\": [
     \\"id\\"
   ],
-  \\"/admin/episodes/new\\": [],
-  \\"/jokes\\": [],
   \\"/jokes/:jokeId\\": [
     \\"jokeId\\"
   ]
 };
 
-function $path(route, ...paramsOrQuery) {
-  const routeParams = routes[route];
-  let path = route;
-  let query = paramsOrQuery[0];
-
-  if (routeParams?.paramsNames?.length > 0) {
-    const params = paramsOrQuery[0];
-    paramsNames.forEach((name) => {
-      path.replace(':' + name, params[name]);
-    })
-  }
-
-  if (!query) {
-    return path;
-  }
-
-  const searchParams = new URLSearchParams('');
-  Object.entries(query).forEach(([key, value]) => {
-    searchParams.append(key, value);
-  });
-
-  return path + '?' + searchParams.toString();
-}
-
-module.exports = { $path }
+module.exports = { routes }
 "
 `;
 
-exports[`build 3`] = `"{\\"name\\":\\".remix-routes\\",\\"main\\":\\"index.js\\",\\"types\\":\\"index.d.ts\\"}"`;
+exports[`build 3`] = `"{\\"name\\":\\".remix-routes\\",\\"main\\":\\"index.js\\",\\"types\\":\\"types.d.ts\\"}"`;
+
+exports[`build 4`] = `
+"export declare function $path(
+  route: \\"/\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/chats/:season/:episode/:slug\\",
+  params: { season: string | number; episode: string | number; slug: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/chats/:season/:episode\\",
+  params: { season: string | number; episode: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/blog/rss.xml\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/s/:query\\",
+  params: { query: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/credits\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/admin\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/admin/episodes\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/admin/episodes/:id\\",
+  params: { id: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/admin/episodes/:id/comments\\",
+  params: { id: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/admin/episodes/new\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/jokes\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/jokes/:jokeId\\",
+  params: { jokeId: string | number },
+  query?: Record<string, string | number>
+): string;
+
+"
+`;

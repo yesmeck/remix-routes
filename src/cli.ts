@@ -63,47 +63,29 @@ function generate(routesInfo: RoutesInfo) {
   const jsCode = generateHelpers(routesInfo);
   const tsCode = generateDefinition(routesInfo);
   const outputPath = path.join(process.cwd(), 'node_modules', '.remix-routes');
-  console.log(outputPath);
   if (!fs.existsSync(outputPath)) {
     fs.mkdirSync(outputPath);
   }
   fs.writeFileSync(path.join(outputPath, 'index.js'), jsCode);
-  fs.writeFileSync(path.join(outputPath, 'index.d.ts'), tsCode);
+  fs.writeFileSync(path.join(outputPath, 'types.d.ts'), tsCode);
   fs.writeFileSync(path.join(outputPath, 'package.json'), JSON.stringify({
     "name": ".remix-routes",
     "main": "index.js",
-    "types": "index.d.ts"
+    "types": "types.d.ts"
   }));
 }
 
 function generateHelpers(routesInfo: RoutesInfo) {
-  return `const routes = ${JSON.stringify(routesInfo, null, 2)};
+  const routes = Object.entries(routesInfo).reduce((acc: Record<string, string[]>, [route, params]) => {
+    if (params.length > 0) {
+      acc[route] = params;
+    }
+    return acc;
+  }, {})
+  return `
+const routes = ${JSON.stringify(routes, null, 2)};
 
-function $path(route, ...paramsOrQuery) {
-  const routeParams = routes[route];
-  let path = route;
-  let query = paramsOrQuery[0];
-
-  if (routeParams?.paramsNames?.length > 0) {
-    const params = paramsOrQuery[0];
-    paramsNames.forEach((name) => {
-      path.replace(':' + name, params[name]);
-    })
-  }
-
-  if (!query) {
-    return path;
-  }
-
-  const searchParams = new URLSearchParams('');
-  Object.entries(query).forEach(([key, value]) => {
-    searchParams.append(key, value);
-  });
-
-  return path + '?' + searchParams.toString();
-}
-
-module.exports = { $path }
+module.exports = { routes }
 `;
 }
 
