@@ -71,7 +71,6 @@ function generate(routesInfo: RoutesInfo) {
   fs.writeFileSync(path.join(outputPath, 'package.json'), JSON.stringify({
     "name": ".remix-routes",
     "main": "index.js",
-    "types": "types.d.ts"
   }));
 }
 
