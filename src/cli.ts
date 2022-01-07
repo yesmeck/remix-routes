@@ -77,29 +77,33 @@ function generate(routesInfo: RoutesInfo) {
 }
 
 function generateHelpers(routesInfo: RoutesInfo) {
-  return `
-const routes = ${JSON.stringify(routesInfo, null, 2)};
+  return `const routes = ${JSON.stringify(routesInfo, null, 2)};
 
-export function $path(route, ...paramsOrQuery) {
-  const { paramsNames } = routesInfo[route];
+function $path(route, ...paramsOrQuery) {
+  const routeParams = routes[route];
   let path = route;
   let query = paramsOrQuery[0];
-  if (paramsNames.length > 0) {
+
+  if (routeParams?.paramsNames?.length > 0) {
     const params = paramsOrQuery[0];
-    let query = paramsOrQuery[1];
-    paramsNames.forEach((name, index) => {
+    paramsNames.forEach((name) => {
       path.replace(':' + name, params[name]);
-    }
+    })
   }
+
   if (!query) {
     return path;
   }
+
   const searchParams = new URLSearchParams('');
   Object.entries(query).forEach(([key, value]) => {
     searchParams.append(key, value);
   });
+
   return path + '?' + searchParams.toString();
 }
+
+module.exports = { $path }
 `;
 }
 
