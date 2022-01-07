@@ -9,7 +9,7 @@
   },
   "files": [
     "lib",
-    "index.js",
+    "!lib/__tests__",
     "index.d.ts"
   ],
   "scripts": {
