@@ -81,15 +81,15 @@ function generateHelpers(routesInfo: RoutesInfo) {
 const routes = ${JSON.stringify(routesInfo, null, 2)};
 
 export function $path(route, ...paramsOrQuery) {
-  const { paramsNames } = routesInfo[route];
+  const { paramsNames } = routes[route];
   let path = route;
   let query = paramsOrQuery[0];
-  if (paramsNames.length > 0) {
+  if (paramsNames?.length > 0) {
     const params = paramsOrQuery[0];
     let query = paramsOrQuery[1];
-    paramsNames.forEach((name, index) => {
+    paramsNames?.forEach((name, index) => {
       path.replace(':' + name, params[name]);
-    }
+    })
   }
   if (!query) {
     return path;
@@ -100,6 +100,8 @@ export function $path(route, ...paramsOrQuery) {
   });
   return path + '?' + searchParams.toString();
 }
+
+module.exports = { $path }
 `;
 }
 
