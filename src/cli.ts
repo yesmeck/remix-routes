@@ -53,6 +53,7 @@ export async function build(remixRoot: string) {
 }
 
 function watch(remixRoot: string) {
+  build(remixRoot);
   chokidar.watch([path.join(remixRoot, 'app/routes/**/*.{ts,tsx}'), path.join(remixRoot, 'remix.config.js')]).on('change', () => {
     build(remixRoot);
   });
@@ -126,7 +127,7 @@ function parse(routes: ConfigRoute[]) {
 
 
 if (require.main === module) {
-  (async function () {
+  (async function() {
     const remixRoot = process.env.REMIX_ROOT || process.cwd()
 
     if (cli.flags.watch) {
