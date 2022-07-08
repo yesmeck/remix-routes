@@ -3,8 +3,8 @@ import meow from 'meow';
 import * as fs from 'fs';
 import * as path from 'path';
 import chokidar from 'chokidar';
-import type { ConfigRoute } from '@remix-run/dev/config/routes';
-import { readConfig } from '@remix-run/dev/config';
+import type { ConfigRoute } from '@remix-run/dev/dist/config/routes';
+import { readConfig } from '@remix-run/dev/dist/config';
 
 const helpText = `
 Usage
