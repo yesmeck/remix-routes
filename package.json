@@ -24,7 +24,7 @@
   "author": "Wei Zhu",
   "license": "MIT",
   "devDependencies": {
-    "@remix-run/dev": "^1.0.6",
+    "@remix-run/dev": "^1.6.4",
     "@types/cli-table": "^0.3.0",
     "@types/jest": "^27.0.3",
     "@types/node": "^16.11.12",
