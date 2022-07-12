@@ -25,3 +25,7 @@ export function $path(route: string, ...paramsOrQuery: Array<object>) {
 
   return path + '?' + searchParams.toString();
 }
+
+export function $params(_route: string, params: { readonly [key: string]: string | undefined }) {
+  return params
+}

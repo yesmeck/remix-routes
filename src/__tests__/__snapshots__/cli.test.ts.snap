@@ -92,5 +92,45 @@ export declare function $path(
   query?: Record<string, string | number>
 ): string;
 
+export declare function $params(
+  route: \\"/chats/:season/:episode/:slug\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  season: string,
+  episode: string,
+  slug: string
+};
+export declare function $params(
+  route: \\"/chats/:season/:episode\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  season: string,
+  episode: string
+};
+export declare function $params(
+  route: \\"/s/:query\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  query: string
+};
+export declare function $params(
+  route: \\"/admin/episodes/:id\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  id: string
+};
+export declare function $params(
+  route: \\"/admin/episodes/:id/comments\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  id: string
+};
+export declare function $params(
+  route: \\"/jokes/:jokeId\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  jokeId: string
+};
+
 "
 `;
