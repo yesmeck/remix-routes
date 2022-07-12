@@ -62,7 +62,10 @@ function watch(remixRoot: string) {
 
 function generate(routesInfo: RoutesInfo) {
   const jsCode = generateHelpers(routesInfo);
-  const tsCode = generateDefinition(routesInfo);
+  const tsCode = [
+    generatePathDefinition(routesInfo),
+    generateParamsDefinition(routesInfo)
+  ].join('\n\n') + '\n\n';
   const outputPath = path.join(process.cwd(), 'node_modules', '.remix-routes');
   if (!fs.existsSync(outputPath)) {
     fs.mkdirSync(outputPath);
@@ -89,7 +92,7 @@ module.exports = { routes }
 `;
 }
 
-function generateDefinition(routesInfo: RoutesInfo) {
+function generatePathDefinition(routesInfo: RoutesInfo) {
   const code: string[] = [];
   Object.entries({
     '/': [],
@@ -105,8 +108,29 @@ function generateDefinition(routesInfo: RoutesInfo) {
     lines.push(`): string;`);
     code.push(lines.join('\n'));
   });
-  code.push('\n');
   return code.join('\n');
+}
+
+function generateParamsDefinition(routesInfo: RoutesInfo) {
+  const routes = Object.entries(routesInfo)
+
+  // $params helper makes sense only for routes with params.
+  const routesWithParams = routes.filter(([_, paramsNames]) => paramsNames.length > 0)
+
+  const code = routesWithParams.map(([route, paramsNames]) => {
+    const lines: string[] = []
+    
+    lines.push(`export declare function $params(`)
+    lines.push(`  route: ${JSON.stringify(route)},`)
+    lines.push(`  params: { readonly [key: string]: string | undefined }`)
+    lines.push(`): {`)
+    lines.push(paramsNames.map(paramName => `  ${paramName}: string`).join(',\n'))
+    lines.push(`};`)
+
+    return lines.join('\n')
+  })
+
+  return code.join('\n')
 }
 
 function parse(routes: ConfigRoute[]) {
