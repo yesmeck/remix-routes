@@ -85,7 +85,12 @@ function generate(routesInfo: RoutesInfo) {
       generatePathDefinition(routesInfo),
       generateParamsDefinition(routesInfo),
     ].join('\n\n') + '\n\n';
-  const outputPath = path.join(process.cwd(), 'node_modules', '.remix-routes');
+
+  const outputPath = path.join(
+    findNearestNodeModulesPath(__dirname!),
+    '.remix-routes',
+  );
+
   if (!fs.existsSync(outputPath)) {
     fs.mkdirSync(outputPath);
   }
@@ -168,10 +173,12 @@ function parse(routes: ConfigRoute[]) {
   const paramNames: string[] = [];
   routes.forEach((route) => {
     if (route.path?.startsWith(':')) {
-      return paramNames.push(...route.path.split('/').map(param => param.replace(':', '')));
+      return paramNames.push(
+        ...route.path.split('/').map((param) => param.replace(':', '')),
+      );
     }
     const [_, ...paramOrActions] = route.path!.split('/');
-    paramOrActions.forEach(paramOrAction => {
+    paramOrActions.forEach((paramOrAction) => {
       if (paramOrAction.startsWith(':')) {
         paramNames.push(paramOrAction.replace(':', ''));
       }
@@ -180,10 +187,9 @@ function parse(routes: ConfigRoute[]) {
   return paramNames;
 }
 
-
 if (require.main === module) {
-  (async function() {
-    const remixRoot = process.env.REMIX_ROOT || process.cwd()
+  (async function () {
+    const remixRoot = process.env.REMIX_ROOT || process.cwd();
 
     if (cli.flags.watch) {
       watch(remixRoot);
@@ -191,4 +197,18 @@ if (require.main === module) {
       build(remixRoot);
     }
   })();
+}
+
+function findNearestNodeModulesPath(destDir: string) {
+  let p = destDir;
+
+  while (p !== '/') {
+    const dest = path.join(p, 'node_modules');
+    if (fs.existsSync(dest)) {
+      return dest;
+    }
+    p = path.resolve(p, '..');
+  }
+
+  throw Error('Could not find node_modules dir');
 }
