@@ -52,6 +52,14 @@ export declare function $path(
   query?: Record<string, string | number>
 ): string;
 export declare function $path(
+  route: \\"/auth\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/auth/login\\",
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
   route: \\"/s/:query\\",
   params: { query: string | number },
   query?: Record<string, string | number>

@@ -47,7 +47,7 @@ async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
       if (route.path) {
         currentPath = [...currentPath, route];
         const fullPath = currentPath.reduce(
-          (acc, curr) => [acc, curr.path].join('/'),
+          (acc, curr) => [acc, trimSlash(curr.path!)].join('/'),
           '',
         );
         const paramsNames = parse(currentPath);
@@ -197,6 +197,10 @@ if (require.main === module) {
       build(remixRoot);
     }
   })();
+}
+
+function trimSlash(path: string) {
+  return path.replace(/\/+$/, '');
 }
 
 function findNearestNodeModulesPath(destDir: string) {
