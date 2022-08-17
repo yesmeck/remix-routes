@@ -12,6 +12,13 @@ const routes = {
     \\"season\\",
     \\"episode\\"
   ],
+  \\"/people/:personId\\": [
+    \\"personId\\"
+  ],
+  \\"/people/:personId/:planId/remove-plan\\": [
+    \\"personId\\",
+    \\"planId\\"
+  ],
   \\"/s/:query\\": [
     \\"query\\"
   ],
@@ -45,6 +52,16 @@ export declare function $path(
 export declare function $path(
   route: \\"/chats/:season/:episode\\",
   params: { season: string | number; episode: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/people/:personId\\",
+  params: { personId: string | number },
+  query?: Record<string, string | number>
+): string;
+export declare function $path(
+  route: \\"/people/:personId/:planId/remove-plan\\",
+  params: { personId: string | number; planId: string | number },
   query?: Record<string, string | number>
 ): string;
 export declare function $path(
@@ -114,6 +131,19 @@ export declare function $params(
 ): {
   season: string,
   episode: string
+};
+export declare function $params(
+  route: \\"/people/:personId\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  personId: string
+};
+export declare function $params(
+  route: \\"/people/:personId/:planId/remove-plan\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  personId: string,
+  planId: string
 };
 export declare function $params(
   route: \\"/s/:query\\",
