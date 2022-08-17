@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@remix-run/dev': ^1.6.4
+  '@remix-run/dev': ^1.6.7
   '@types/cli-table': ^0.3.0
   '@types/jest': ^27.0.3
   '@types/node': ^16.11.12
@@ -18,7 +18,7 @@ dependencies:
   meow: 9.0.0
 
 devDependencies:
-  '@remix-run/dev': 1.6.4
+  '@remix-run/dev': 1.6.7
   '@types/cli-table': 0.3.0
   '@types/jest': 27.0.3
   '@types/node': 16.11.17
@@ -1492,6 +1492,13 @@ packages:
       regenerator-runtime: 0.13.9
     dev: true
 
+  /@babel/runtime/7.18.9:
+    resolution: {integrity: sha512-lkqXDcvlFT5rvEjiu6+QYO+1GXrEHRo2LOtS7E4GtX5ESIZOgepqsZBVIj6Pv+a6zqsya9VCgiK1KAK4BvJDAw==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.9
+    dev: true
+
   /@babel/template/7.16.0:
     resolution: {integrity: sha512-MnZdpFD/ZdYhXwiunMqqgyZyucaYsbL0IrjoGjaVhGilz+x8YB++kRfygSOIj1yOtWKPlx7NBp+9I1RQSgsd5A==}
     engines: {node: '>=6.9.0'}
@@ -1859,7 +1866,7 @@ packages:
     deprecated: this version had an improper engines field added, update to 1.1.1
     dependencies:
       '@gar/promisify': 1.1.2
-      semver: 7.3.5
+      semver: 7.3.7
     dev: true
 
   /@npmcli/move-file/1.1.2:
@@ -1984,12 +1991,12 @@ packages:
       '@octokit/openapi-types': 11.2.0
     dev: true
 
-  /@remix-run/dev/1.6.4:
-    resolution: {integrity: sha512-HRWX7/c2PDxWfLa2/3oQcKFPQlKaQgelksFUmef4aaga4n6y4dHWE56do/Lf/t34T/PlKWa5uToiaUNuzpTmMQ==}
+  /@remix-run/dev/1.6.7:
+    resolution: {integrity: sha512-bIIedVfQucgr7IlZ3u7QNglVyPHFSVJ6gt/VxjZcJFZ0R9x7YOiWLXiJkl3QwM0iHbG8BGiA1GM36GSPHBuxTw==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
-      '@remix-run/serve': 1.6.4
+      '@remix-run/serve': 1.6.7
     peerDependenciesMeta:
       '@remix-run/serve':
         optional: true
@@ -2000,7 +2007,7 @@ packages:
       '@babel/preset-typescript': 7.18.6_@babel+core@7.18.6
       '@esbuild-plugins/node-modules-polyfill': 0.1.4_esbuild@0.14.22
       '@npmcli/package-json': 2.0.0
-      '@remix-run/server-runtime': 1.6.4
+      '@remix-run/server-runtime': 1.6.7
       '@yarnpkg/esbuild-plugin-pnp': 3.0.0-rc.11_esbuild@0.14.22
       arg: 5.0.2
       cacache: 15.3.0
@@ -2023,11 +2030,11 @@ packages:
       minimatch: 3.0.4
       node-fetch: 2.6.7
       ora: 5.4.1
-      prettier: 2.6.1
+      prettier: 2.7.1
       pretty-ms: 7.0.1
       remark-frontmatter: 4.0.1
       remark-mdx-frontmatter: 1.1.1
-      semver: 7.3.5
+      semver: 7.3.7
       sort-package-json: 1.57.0
       tar-fs: 2.1.1
       tsconfig-paths: 4.0.0
@@ -2043,8 +2050,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@remix-run/server-runtime/1.6.4:
-    resolution: {integrity: sha512-CHFJzg5+7yFLndZJnYvr0ZqtNhkmu0txk5hCAEtADvb19M56RywMT6s2u3POnAPWmjpvEA8hv5IpayfUi6xeRg==}
+  /@remix-run/server-runtime/1.6.7:
+    resolution: {integrity: sha512-7mn+zztDqTnM9XyFQmpPsiyYULtlSqcQN0ct82+tcWa6Wxp4he/3JcHwa9BQBKr500RSDDYpJKSByRIZB9kp1w==}
     engines: {node: '>=14'}
     peerDependencies:
       react: '>=16.8'
@@ -2055,8 +2062,8 @@ packages:
       cookie: 0.4.2
       jsesc: 3.0.2
       react-router-dom: 6.3.0
-      set-cookie-parser: 2.5.0
-      source-map: 0.7.3
+      set-cookie-parser: 2.5.1
+      source-map: 0.7.4
     dev: true
 
   /@rollup/pluginutils/4.1.2:
@@ -3335,8 +3342,8 @@ packages:
     resolution: {integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==}
     dev: true
 
-  /deasync/0.1.24:
-    resolution: {integrity: sha512-i98vg42xNfRZCymummMAN0rIcQ1gZFinSe3btvPIvy6JFTaeHcumeKybRo2HTv86nasfmT0nEgAn2ggLZhOCVA==}
+  /deasync/0.1.28:
+    resolution: {integrity: sha512-QqLF6inIDwiATrfROIyQtwOQxjZuek13WRYZ7donU5wJPLoP67MnYxA6QtqdvdBy2mMqv5m3UefBVdJjvevOYg==}
     engines: {node: '>=0.11.0'}
     requiresBuild: true
     dependencies:
@@ -4403,7 +4410,7 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: 3.14.5
+      uglify-js: 3.16.3
     dev: true
 
   /hard-rejection/2.1.0:
@@ -4495,7 +4502,7 @@ packages:
   /history/5.3.0:
     resolution: {integrity: sha512-ZqaKwjjrAYUYfLG+htGaIIZ4nioX2L70ZUMIFysS3xvBsSG4x/n1V6TXV3N8ZYNuFGlDirFg32T7B6WOUPDYcQ==}
     dependencies:
-      '@babel/runtime': 7.18.6
+      '@babel/runtime': 7.18.9
     dev: true
 
   /hook-std/2.0.0:
@@ -6999,8 +7006,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/2.6.1:
-    resolution: {integrity: sha512-8UVbTBYGwN37Bs9LERmxCPjdvPxlEowx2urIL6urHzdb3SDq4B/Z6xLFCblrSnE4iKWcS6ziJ3aOYrc1kz/E2A==}
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -7556,6 +7563,14 @@ packages:
     dependencies:
       lru-cache: 6.0.0
 
+  /semver/7.3.7:
+    resolution: {integrity: sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      lru-cache: 6.0.0
+    dev: true
+
   /send/0.17.2:
     resolution: {integrity: sha512-UJYB6wFSJE3G00nEivR5rgWp8c2xXvJ3OPWPhmuteU0IKj8nKbG3DrjiOmLwpnHGYWAVwA69zmTm++YG0Hmwww==}
     engines: {node: '>= 0.8.0'}
@@ -7589,8 +7604,8 @@ packages:
       - supports-color
     dev: true
 
-  /set-cookie-parser/2.5.0:
-    resolution: {integrity: sha512-cHMAtSXilfyBePduZEBVPTCftTQWz6ehWJD5YNUg4mqvRosrrjKbo4WS8JkB0/RxonMoohHm7cOGH60mDkRQ9w==}
+  /set-cookie-parser/2.5.1:
+    resolution: {integrity: sha512-1jeBGaKNGdEq4FgIrORu/N570dwoPYio8lSoYLWmX7sQ//0JY08Xh9o5pBcgmHQ/MbsYp/aZnOe1s1lIsbLprQ==}
     dev: true
 
   /set-value/2.0.1:
@@ -7731,6 +7746,11 @@ packages:
 
   /source-map/0.7.3:
     resolution: {integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==}
+    engines: {node: '>= 8'}
+    dev: true
+
+  /source-map/0.7.4:
+    resolution: {integrity: sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==}
     engines: {node: '>= 8'}
     dev: true
 
@@ -8238,8 +8258,8 @@ packages:
     hasBin: true
     dev: true
 
-  /uglify-js/3.14.5:
-    resolution: {integrity: sha512-qZukoSxOG0urUTvjc2ERMTcAy+BiFh3weWAkeurLwjrCba73poHmG3E36XEjd/JGukMzwTL7uCxZiAexj8ppvQ==}
+  /uglify-js/3.16.3:
+    resolution: {integrity: sha512-uVbFqx9vvLhQg0iBaau9Z75AxWJ8tqM9AV890dIZCLApF4rTcyHwmAvLeEdYRs+BzYWu8Iw81F79ah0EfTXbaw==}
     engines: {node: '>=0.8.0'}
     hasBin: true
     requiresBuild: true
@@ -8636,7 +8656,7 @@ packages:
       unist-util-visit: 4.1.0
       vfile: 5.2.0
     optionalDependencies:
-      deasync: 0.1.24
+      deasync: 0.1.28
     transitivePeerDependencies:
       - supports-color
     dev: true

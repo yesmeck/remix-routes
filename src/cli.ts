@@ -172,17 +172,15 @@ function generateParamsDefinition(routesInfo: RoutesInfo) {
 function parse(routes: ConfigRoute[]) {
   const paramNames: string[] = [];
   routes.forEach((route) => {
-    if (route.path?.startsWith(':')) {
-      return paramNames.push(
-        ...route.path.split('/').map((param) => param.replace(':', '')),
-      );
-    }
-    const [_, ...paramOrActions] = route.path!.split('/');
-    paramOrActions.forEach((paramOrAction) => {
-      if (paramOrAction.startsWith(':')) {
-        paramNames.push(paramOrAction.replace(':', ''));
-      }
-    });
+    return (
+      route.path &&
+      paramNames.push(
+        ...route.path
+          .split('/')
+          .filter((seg) => seg.startsWith(':'))
+          .map((param) => param.replace(':', '')),
+      )
+    );
   });
   return paramNames;
 }
