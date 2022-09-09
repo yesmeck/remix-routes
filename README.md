@@ -59,6 +59,8 @@ import { $path } from 'remix-routes';
 
 $path('/posts/:id', { id: 6 }, { version: 18 }); // => /posts/6?version=18
 $path('/posts', { limit: 10 }); // => /posts?limit=10
+// You can pass any URLSearchParams init as param
+$path('/posts/delete', [['id', 1], ['id', 2]]); // => /posts/delete?id=1&id=2
 ```
 
 Checking params:

@@ -12,6 +12,15 @@ test('$path + query', () => {
   expect($path('/posts', { order: 'desc' })).toBe('/posts?order=desc');
 });
 
+test('$path + array query', () => {
+  expect(
+    $path('/posts/delete', [
+      ['id', 1],
+      ['id', 2],
+    ]),
+  ).toBe('/posts/delete?id=1&id=2');
+});
+
 test('$path + params + query', () => {
   expect($path('/posts/:id', { id: 1 }, { raw: 'true' })).toBe('/posts/1?raw=true');
 });
