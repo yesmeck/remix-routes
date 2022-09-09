@@ -136,7 +136,9 @@ function generatePathDefinition(routesInfo: RoutesInfo) {
       );
       lines.push(`  params: { ${paramsType.join('; ')} },`);
     }
-    lines.push(`  query?: Record<string, string | number>`);
+    lines.push(
+      `  query?: string | string[][] | Record<string, string> | URLSearchParams`,
+    );
     lines.push(`): string;`);
     code.push(lines.join('\n'));
   });

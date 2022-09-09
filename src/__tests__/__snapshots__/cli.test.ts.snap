@@ -42,79 +42,79 @@ exports[`build 2`] = `"{\\"name\\":\\".remix-routes\\",\\"main\\":\\"index.js\\"
 exports[`build 3`] = `
 "export declare function $path(
   route: \\"/\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/chats/:season/:episode/:slug\\",
   params: { season: string | number; episode: string | number; slug: string | number },
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/chats/:season/:episode\\",
   params: { season: string | number; episode: string | number },
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/people/:personId\\",
   params: { personId: string | number },
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/people/:personId/:planId/remove-plan\\",
   params: { personId: string | number; planId: string | number },
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/blog/rss.xml\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/auth\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/auth/login\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/s/:query\\",
   params: { query: string | number },
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/credits\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/admin\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/admin/episodes\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/:id\\",
   params: { id: string | number },
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/:id/comments\\",
   params: { id: string | number },
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/new\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/jokes\\",
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/jokes/:jokeId\\",
   params: { jokeId: string | number },
-  query?: Record<string, string | number>
+  query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 
 export declare function $params(
