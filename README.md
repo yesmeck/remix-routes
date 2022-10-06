@@ -42,7 +42,7 @@ $ npm add remix-routes
 ```typescript
 import type { ActionFunction } from 'remix';
 import { redirect } from 'remix';
-import { $path } from 'remix-routes'; // <-- Import magic $path helper from remix-routes.
+import { $path } from 'remix-routes'; // <-- Import magical $path helper from remix-routes.
 
 export const action: ActionFunction = async ({ request }) => {
   let formData = await request.formData();
