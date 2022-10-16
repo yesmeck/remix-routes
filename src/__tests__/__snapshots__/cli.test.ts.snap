@@ -1,45 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`build 1`] = `
-"
-const routes = {
-  \\"/chats/:season/:episode/:slug\\": [
-    \\"season\\",
-    \\"episode\\",
-    \\"slug\\"
-  ],
-  \\"/chats/:season/:episode\\": [
-    \\"season\\",
-    \\"episode\\"
-  ],
-  \\"/people/:personId\\": [
-    \\"personId\\"
-  ],
-  \\"/people/:personId/:planId/remove-plan\\": [
-    \\"personId\\",
-    \\"planId\\"
-  ],
-  \\"/s/:query\\": [
-    \\"query\\"
-  ],
-  \\"/admin/episodes/:id\\": [
-    \\"id\\"
-  ],
-  \\"/admin/episodes/:id/comments\\": [
-    \\"id\\"
-  ],
-  \\"/jokes/:jokeId\\": [
-    \\"jokeId\\"
-  ]
-};
-
-module.exports = { routes }
-"
-`;
-
-exports[`build 2`] = `"{\\"name\\":\\".remix-routes\\",\\"main\\":\\"index.js\\"}"`;
-
-exports[`build 3`] = `
 "export declare function $path(
   route: \\"/\\",
   query?: string | string[][] | Record<string, string> | URLSearchParams
@@ -69,11 +30,24 @@ export declare function $path(
   query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
+  route: \\"/posts/delete\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
   route: \\"/auth\\",
   query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
   route: \\"/auth/login\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/posts\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/posts/:id\\",
+  params: { id: string | number },
   query?: string | string[][] | Record<string, string> | URLSearchParams
 ): string;
 export declare function $path(
@@ -146,6 +120,12 @@ export declare function $params(
   planId: string
 };
 export declare function $params(
+  route: \\"/posts/:id\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  id: string
+};
+export declare function $params(
   route: \\"/s/:query\\",
   params: { readonly [key: string]: string | undefined }
 ): {
@@ -170,5 +150,68 @@ export declare function $params(
   jokeId: string
 };
 
+"
+`;
+
+exports[`build 2`] = `
+"const routes = {
+  \\"/chats/:season/:episode/:slug\\": [
+    \\"season\\",
+    \\"episode\\",
+    \\"slug\\"
+  ],
+  \\"/chats/:season/:episode\\": [
+    \\"season\\",
+    \\"episode\\"
+  ],
+  \\"/people/:personId\\": [
+    \\"personId\\"
+  ],
+  \\"/people/:personId/:planId/remove-plan\\": [
+    \\"personId\\",
+    \\"planId\\"
+  ],
+  \\"/posts/:id\\": [
+    \\"id\\"
+  ],
+  \\"/s/:query\\": [
+    \\"query\\"
+  ],
+  \\"/admin/episodes/:id\\": [
+    \\"id\\"
+  ],
+  \\"/admin/episodes/:id/comments\\": [
+    \\"id\\"
+  ],
+  \\"/jokes/:jokeId\\": [
+    \\"jokeId\\"
+  ]
+}
+
+module.exports.$path = function $path(route, ...paramsOrQuery) {
+  const routeParams = routes[route];
+  let path = route;
+  let query = paramsOrQuery[0];
+  if (
+    (routeParams === null || routeParams === void 0
+      ? void 0
+      : routeParams.length) > 0
+  ) {
+    const params = paramsOrQuery[0];
+    query = paramsOrQuery[1];
+    routeParams.forEach((name) => {
+      path = path.replace(':' + name, params[name]);
+    });
+  }
+  if (!query) {
+    return path;
+  }
+  const searchParams = new URLSearchParams(query);
+  return path + '?' + searchParams.toString();
+}
+
+module.exports.$params = function $params(_route, params) {
+  return params;
+}
 "
 `;

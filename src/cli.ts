@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import chokidar from 'chokidar';
 import type { ConfigRoute } from '@remix-run/dev/dist/config/routes';
+import mkdirp from 'mkdirp';
 
 let readConfig: typeof import('@remix-run/dev/dist/config').readConfig;
 
@@ -87,22 +88,15 @@ function generate(routesInfo: RoutesInfo) {
     ].join('\n\n') + '\n\n';
 
   const outputPath = path.join(
-    findNearestNodeModulesPath(__dirname!),
-    '.remix-routes',
+    process.cwd(),
+    'node_modules',
   );
 
   if (!fs.existsSync(outputPath)) {
-    fs.mkdirSync(outputPath);
+    mkdirp.sync(outputPath);
   }
-  fs.writeFileSync(path.join(outputPath, 'index.js'), jsCode);
-  fs.writeFileSync(path.join(outputPath, 'types.d.ts'), tsCode);
-  fs.writeFileSync(
-    path.join(outputPath, 'package.json'),
-    JSON.stringify({
-      name: '.remix-routes',
-      main: 'index.js',
-    }),
-  );
+  fs.writeFileSync(path.join(outputPath, 'remix-routes.js'), jsCode);
+  fs.writeFileSync(path.join(outputPath, 'remix-routes.d.ts'), tsCode);
 }
 
 function generateHelpers(routesInfo: RoutesInfo) {
@@ -115,11 +109,8 @@ function generateHelpers(routesInfo: RoutesInfo) {
     },
     {},
   );
-  return `
-const routes = ${JSON.stringify(routes, null, 2)};
-
-module.exports = { routes }
-`;
+  const helper = fs.readFileSync(path.resolve(__dirname, '../helper.js'), 'utf-8')
+  return helper.replace('// __routes__', `const routes = ${JSON.stringify(routes, null, 2)}`);
 }
 
 function generatePathDefinition(routesInfo: RoutesInfo) {
@@ -201,18 +192,4 @@ if (require.main === module) {
 
 function trimSlash(path: string) {
   return path.replace(/\/+$/, '');
-}
-
-function findNearestNodeModulesPath(destDir: string) {
-  let p = destDir;
-
-  while (p !== '/') {
-    const dest = path.join(p, 'node_modules');
-    if (fs.existsSync(dest)) {
-      return dest;
-    }
-    p = path.resolve(p, '..');
-  }
-
-  throw Error('Could not find node_modules dir');
 }
