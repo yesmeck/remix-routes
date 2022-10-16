@@ -90,21 +90,13 @@ function generate(routesInfo: RoutesInfo) {
   const outputPath = path.join(
     process.cwd(),
     'node_modules',
-    'remix-routes',
   );
 
   if (!fs.existsSync(outputPath)) {
     mkdirp.sync(outputPath);
   }
-  fs.writeFileSync(path.join(outputPath, 'index.js'), jsCode);
-  fs.writeFileSync(path.join(outputPath, 'index.d.ts'), tsCode);
-  fs.writeFileSync(
-    path.join(outputPath, 'package.json'),
-    JSON.stringify({
-      name: 'remix-routes',
-      main: 'index.js',
-    }),
-  );
+  fs.writeFileSync(path.join(outputPath, 'remix-routes.js'), jsCode);
+  fs.writeFileSync(path.join(outputPath, 'remix-routes.d.ts'), tsCode);
 }
 
 function generateHelpers(routesInfo: RoutesInfo) {

@@ -215,5 +215,3 @@ module.exports.$params = function $params(_route, params) {
 }
 "
 `;
-
-exports[`build 3`] = `"{\\"name\\":\\"remix-routes\\",\\"main\\":\\"index.js\\"}"`;
