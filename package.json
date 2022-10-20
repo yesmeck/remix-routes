@@ -1,8 +1,8 @@
 {
   "name": "remix-routes",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "description": "Typesafe routing for Remix apps.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "bin": {
     "remix-routes": "lib/cli.js"
   },
