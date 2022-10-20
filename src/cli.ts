@@ -80,7 +80,6 @@ function watch(remixRoot: string) {
 }
 
 function generate(routesInfo: RoutesInfo) {
-  const jsCode = generateHelpers(routesInfo);
   const tsCode =
     [
       generatePathDefinition(routesInfo),
@@ -95,22 +94,7 @@ function generate(routesInfo: RoutesInfo) {
   if (!fs.existsSync(outputPath)) {
     mkdirp.sync(outputPath);
   }
-  fs.writeFileSync(path.join(outputPath, 'remix-routes.js'), jsCode);
   fs.writeFileSync(path.join(outputPath, 'remix-routes.d.ts'), tsCode);
-}
-
-function generateHelpers(routesInfo: RoutesInfo) {
-  const routes = Object.entries(routesInfo).reduce(
-    (acc: Record<string, string[]>, [route, params]) => {
-      if (params.length > 0) {
-        acc[route] = params;
-      }
-      return acc;
-    },
-    {},
-  );
-  const helper = fs.readFileSync(path.resolve(__dirname, '../helper.js'), 'utf-8')
-  return helper.replace('// __routes__', `const routes = ${JSON.stringify(routes, null, 2)}`);
 }
 
 function generatePathDefinition(routesInfo: RoutesInfo) {
