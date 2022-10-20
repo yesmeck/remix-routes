@@ -1,16 +1,14 @@
 {
   "name": "remix-routes",
   "version": "0.6.0-alpha.1",
-  "description": "",
+  "description": "Typesafe routing for Remix apps.",
   "main": "index.js",
-  "types": "index.d.ts",
   "bin": {
     "remix-routes": "lib/cli.js"
   },
   "files": [
     "lib",
-    "!lib/__tests__",
-    "helper.js"
+    "!lib/__tests__"
   ],
   "scripts": {
     "watch": "tsc --watch",
