@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest';
 import { $path, $params } from '../index';
 
 test('$path', () => {

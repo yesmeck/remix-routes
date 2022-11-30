@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-remix-routes-plugin"
+      }
+    ],
+    "target": "es2017",
+    "jsx": "react-jsx",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": "Users/wei/workspaces/remix-routes/e2e",
+    "allowJs": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "isolatedModules": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  },
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"]
+}
