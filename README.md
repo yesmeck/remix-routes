@@ -2,7 +2,7 @@
 
 `remix-routes` automatically generates typesafe helper functions for manipulating internal links in your Remix apps.
 
-![Screenshot](https://user-images.githubusercontent.com/465125/147367217-0b8e8a04-0152-48e8-ba65-32c34605a4a5.png)
+https://user-images.githubusercontent.com/465125/205243864-3493733d-8586-405f-94eb-088fdb87fd23.mp4
 
 ## Installation
 
@@ -108,6 +108,9 @@ Add the plugin to your `tsconfig.json`:
 ```
 
 Select workspace version of TypeScript in VSCode:
+
+<img width="685" alt="Screenshot 2022-12-02 at 5 56 39 pm" src="https://user-images.githubusercontent.com/465125/205244385-e8051e71-1fda-417a-80a5-107f551d4bcf.png">
+
 
 ## License
 
