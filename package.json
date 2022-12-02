@@ -1,45 +1,18 @@
 {
-  "name": "remix-routes",
+  "name": "root",
+  "private": true,
   "version": "1.0.0",
-  "description": "Typesafe routing for Remix apps.",
-  "main": "lib/index.js",
-  "bin": {
-    "remix-routes": "lib/cli.js"
-  },
-  "files": [
-    "lib",
-    "!lib/__tests__"
-  ],
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "watch": "tsc --watch",
-    "prebuild": "rm -rf lib",
-    "build": "tsc",
-    "prepack": "npm run build",
-    "test": "jest",
-    "semantic-release": "semantic-release"
+    "test": "vitest",
+    "watch": "pnpm run --parallel watch"
   },
-  "keywords": ["remix", "routes", "typescript"],
-  "author": "Wei Zhu",
+  "keywords": [],
+  "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@remix-run/dev": "^1.6.7",
-    "@types/cli-table": "^0.3.0",
-    "@types/jest": "^27.0.3",
-    "@types/mkdirp": "^1.0.2",
-    "@types/node": "^16.11.12",
-    "@types/pluralize": "^0.0.29",
-    "jest": "^27.4.4",
-    "semantic-release": "^19.0.3",
-    "ts-jest": "^27.1.1",
-    "typescript": "^4.5.3"
-  },
-  "dependencies": {
-    "chokidar": "^3.5.2",
-    "meow": "9.0.0",
-    "mkdirp": "^1.0.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yesmeck/remix-routes.git"
+    "typescript-remix-routes-plugin": "workspace:*",
+    "vitest": "^0.23.2"
   }
 }

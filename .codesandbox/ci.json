@@ -1,6 +1,0 @@
-{
-  "installCommand": "install",
-  "buildCommand": "build",
-  "sandbox": ["modest-field-j6v9jy"],
-  "node": "16"
-}

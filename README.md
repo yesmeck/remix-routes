@@ -2,23 +2,9 @@
 
 `remix-routes` automatically generates typesafe helper functions for manipulating internal links in your Remix apps.
 
-![Screenshot](https://user-images.githubusercontent.com/465125/147367217-0b8e8a04-0152-48e8-ba65-32c34605a4a5.png)
+https://user-images.githubusercontent.com/465125/205243864-3493733d-8586-405f-94eb-088fdb87fd23.mp4
 
 ## Installation
-
-- Using pnpm:
-
-```bash
-$ pnpm add remix-routes
-```
-
-- Using yarn:
-
-```bash
-$ yarn add remix-routes
-```
-
-- Using npm:
 
 ```bash
 $ npm add remix-routes
@@ -26,13 +12,28 @@ $ npm add remix-routes
 
 ## Setup
 
-`package.json`
+Add `remix-routes` to your dev and build script in `package.json`.
+
+**With [`concurrently`](https://www.npmjs.com/package/concurrently) package:**
 
 ```json
 {
   "scripts": {
     "build": "remix-routes && remix build",
     "dev": "concurrently \"remix-routes -w\" \"remix dev\""
+  }
+}
+```
+
+**With [`npm-run-all`](https://www.npmjs.com/package/npm-run-all) package:**
+
+```json
+{
+  "scripts": {
+    "build": "run-s build:*",
+    "build:routes": "remix-routes",
+    "dev": "run-p dev:*",
+    "dev:routes": "remix-routes -w",
   }
 }
 ```
@@ -76,15 +77,40 @@ export const action: ActionFunction = async ({ params }) => {
 }
 ```
 
-## API
-
-- `$path(path: string, params: { [key: string]: string | number }, query?: { [key: string]: string | number })`
-- `$path(path: string, query?: { [key: string]: string | number })`
-- `$params(path: string, params: { readonly [key: string]: string | undefined })`
-
 ## Command Line Options
 
 - `-w`: Watch for changes and automatically rebuild.
+
+## TypeScript Integration
+
+A TypeScript plugin is available to help you navigate between route files.
+
+### Installation
+
+```bash
+$ npm add -D typescript-remix-routes-plugin
+```
+
+### Setup
+
+Add the plugin to your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-remix-routes-plugin"
+      }
+    ]
+  }
+}
+```
+
+Select workspace version of TypeScript in VSCode:
+
+<img width="685" alt="Screenshot 2022-12-02 at 5 56 39 pm" src="https://user-images.githubusercontent.com/465125/205244385-e8051e71-1fda-417a-80a5-107f551d4bcf.png">
+
 
 ## License
 

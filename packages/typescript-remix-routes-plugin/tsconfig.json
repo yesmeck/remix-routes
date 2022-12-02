@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "commonjs",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "rootDir": "src",
+    "outDir": "lib"
+  },
+  "exclude": ["node_modules", "lib", "vitest.config.ts"]
+}
