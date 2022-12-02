@@ -8,8 +8,7 @@
   },
   "files": [
     "lib",
-    "!lib/__tests__",
-    "typescript-plugin.js"
+    "!lib/__tests__"
   ],
   "scripts": {
     "watch": "tsc --watch",
@@ -18,7 +17,11 @@
     "prepare": "npm run build",
     "semantic-release": "semantic-release"
   },
-  "keywords": ["remix", "routes", "typescript"],
+  "keywords": [
+    "remix",
+    "routes",
+    "typescript"
+  ],
   "author": "Wei Zhu",
   "license": "MIT",
   "devDependencies": {

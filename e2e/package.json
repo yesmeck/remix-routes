@@ -1,5 +1,6 @@
 {
   "name": "e2e",
+  "private": true,
   "scripts": {
     "test": "vitest",
     "watch": "remix-routes -w"

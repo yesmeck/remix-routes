@@ -1,6 +1,6 @@
 {
   "name": "typescript-remix-routes-plugin",
-  "version": "0.0.0-alpha.4",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "./lib/index.js",
   "exports": {
@@ -14,6 +14,11 @@
     "watch": "tsc --watch",
     "prepare": "npm run build"
   },
+  "keywords": [
+    "remix",
+    "routes",
+    "typescript"
+  ],
   "dependencies": {
     "resolve": "^1.22.0",
     "typescript": "^4.4.3"
