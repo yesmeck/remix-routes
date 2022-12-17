@@ -63,7 +63,7 @@ async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
 
 export async function build(remixRoot: string) {
   const routesInfo = await buildHelpers(remixRoot);
-  generate(routesInfo);
+  generate(routesInfo, remixRoot);
 }
 
 function watch(remixRoot: string) {
@@ -79,7 +79,7 @@ function watch(remixRoot: string) {
   console.log('Watching for routes changes...');
 }
 
-function generate(routesInfo: RoutesInfo) {
+function generate(routesInfo: RoutesInfo, remixRoot: string) {
   const tsCode =
     [
       generatePathDefinition(routesInfo),
@@ -87,7 +87,7 @@ function generate(routesInfo: RoutesInfo) {
     ].join('\n\n') + '\n\n';
 
   const outputPath = path.join(
-    process.cwd(),
+    remixRoot,
     'node_modules',
   );
 

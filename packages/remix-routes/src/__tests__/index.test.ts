@@ -28,6 +28,11 @@ test('$path + params + query', () => {
   );
 });
 
+test('$path + optional route fragment', () => {
+  expect($path('/:lang?/about', {})).toBe('/about');
+  expect($path('/:lang?/about', { lang: 'en' })).toBe('/en/about');
+});
+
 test('$params', () => {
   expect($params('/posts/:id', { id: '1' })).toStrictEqual({ id: '1' });
 });

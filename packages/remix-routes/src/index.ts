@@ -1,12 +1,8 @@
-function extractParams(route: string) {
-  return route
-    .split('/')
-    .filter((seg) => seg.indexOf(':') === 0)
-    .map((seg) => seg.slice(1));
+function includesParams(route: string) {
+  return route.indexOf('/:') > -1;
 }
 
 export function $path(route: string, ...paramsOrQuery: Array<any>) {
-  const routeParams = extractParams(route);
   let path = route;
   let query:
     | string
@@ -15,12 +11,22 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
     | URLSearchParams
     | undefined = paramsOrQuery[0];
 
-  if (routeParams.length > 0) {
+  if (includesParams(route)) {
     const params: any = paramsOrQuery[0];
     query = paramsOrQuery[1];
-    routeParams.forEach((name) => {
-      path = path.replace(':' + name, params[name]);
-    });
+    path = route.split('/').map(fragment => {
+      if (fragment.indexOf(':') > -1) {
+        let paramName = fragment.slice(1);
+        if (paramName.indexOf('?') > -1) {
+          paramName = paramName.slice(0, -1);
+        }
+        if (paramName in params) {
+          return params[paramName];
+        }
+        return null
+      }
+      return fragment;
+    }).filter(f => f !== null).join('/');
   }
 
   if (!query) {
