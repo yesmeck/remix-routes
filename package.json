@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest",
-    "watch": "pnpm run --parallel watch"
+    "watch": "pnpm run --parallel watch",
+    "ci:publish": "pnpm publish -r"
   },
   "keywords": [],
   "author": "",
