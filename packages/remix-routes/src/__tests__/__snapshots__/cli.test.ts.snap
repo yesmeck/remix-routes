@@ -1,0 +1,165 @@
+// Vitest Snapshot v1
+
+exports[`build 1`] = `
+"export declare function $path(
+  route: \\"/\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/chats/:season/:episode/:slug\\",
+  params: { season: string | number; episode: string | number; slug: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/chats/:season/:episode\\",
+  params: { season: string | number; episode: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/people/:personId\\",
+  params: { personId: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/people/:personId/:planId/remove-plan\\",
+  params: { personId: string | number; planId: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/blog/rss.xml\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/:lang?/about\\",
+  params: { lang?: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/posts/delete\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/auth\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/auth/login\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/posts\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/posts/:id\\",
+  params: { id: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/s/:query\\",
+  params: { query: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/credits\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/admin\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/admin/episodes\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/admin/episodes/:id\\",
+  params: { id: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/admin/episodes/:id/comments\\",
+  params: { id: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/admin/episodes/new\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/jokes\\",
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+export declare function $path(
+  route: \\"/jokes/:jokeId\\",
+  params: { jokeId: string | number },
+  query?: string | string[][] | Record<string, string> | URLSearchParams
+): string;
+
+export declare function $params(
+  route: \\"/chats/:season/:episode/:slug\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  season: string,
+  episode: string,
+  slug: string
+};
+export declare function $params(
+  route: \\"/chats/:season/:episode\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  season: string,
+  episode: string
+};
+export declare function $params(
+  route: \\"/people/:personId\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  personId: string
+};
+export declare function $params(
+  route: \\"/people/:personId/:planId/remove-plan\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  personId: string,
+  planId: string
+};
+export declare function $params(
+  route: \\"/:lang?/about\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  lang?: string
+};
+export declare function $params(
+  route: \\"/posts/:id\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  id: string
+};
+export declare function $params(
+  route: \\"/s/:query\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  query: string
+};
+export declare function $params(
+  route: \\"/admin/episodes/:id\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  id: string
+};
+export declare function $params(
+  route: \\"/admin/episodes/:id/comments\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  id: string
+};
+export declare function $params(
+  route: \\"/jokes/:jokeId\\",
+  params: { readonly [key: string]: string | undefined }
+): {
+  jokeId: string
+};
+
+"
+`;
