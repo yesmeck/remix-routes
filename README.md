@@ -40,6 +40,8 @@ Add `remix-routes` to your dev and build script in `package.json`.
 
 ## Usage
 
+### Basic usage
+
 ```typescript
 import type { ActionFunction } from 'remix';
 import { redirect } from 'remix';
@@ -53,7 +55,7 @@ export const action: ActionFunction = async ({ request }) => {
 };
 ```
 
-Appending query string:
+### Appending query string:
 
 ```typescript
 import { $path } from 'remix-routes';
@@ -64,7 +66,29 @@ $path('/posts', { limit: 10 }); // => /posts?limit=10
 $path('/posts/delete', [['id', 1], ['id', 2]]); // => /posts/delete?id=1&id=2
 ```
 
-Checking params:
+### Typed query string:
+
+Define type of query string by exporting a type named `SearchParams` in route file:
+
+```typescript
+// app/routes/posts.tsx
+
+export type SearchParams = {
+  view: 'list' | 'grid',
+  sort?: 'date' | 'views',
+  page?: number,
+}
+```
+
+```typescript
+import { $path } from 'remix-routes';
+
+// The query string is type-safe.
+$path('/posts', { view: 'list', sort: 'date', page: 1 });
+```
+
+
+### Checking params:
 
 ```typescript
 import type { ActionFunction } from 'remix';
