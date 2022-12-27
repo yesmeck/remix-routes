@@ -1,99 +1,109 @@
 // Vitest Snapshot v1
 
 exports[`build 1`] = `
-"export declare function $path(
+"
+type IsAny<T> = (
+  unknown extends T
+    ? [keyof T] extends [never] ? false : true
+    : false
+);
+type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
+type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
+      
+
+export declare function $path(
   route: \\"/\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/root').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/chats/:season/:episode/:slug\\",
   params: { season: string | number; episode: string | number; slug: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/chats.$season.$episode.$slug').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/chats/:season/:episode\\",
   params: { season: string | number; episode: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/chats.$season.$episode').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/people/:personId\\",
   params: { personId: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/people/$personId').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/people/:personId/:planId/remove-plan\\",
   params: { personId: string | number; planId: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/blog/rss.xml\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/blog.rss[.]xml').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/:lang?/about\\",
   params: { lang?: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/($lang)/about').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/posts/delete\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/posts/delete').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/auth\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/auth/__auth').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/auth/login\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/auth/__auth/login').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/posts\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/posts/index').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/posts/:id\\",
   params: { id: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/posts/$id').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/s/:query\\",
   params: { query: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/s.$query').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/credits\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/credits').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/admin').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin/episodes\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/admin/episodes/index').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/:id\\",
   params: { id: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/admin/episodes/$id').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/:id/comments\\",
   params: { id: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/admin/episodes/$id/comments').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/new\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/admin/episodes/new').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/jokes\\",
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/jokes').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/jokes/:jokeId\\",
   params: { jokeId: string | number },
-  query?: string | string[][] | Record<string, string> | URLSearchParams
+  ...query: Query<import('../app/routes/jokes/$jokeId').SearchParams>
 ): string;
 
 export declare function $params(

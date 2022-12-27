@@ -31,7 +31,10 @@ const cli = meow(helpText, {
   },
 });
 
-type RoutesInfo = Record<string, string[]>;
+type RoutesInfo = Record<string, {
+  fileName: string;
+  params: string[];
+}>
 
 async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
   const config = await readConfig(remixRoot);
@@ -52,7 +55,15 @@ async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
           '',
         );
         const paramsNames = parse(currentPath);
-        routesInfo[fullPath] = paramsNames;
+        routesInfo[fullPath] = {
+          fileName: route.file,
+          params: paramsNames
+        };
+      } else if (route.id === 'root') {
+        routesInfo['/'] = {
+          fileName: route.file,
+          params: [],
+        };
       }
       handleRoutesRecursive(route.id, currentPath);
     });
@@ -82,6 +93,15 @@ function watch(remixRoot: string) {
 function generate(routesInfo: RoutesInfo, remixRoot: string) {
   const tsCode =
     [
+      `
+type IsAny<T> = (
+  unknown extends T
+    ? [keyof T] extends [never] ? false : true
+    : false
+);
+type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
+type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
+      `,
       generatePathDefinition(routesInfo),
       generateParamsDefinition(routesInfo),
     ].join('\n\n') + '\n\n';
@@ -99,20 +119,17 @@ function generate(routesInfo: RoutesInfo, remixRoot: string) {
 
 function generatePathDefinition(routesInfo: RoutesInfo) {
   const code: string[] = [];
-  Object.entries({
-    '/': [],
-    ...routesInfo,
-  }).forEach(([route, paramsNames]) => {
+  Object.entries(routesInfo).forEach(([route, { fileName, params }]) => {
     const lines = ['export declare function $path('];
     lines.push(`  route: ${JSON.stringify(route)},`);
-    if (paramsNames.length > 0) {
-      const paramsType = paramsNames.map(
-        (paramName) => `${paramName}: string | number`,
+    if (params.length > 0) {
+      const paramsType = params.map(
+        (param) => `${param}: string | number`,
       );
       lines.push(`  params: { ${paramsType.join('; ')} },`);
     }
     lines.push(
-      `  query?: string | string[][] | Record<string, string> | URLSearchParams`,
+      `  ...query: Query<import('../app/${fileName.replace(/\.tsx?$/, '')}').SearchParams>`,
     );
     lines.push(`): string;`);
     code.push(lines.join('\n'));
@@ -125,10 +142,10 @@ function generateParamsDefinition(routesInfo: RoutesInfo) {
 
   // $params helper makes sense only for routes with params.
   const routesWithParams = routes.filter(
-    ([_, paramsNames]) => paramsNames.length > 0,
+    ([_, { params }]) => params.length > 0,
   );
 
-  const code = routesWithParams.map(([route, paramsNames]) => {
+  const code = routesWithParams.map(([route, { params }]) => {
     const lines: string[] = [];
 
     lines.push(`export declare function $params(`);
@@ -136,7 +153,7 @@ function generateParamsDefinition(routesInfo: RoutesInfo) {
     lines.push(`  params: { readonly [key: string]: string | undefined }`);
     lines.push(`): {`);
     lines.push(
-      paramsNames.map((paramName) => `  ${paramName}: string`).join(',\n'),
+      params.map((param) => `  ${param}: string`).join(',\n'),
     );
     lines.push(`};`);
 

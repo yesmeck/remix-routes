@@ -1,5 +1,10 @@
 import { ActionFunction, LoaderFunction } from '@remix-run/node';
 
+export type SearchParams = {
+  view: 'list' | 'grid';
+  sort?: 'price' | 'size';
+}
+
 export const action: ActionFunction = async (context) => {
 
 }
