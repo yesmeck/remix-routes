@@ -28,6 +28,11 @@ const cli = meow(helpText, {
       type: 'boolean',
       alias: 'w',
     },
+    outputDirPath: {
+      type: 'string',
+      alias: 'o',
+      default: 'node_modules',
+    }
   },
 });
 
@@ -72,25 +77,25 @@ async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
   return routesInfo;
 }
 
-export async function build(remixRoot: string) {
+export async function build(remixRoot: string, outputDirPath: string) {
   const routesInfo = await buildHelpers(remixRoot);
-  generate(routesInfo, remixRoot);
+  generate(routesInfo, remixRoot, outputDirPath);
 }
 
-function watch(remixRoot: string) {
-  build(remixRoot);
+function watch(remixRoot: string, outputDirPath: string) {
+  build(remixRoot, outputDirPath);
   chokidar
     .watch([
       path.join(remixRoot, 'app/routes/**/*.{ts,tsx}'),
       path.join(remixRoot, 'remix.config.js'),
     ])
     .on('change', () => {
-      build(remixRoot);
+      build(remixRoot, outputDirPath);
     });
   console.log('Watching for routes changes...');
 }
 
-function generate(routesInfo: RoutesInfo, remixRoot: string) {
+function generate(routesInfo: RoutesInfo, remixRoot: string, outputDirPath: string) {
   const tsCode =
     [
       `
@@ -108,7 +113,7 @@ type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
 
   const outputPath = path.join(
     remixRoot,
-    'node_modules',
+    outputDirPath,
   );
 
   if (!fs.existsSync(outputPath)) {
@@ -184,9 +189,9 @@ if (require.main === module) {
     const remixRoot = process.env.REMIX_ROOT || process.cwd();
 
     if (cli.flags.watch) {
-      watch(remixRoot);
+      watch(remixRoot, cli.flags.outputDirPath);
     } else {
-      build(remixRoot);
+      build(remixRoot, cli.flags.outputDirPath);
     }
   })();
 }
