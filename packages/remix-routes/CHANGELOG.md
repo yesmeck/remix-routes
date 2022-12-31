@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.3.0
+
+### Minor Changes
+
+- 9f92788: feat: add outputDirPath arg to CLI
+
 ## 1.2.0
 
 ### Minor Changes
