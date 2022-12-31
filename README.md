@@ -104,6 +104,7 @@ export const action: ActionFunction = async ({ params }) => {
 ## Command Line Options
 
 - `-w`: Watch for changes and automatically rebuild.
+- `-o`: Specify the output path for `remix-routes.d.ts`. Defaults to `./node_modules` if arg is not given.
 
 ## TypeScript Integration
 

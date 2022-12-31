@@ -31,7 +31,7 @@ const cli = meow(helpText, {
     outputDirPath: {
       type: 'string',
       alias: 'o',
-      default: 'node_modules',
+      default: './node_modules',
     }
   },
 });
