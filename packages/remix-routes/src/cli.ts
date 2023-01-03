@@ -22,6 +22,8 @@ Options
 --watch, -w  Watch for routes changes
 `;
 
+const DEFAULT_OUTPUT_DIR_PATH = './node_modules'
+
 const cli = meow(helpText, {
   flags: {
     watch: {
@@ -31,7 +33,7 @@ const cli = meow(helpText, {
     outputDirPath: {
       type: 'string',
       alias: 'o',
-      default: './node_modules',
+      default: DEFAULT_OUTPUT_DIR_PATH,
     }
   },
 });
@@ -99,6 +101,8 @@ function generate(routesInfo: RoutesInfo, remixRoot: string, outputDirPath: stri
   const tsCode =
     [
       `
+declare module "remix-routes" {
+
 type IsAny<T> = (
   unknown extends T
     ? [keyof T] extends [never] ? false : true
@@ -109,6 +113,7 @@ type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
       `,
       generatePathDefinition(routesInfo),
       generateParamsDefinition(routesInfo),
+      "}",
     ].join('\n\n') + '\n\n';
 
   const outputPath = path.join(
