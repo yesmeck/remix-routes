@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.3.1
+
+### Patch Changes
+
+- b2ca3ad: fix: enable remix-routes.d.ts to find remix-routes module (#33)
+
 ## 1.3.0
 
 ### Minor Changes
