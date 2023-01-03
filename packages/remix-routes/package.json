@@ -3,6 +3,7 @@
   "version": "1.3.0",
   "description": "Typesafe routing for Remix apps.",
   "main": "lib/index.js",
+  "types": "remix-routes.d.ts",
   "bin": {
     "remix-routes": "lib/cli.js"
   },
