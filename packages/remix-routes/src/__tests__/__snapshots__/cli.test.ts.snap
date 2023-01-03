@@ -2,6 +2,8 @@
 
 exports[`build 1`] = `
 "
+declare module \\"remix-routes\\" {
+
 type IsAny<T> = (
   unknown extends T
     ? [keyof T] extends [never] ? false : true
@@ -170,6 +172,8 @@ export declare function $params(
 ): {
   jokeId: string
 };
+
+}
 
 "
 `;
