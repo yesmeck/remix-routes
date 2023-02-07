@@ -110,8 +110,9 @@ type IsAny<T> = (
     : false
 );
 type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
-type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
+type Query<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
       `,
+      generateRouteDefinition(routesInfo),
       generatePathDefinition(routesInfo),
       generateParamsDefinition(routesInfo),
       "}",
@@ -128,19 +129,32 @@ type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
   fs.writeFileSync(path.join(outputPath, 'remix-routes.d.ts'), tsCode);
 }
 
+function generateRouteDefinition(routesInfo: RoutesInfo) {
+  const code: string[] = ['export interface Routes {'];
+  Object.entries(routesInfo).forEach(([route, { fileName, params }]) => {
+    const lines = [`  "${route}": {`];
+    const paramsType = params.map(
+      (param) => `${param}: string | number`,
+    );
+    lines.push(`    params: { ${paramsType.join('; ')} },`);
+    lines.push(`    query: Query<import('../app/${fileName.replace(/\.tsx?$/, '')}').SearchParams>,`)
+    lines.push('  };')
+    code.push(lines.join('\n'));
+  });
+  code.push("}");
+  return code.join('\n');
+}
+
 function generatePathDefinition(routesInfo: RoutesInfo) {
   const code: string[] = [];
   Object.entries(routesInfo).forEach(([route, { fileName, params }]) => {
     const lines = ['export declare function $path('];
     lines.push(`  route: ${JSON.stringify(route)},`);
     if (params.length > 0) {
-      const paramsType = params.map(
-        (param) => `${param}: string | number`,
-      );
-      lines.push(`  params: { ${paramsType.join('; ')} },`);
+      lines.push(`  params: Routes["${route}"]["params"],`);
     }
     lines.push(
-      `  ...query: Query<import('../app/${fileName.replace(/\.tsx?$/, '')}').SearchParams>`,
+      `  ...query: [Routes["${route}"]["query"]]`,
     );
     lines.push(`): string;`);
     code.push(lines.join('\n'));
