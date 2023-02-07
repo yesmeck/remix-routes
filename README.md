@@ -80,6 +80,13 @@ export type SearchParams = {
 }
 ```
 
+```typescript
+import { $path } from 'remix-routes';
+
+// The query string is type-safe.
+$path('/posts', { view: 'list', sort: 'date', page: 1 });
+```
+
 You can combine this feature with [zod](https://github.com/colinhacks/zod) and [remix-params-helper](https://github.com/kiliman/remix-params-helper) to add runtime params checking:
 
 ```typescript
@@ -102,14 +109,6 @@ export const loader = async (request) => {
   const { view, sort, page } = result.data;
 }
 ```
-
-```typescript
-import { $path } from 'remix-routes';
-
-// The query string is type-safe.
-$path('/posts', { view: 'list', sort: 'date', page: 1 });
-```
-
 
 ### Checking params:
 
