@@ -80,6 +80,29 @@ export type SearchParams = {
 }
 ```
 
+You can combine this feature with [zod](https://github.com/colinhacks/zod) and [remix-params-helper](https://github.com/kiliman/remix-params-helper) to add runtime params checking:
+
+```typescript
+import { z } from "zod";
+import { getSearchParams } from "remix-params-helper";
+
+const SearchParamsSchema = z.object({
+  view: z.enum(["list", "grid"]),
+  sort: z.enum(["price", "size"]).optional(),
+  page: z.number().int().optional(),
+})
+
+export type SearchParams = z.infer<typeof SearchParamsSchema>;
+
+export const loader = async (request) => {
+  const result = getSearchParams(request, SearchParamsSchema)
+  if (!result.success) {
+    return json(result.errors, { status: 400 })
+  }
+  const { view, sort, page } = result.data;
+}
+```
+
 ```typescript
 import { $path } from 'remix-routes';
 
