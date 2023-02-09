@@ -10,7 +10,7 @@ type IsAny<T> = (
     : false
 );
 type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
-type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
+type Query<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
       
 
 export interface Routes {
@@ -102,97 +102,97 @@ export interface Routes {
 
 export declare function $path(
   route: \\"/\\",
-  ...query: Routes[\\"/\\"][\\"query\\"]
+  ...query: [Routes[\\"/\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/chats/:season/:episode/:slug\\",
   params: Routes[\\"/chats/:season/:episode/:slug\\"][\\"params\\"],
-  ...query: Routes[\\"/chats/:season/:episode/:slug\\"][\\"query\\"]
+  ...query: [Routes[\\"/chats/:season/:episode/:slug\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/chats/:season/:episode\\",
   params: Routes[\\"/chats/:season/:episode\\"][\\"params\\"],
-  ...query: Routes[\\"/chats/:season/:episode\\"][\\"query\\"]
+  ...query: [Routes[\\"/chats/:season/:episode\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/people/:personId\\",
   params: Routes[\\"/people/:personId\\"][\\"params\\"],
-  ...query: Routes[\\"/people/:personId\\"][\\"query\\"]
+  ...query: [Routes[\\"/people/:personId\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/people/:personId/:planId/remove-plan\\",
   params: Routes[\\"/people/:personId/:planId/remove-plan\\"][\\"params\\"],
-  ...query: Routes[\\"/people/:personId/:planId/remove-plan\\"][\\"query\\"]
+  ...query: [Routes[\\"/people/:personId/:planId/remove-plan\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/blog/rss.xml\\",
-  ...query: Routes[\\"/blog/rss.xml\\"][\\"query\\"]
+  ...query: [Routes[\\"/blog/rss.xml\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/:lang?/about\\",
   params: Routes[\\"/:lang?/about\\"][\\"params\\"],
-  ...query: Routes[\\"/:lang?/about\\"][\\"query\\"]
+  ...query: [Routes[\\"/:lang?/about\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/posts/delete\\",
-  ...query: Routes[\\"/posts/delete\\"][\\"query\\"]
+  ...query: [Routes[\\"/posts/delete\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/auth\\",
-  ...query: Routes[\\"/auth\\"][\\"query\\"]
+  ...query: [Routes[\\"/auth\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/auth/login\\",
-  ...query: Routes[\\"/auth/login\\"][\\"query\\"]
+  ...query: [Routes[\\"/auth/login\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/posts\\",
-  ...query: Routes[\\"/posts\\"][\\"query\\"]
+  ...query: [Routes[\\"/posts\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/posts/:id\\",
   params: Routes[\\"/posts/:id\\"][\\"params\\"],
-  ...query: Routes[\\"/posts/:id\\"][\\"query\\"]
+  ...query: [Routes[\\"/posts/:id\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/s/:query\\",
   params: Routes[\\"/s/:query\\"][\\"params\\"],
-  ...query: Routes[\\"/s/:query\\"][\\"query\\"]
+  ...query: [Routes[\\"/s/:query\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/credits\\",
-  ...query: Routes[\\"/credits\\"][\\"query\\"]
+  ...query: [Routes[\\"/credits\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/admin\\",
-  ...query: Routes[\\"/admin\\"][\\"query\\"]
+  ...query: [Routes[\\"/admin\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/admin/episodes\\",
-  ...query: Routes[\\"/admin/episodes\\"][\\"query\\"]
+  ...query: [Routes[\\"/admin/episodes\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/:id\\",
   params: Routes[\\"/admin/episodes/:id\\"][\\"params\\"],
-  ...query: Routes[\\"/admin/episodes/:id\\"][\\"query\\"]
+  ...query: [Routes[\\"/admin/episodes/:id\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/:id/comments\\",
   params: Routes[\\"/admin/episodes/:id/comments\\"][\\"params\\"],
-  ...query: Routes[\\"/admin/episodes/:id/comments\\"][\\"query\\"]
+  ...query: [Routes[\\"/admin/episodes/:id/comments\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/new\\",
-  ...query: Routes[\\"/admin/episodes/new\\"][\\"query\\"]
+  ...query: [Routes[\\"/admin/episodes/new\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/jokes\\",
-  ...query: Routes[\\"/jokes\\"][\\"query\\"]
+  ...query: [Routes[\\"/jokes\\"][\\"query\\"]]
 ): string;
 export declare function $path(
   route: \\"/jokes/:jokeId\\",
   params: Routes[\\"/jokes/:jokeId\\"][\\"params\\"],
-  ...query: Routes[\\"/jokes/:jokeId\\"][\\"query\\"]
+  ...query: [Routes[\\"/jokes/:jokeId\\"][\\"query\\"]]
 ): string;
 
 export declare function $params(
