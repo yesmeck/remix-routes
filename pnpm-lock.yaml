@@ -47,12 +47,14 @@ importers:
       meow: 9.0.0
       mkdirp: ^1.0.4
       semantic-release: ^19.0.3
+      slash: '3'
       typescript: ^4.5.3
       typescript-remix-routes-plugin: workspace:*
     dependencies:
       chokidar: 3.5.2
       meow: 9.0.0
       mkdirp: 1.0.4
+      slash: 3.0.0
       typescript-remix-routes-plugin: link:../typescript-remix-routes-plugin
     devDependencies:
       '@remix-run/dev': 1.9.0
@@ -70,11 +72,13 @@ importers:
       '@types/node': ^17.0.21
       '@types/resolve': ^1.20.2
       resolve: ^1.22.0
+      slash: '3'
       typescript: ^4.4.3
       vite: ^3.1.0
       vitest: ^0.23.2
     dependencies:
       resolve: 1.22.1
+      slash: 3.0.0
       typescript: 4.5.4
     devDependencies:
       '@remix-run/dev': 1.9.0
@@ -7642,7 +7646,6 @@ packages:
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
-    dev: true
 
   /smart-buffer/4.2.0:
     resolution: {integrity: sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg==}

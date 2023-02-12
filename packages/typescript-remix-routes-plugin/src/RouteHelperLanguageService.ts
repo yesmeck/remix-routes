@@ -4,6 +4,7 @@ import { LanguageService } from './LanguageService';
 import { RemixProject } from './RemixProject';
 import { RouteContext } from './RouteContext';
 import { ScriptSourceHelper } from './ScriptSourceHelper';
+import slash from 'slash';
 
 export class RouteHelperLanguageService extends LanguageService {
   constructor(
@@ -32,7 +33,7 @@ export class RouteHelperLanguageService extends LanguageService {
             kind: ts.ScriptElementKind.string,
             kindModifiers: '',
             displayParts: routes.slice(0, 1).map((route) => ({
-              text: `(remix) file: ${path.join('~/app', route.relativeFileName)}`,
+              text: `(remix) file: ${slash(path.join('~/app', route.relativeFileName))}`,
               kind: ts.SymbolDisplayPartKind.methodName as any,
             })),
             textSpan: {

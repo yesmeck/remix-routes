@@ -123,6 +123,20 @@ export const action: ActionFunction = async ({ params }) => {
 }
 ```
 
+### Route type definitions
+
+remix-routes also export all route type definitions for your convenience.
+
+```typescript
+import type { Routes } from 'remix-routes';
+import { useParams } from "remix";
+
+export default function Component() {
+  const { id } = useParams<Routes['/posts/:id']['params']>();
+  ...
+}
+```
+
 ## Command Line Options
 
 - `-w`: Watch for changes and automatically rebuild.
