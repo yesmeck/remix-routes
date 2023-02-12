@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "resolve": "^1.22.0",
+    "slash": "3",
     "typescript": "^4.4.3"
   },
   "devDependencies": {

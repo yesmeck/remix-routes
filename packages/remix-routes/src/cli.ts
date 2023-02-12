@@ -5,6 +5,7 @@ import * as path from 'path';
 import chokidar from 'chokidar';
 import type { ConfigRoute } from '@remix-run/dev/dist/config/routes';
 import mkdirp from 'mkdirp';
+import slash from 'slash';
 
 let readConfig: typeof import('@remix-run/dev/dist/config').readConfig;
 
@@ -137,7 +138,7 @@ function generateRouteDefinition(routesInfo: RoutesInfo) {
       (param) => `${param}: string | number`,
     );
     lines.push(`    params: { ${paramsType.join('; ')} },`);
-    lines.push(`    query: Query<import('../app/${fileName.replace(/\.tsx?$/, '')}').SearchParams>,`)
+    lines.push(`    query: Query<import('../app/${slash(fileName.replace(/\.tsx?$/, ''))}').SearchParams>,`)
     lines.push('  };')
     code.push(lines.join('\n'));
   });
