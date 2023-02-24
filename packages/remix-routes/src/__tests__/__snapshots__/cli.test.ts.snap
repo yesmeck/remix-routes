@@ -10,189 +10,190 @@ type IsAny<T> = (
     : false
 );
 type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
-type Query<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
+type ExportedQuery<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
+type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
       
 
 export interface Routes {
   \\"/\\": {
     params: {  },
-    query: Query<import('../app/root').SearchParams>,
+    query: ExportedQuery<import('../app/root').SearchParams>,
   };
   \\"/chats/:season/:episode/:slug\\": {
     params: { season: string | number; episode: string | number; slug: string | number },
-    query: Query<import('../app/routes/chats.$season.$episode.$slug').SearchParams>,
+    query: ExportedQuery<import('../app/routes/chats.$season.$episode.$slug').SearchParams>,
   };
   \\"/chats/:season/:episode\\": {
     params: { season: string | number; episode: string | number },
-    query: Query<import('../app/routes/chats.$season.$episode').SearchParams>,
+    query: ExportedQuery<import('../app/routes/chats.$season.$episode').SearchParams>,
   };
   \\"/people/:personId\\": {
     params: { personId: string | number },
-    query: Query<import('../app/routes/people/$personId').SearchParams>,
+    query: ExportedQuery<import('../app/routes/people/$personId').SearchParams>,
   };
   \\"/people/:personId/:planId/remove-plan\\": {
     params: { personId: string | number; planId: string | number },
-    query: Query<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>,
+    query: ExportedQuery<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>,
   };
   \\"/blog/rss.xml\\": {
     params: {  },
-    query: Query<import('../app/routes/blog.rss[.]xml').SearchParams>,
+    query: ExportedQuery<import('../app/routes/blog.rss[.]xml').SearchParams>,
   };
   \\"/:lang?/about\\": {
     params: { lang?: string | number },
-    query: Query<import('../app/routes/($lang)/about').SearchParams>,
+    query: ExportedQuery<import('../app/routes/($lang)/about').SearchParams>,
   };
   \\"/posts/delete\\": {
     params: {  },
-    query: Query<import('../app/routes/posts/delete').SearchParams>,
+    query: ExportedQuery<import('../app/routes/posts/delete').SearchParams>,
   };
   \\"/auth\\": {
     params: {  },
-    query: Query<import('../app/routes/auth/__auth').SearchParams>,
+    query: ExportedQuery<import('../app/routes/auth/__auth').SearchParams>,
   };
   \\"/auth/login\\": {
     params: {  },
-    query: Query<import('../app/routes/auth/__auth/login').SearchParams>,
+    query: ExportedQuery<import('../app/routes/auth/__auth/login').SearchParams>,
   };
   \\"/posts\\": {
     params: {  },
-    query: Query<import('../app/routes/posts/index').SearchParams>,
+    query: ExportedQuery<import('../app/routes/posts/index').SearchParams>,
   };
   \\"/posts/:id\\": {
     params: { id: string | number },
-    query: Query<import('../app/routes/posts/$id').SearchParams>,
+    query: ExportedQuery<import('../app/routes/posts/$id').SearchParams>,
   };
   \\"/s/:query\\": {
     params: { query: string | number },
-    query: Query<import('../app/routes/s.$query').SearchParams>,
+    query: ExportedQuery<import('../app/routes/s.$query').SearchParams>,
   };
   \\"/credits\\": {
     params: {  },
-    query: Query<import('../app/routes/credits').SearchParams>,
+    query: ExportedQuery<import('../app/routes/credits').SearchParams>,
   };
   \\"/admin\\": {
     params: {  },
-    query: Query<import('../app/routes/admin').SearchParams>,
+    query: ExportedQuery<import('../app/routes/admin').SearchParams>,
   };
   \\"/admin/episodes\\": {
     params: {  },
-    query: Query<import('../app/routes/admin/episodes/index').SearchParams>,
+    query: ExportedQuery<import('../app/routes/admin/episodes/index').SearchParams>,
   };
   \\"/admin/episodes/:id\\": {
     params: { id: string | number },
-    query: Query<import('../app/routes/admin/episodes/$id').SearchParams>,
+    query: ExportedQuery<import('../app/routes/admin/episodes/$id').SearchParams>,
   };
   \\"/admin/episodes/:id/comments\\": {
     params: { id: string | number },
-    query: Query<import('../app/routes/admin/episodes/$id/comments').SearchParams>,
+    query: ExportedQuery<import('../app/routes/admin/episodes/$id/comments').SearchParams>,
   };
   \\"/admin/episodes/new\\": {
     params: {  },
-    query: Query<import('../app/routes/admin/episodes/new').SearchParams>,
+    query: ExportedQuery<import('../app/routes/admin/episodes/new').SearchParams>,
   };
   \\"/jokes\\": {
     params: {  },
-    query: Query<import('../app/routes/jokes').SearchParams>,
+    query: ExportedQuery<import('../app/routes/jokes').SearchParams>,
   };
   \\"/jokes/:jokeId\\": {
     params: { jokeId: string | number },
-    query: Query<import('../app/routes/jokes/$jokeId').SearchParams>,
+    query: ExportedQuery<import('../app/routes/jokes/$jokeId').SearchParams>,
   };
 }
 
 export declare function $path(
   route: \\"/\\",
-  ...query: [Routes[\\"/\\"][\\"query\\"]]
+  ...query: Query<import('../app/root').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/chats/:season/:episode/:slug\\",
   params: Routes[\\"/chats/:season/:episode/:slug\\"][\\"params\\"],
-  ...query: [Routes[\\"/chats/:season/:episode/:slug\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/chats.$season.$episode.$slug').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/chats/:season/:episode\\",
   params: Routes[\\"/chats/:season/:episode\\"][\\"params\\"],
-  ...query: [Routes[\\"/chats/:season/:episode\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/chats.$season.$episode').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/people/:personId\\",
   params: Routes[\\"/people/:personId\\"][\\"params\\"],
-  ...query: [Routes[\\"/people/:personId\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/people/$personId').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/people/:personId/:planId/remove-plan\\",
   params: Routes[\\"/people/:personId/:planId/remove-plan\\"][\\"params\\"],
-  ...query: [Routes[\\"/people/:personId/:planId/remove-plan\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/blog/rss.xml\\",
-  ...query: [Routes[\\"/blog/rss.xml\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/blog.rss[.]xml').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/:lang?/about\\",
   params: Routes[\\"/:lang?/about\\"][\\"params\\"],
-  ...query: [Routes[\\"/:lang?/about\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/($lang)/about').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/posts/delete\\",
-  ...query: [Routes[\\"/posts/delete\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/posts/delete').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/auth\\",
-  ...query: [Routes[\\"/auth\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/auth/__auth').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/auth/login\\",
-  ...query: [Routes[\\"/auth/login\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/auth/__auth/login').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/posts\\",
-  ...query: [Routes[\\"/posts\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/posts/index').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/posts/:id\\",
   params: Routes[\\"/posts/:id\\"][\\"params\\"],
-  ...query: [Routes[\\"/posts/:id\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/posts/$id').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/s/:query\\",
   params: Routes[\\"/s/:query\\"][\\"params\\"],
-  ...query: [Routes[\\"/s/:query\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/s.$query').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/credits\\",
-  ...query: [Routes[\\"/credits\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/credits').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin\\",
-  ...query: [Routes[\\"/admin\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/admin').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin/episodes\\",
-  ...query: [Routes[\\"/admin/episodes\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/admin/episodes/index').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/:id\\",
   params: Routes[\\"/admin/episodes/:id\\"][\\"params\\"],
-  ...query: [Routes[\\"/admin/episodes/:id\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/admin/episodes/$id').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/:id/comments\\",
   params: Routes[\\"/admin/episodes/:id/comments\\"][\\"params\\"],
-  ...query: [Routes[\\"/admin/episodes/:id/comments\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/admin/episodes/$id/comments').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/admin/episodes/new\\",
-  ...query: [Routes[\\"/admin/episodes/new\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/admin/episodes/new').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/jokes\\",
-  ...query: [Routes[\\"/jokes\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/jokes').SearchParams>
 ): string;
 export declare function $path(
   route: \\"/jokes/:jokeId\\",
   params: Routes[\\"/jokes/:jokeId\\"][\\"params\\"],
-  ...query: [Routes[\\"/jokes/:jokeId\\"][\\"query\\"]]
+  ...query: Query<import('../app/routes/jokes/$jokeId').SearchParams>
 ): string;
 
 export declare function $params(

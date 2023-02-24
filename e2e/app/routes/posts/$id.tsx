@@ -1,4 +1,5 @@
 import { ActionFunction, LoaderFunction } from '@remix-run/node';
+import { useCatch } from '@remix-run/react';
 
 export type SearchParams = {
   view: 'list' | 'grid';
