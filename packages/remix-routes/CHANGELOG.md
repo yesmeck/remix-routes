@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.4.1
+
+### Patch Changes
+
+- 05c4265: fix: query should be optional by default
+
 ## 1.4.0
 
 ### Minor Changes
