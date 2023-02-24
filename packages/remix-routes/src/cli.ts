@@ -111,7 +111,8 @@ type IsAny<T> = (
     : false
 );
 type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
-type Query<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
+type ExportedQuery<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
+type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
       `,
       generateRouteDefinition(routesInfo),
       generatePathDefinition(routesInfo),
@@ -138,7 +139,7 @@ function generateRouteDefinition(routesInfo: RoutesInfo) {
       (param) => `${param}: string | number`,
     );
     lines.push(`    params: { ${paramsType.join('; ')} },`);
-    lines.push(`    query: Query<import('../app/${slash(fileName.replace(/\.tsx?$/, ''))}').SearchParams>,`)
+    lines.push(`    query: ExportedQuery<import('../app/${slash(fileName.replace(/\.tsx?$/, ''))}').SearchParams>,`)
     lines.push('  };')
     code.push(lines.join('\n'));
   });
@@ -155,7 +156,7 @@ function generatePathDefinition(routesInfo: RoutesInfo) {
       lines.push(`  params: Routes["${route}"]["params"],`);
     }
     lines.push(
-      `  ...query: [Routes["${route}"]["query"]]`,
+      `  ...query: Query<import('../app/${slash(fileName.replace(/\.tsx?$/, ''))}').SearchParams>`,
     );
     lines.push(`): string;`);
     code.push(lines.join('\n'));
