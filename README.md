@@ -142,6 +142,51 @@ export default function Component() {
 - `-w`: Watch for changes and automatically rebuild.
 - `-o`: Specify the output path for `remix-routes.d.ts`. Defaults to `./node_modules` if arg is not given.
 
+## Recipes
+
+Here are a few recipes and patterns that can be useful for your project:
+
+### Typed Redirect Function
+
+```ts
+import { redirect as remixRedirect } from "@remix-run/node";
+
+export const redirect = <
+  Route extends keyof Routes,
+  Rest extends {
+    params: Routes[Route]["params"];
+    query?: Routes[Route]["query"];
+  }
+>(
+  ...args: Rest["params"] extends Record<string, never>
+    ? [route: Route, query?: Rest["query"]]
+    : [route: Route, params: Rest["params"], query?: Rest["query"]]
+) => {
+  return $path(args as any);
+}
+```
+
+### Function Args for $route
+
+```ts
+type RouteFunction = <
+  Route extends keyof Routes,
+  Rest extends {
+    params: Routes[Route]["params"];
+    query?: Routes[Route]["query"];
+  }
+>(
+  ...args: Rest["params"] extends Record<string, never>
+    ? [route: Route, query?: Rest["query"]]
+    : [route: Route, params: Rest["params"], query?: Rest["query"]]
+) => any;
+
+// Example usage:
+export const route = ((...args) => {
+  return $path(args as any);
+}) satisfies RouteFunction;
+```
+
 ## TypeScript Integration
 
 A TypeScript plugin is available to help you navigate between route files.
