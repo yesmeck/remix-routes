@@ -10,11 +10,12 @@ test('$path', () => {
   expectTypeOf($path('/posts', { foo: "bar" })).toEqualTypeOf<string>();
   expectTypeOf($path('/posts/:id', { id: 1 }, { view: "list", sort: 'price' })).toEqualTypeOf<string>();
   expectTypeOf($path('/:lang?/about', { lang: "en" })).toEqualTypeOf<string>();
+  expectTypeOf($path('/admin')).toEqualTypeOf<string>();
+  expectTypeOf($path('/admin', { foo: "bar" })).toEqualTypeOf<string>();
 });
 
 test('$prams', () => {
   let params: any = {};
-  const a = $params('/posts/:id', params);
   expectTypeOf($params('/posts/:id', params)).toEqualTypeOf<{ id: string }>();
   expectTypeOf($params('/:lang?/about', params)).toEqualTypeOf<{ lang?: string }>();
 });
