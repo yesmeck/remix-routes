@@ -14,6 +14,7 @@ test('$path', () => {
 
 test('$prams', () => {
   let params: any = {};
+  const a = $params('/posts/:id', params);
   expectTypeOf($params('/posts/:id', params)).toEqualTypeOf<{ id: string }>();
   expectTypeOf($params('/:lang?/about', params)).toEqualTypeOf<{ lang?: string }>();
 });

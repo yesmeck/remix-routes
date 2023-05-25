@@ -115,8 +115,8 @@ type ExportedQuery<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
 type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
       `,
       generateRouteDefinition(routesInfo),
-      generatePathDefinition(routesInfo),
-      generateParamsDefinition(routesInfo),
+      generatePathDefinition(),
+      generateParamsDefinition(),
       "}",
     ].join('\n\n') + '\n\n';
 
@@ -144,50 +144,38 @@ function generateRouteDefinition(routesInfo: RoutesInfo) {
     code.push(lines.join('\n'));
   });
   code.push("}");
+  code.push('');
+  code.push(`type RoutesWithParams = Pick<
+  Routes,
+  {
+    [K in keyof Routes]: Routes[K]["params"] extends Record<string, never> ? never : K
+  }[keyof Routes]
+>;`);
   return code.join('\n');
 }
 
-function generatePathDefinition(routesInfo: RoutesInfo) {
-  const code: string[] = [];
-  Object.entries(routesInfo).forEach(([route, { fileName, params }]) => {
-    const lines = ['export declare function $path('];
-    lines.push(`  route: ${JSON.stringify(route)},`);
-    if (params.length > 0) {
-      lines.push(`  params: Routes["${route}"]["params"],`);
-    }
-    lines.push(
-      `  ...query: Query<import('../app/${slash(fileName.replace(/\.tsx?$/, ''))}').SearchParams>`,
-    );
-    lines.push(`): string;`);
-    code.push(lines.join('\n'));
-  });
-  return code.join('\n');
+function generatePathDefinition() {
+  return `export declare function $path<
+  Route extends keyof Routes,
+  Rest extends {
+    params: Routes[Route]["params"];
+    query?: Routes[Route]["query"];
+  }
+>(
+  ...args: Rest["params"] extends Record<string, never>
+    ? [route: Route, query?: Rest["query"]]
+    : [route: Route, params: Rest["params"], query?: Rest["query"]]
+): string;`
 }
 
-function generateParamsDefinition(routesInfo: RoutesInfo) {
-  const routes = Object.entries(routesInfo);
-
-  // $params helper makes sense only for routes with params.
-  const routesWithParams = routes.filter(
-    ([_, { params }]) => params.length > 0,
-  );
-
-  const code = routesWithParams.map(([route, { params }]) => {
-    const lines: string[] = [];
-
-    lines.push(`export declare function $params(`);
-    lines.push(`  route: ${JSON.stringify(route)},`);
-    lines.push(`  params: { readonly [key: string]: string | undefined }`);
-    lines.push(`): {`);
-    lines.push(
-      params.map((param) => `  ${param}: string`).join(',\n'),
-    );
-    lines.push(`};`);
-
-    return lines.join('\n');
-  });
-
-  return code.join('\n');
+function generateParamsDefinition() {
+  return `export declare function $params<
+  Route extends keyof RoutesWithParams,
+  Params extends RoutesWithParams[Route]["params"]
+>(
+    route: Route,
+    params: { readonly [key: string]: string | undefined }
+): {[K in keyof Params]: string};`;
 }
 
 function parse(routes: ConfigRoute[]) {

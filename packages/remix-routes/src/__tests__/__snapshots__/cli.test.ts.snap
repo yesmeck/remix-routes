@@ -101,165 +101,32 @@ export interface Routes {
   };
 }
 
-export declare function $path(
-  route: \\"/\\",
-  ...query: Query<import('../app/root').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/chats/:season/:episode/:slug\\",
-  params: Routes[\\"/chats/:season/:episode/:slug\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/chats.$season.$episode.$slug').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/chats/:season/:episode\\",
-  params: Routes[\\"/chats/:season/:episode\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/chats.$season.$episode').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/people/:personId\\",
-  params: Routes[\\"/people/:personId\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/people/$personId').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/people/:personId/:planId/remove-plan\\",
-  params: Routes[\\"/people/:personId/:planId/remove-plan\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/blog/rss.xml\\",
-  ...query: Query<import('../app/routes/blog.rss[.]xml').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/:lang?/about\\",
-  params: Routes[\\"/:lang?/about\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/($lang)/about').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/posts/delete\\",
-  ...query: Query<import('../app/routes/posts/delete').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/auth\\",
-  ...query: Query<import('../app/routes/auth/__auth').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/auth/login\\",
-  ...query: Query<import('../app/routes/auth/__auth/login').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/posts\\",
-  ...query: Query<import('../app/routes/posts/index').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/posts/:id\\",
-  params: Routes[\\"/posts/:id\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/posts/$id').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/s/:query\\",
-  params: Routes[\\"/s/:query\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/s.$query').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/credits\\",
-  ...query: Query<import('../app/routes/credits').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/admin\\",
-  ...query: Query<import('../app/routes/admin').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/admin/episodes\\",
-  ...query: Query<import('../app/routes/admin/episodes/index').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/admin/episodes/:id\\",
-  params: Routes[\\"/admin/episodes/:id\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/admin/episodes/$id').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/admin/episodes/:id/comments\\",
-  params: Routes[\\"/admin/episodes/:id/comments\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/admin/episodes/$id/comments').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/admin/episodes/new\\",
-  ...query: Query<import('../app/routes/admin/episodes/new').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/jokes\\",
-  ...query: Query<import('../app/routes/jokes').SearchParams>
-): string;
-export declare function $path(
-  route: \\"/jokes/:jokeId\\",
-  params: Routes[\\"/jokes/:jokeId\\"][\\"params\\"],
-  ...query: Query<import('../app/routes/jokes/$jokeId').SearchParams>
+type RoutesWithParams = Pick<
+  Routes,
+  {
+    [K in keyof Routes]: Routes[K][\\"params\\"] extends Record<string, never> ? never : K
+  }[keyof Routes]
+>;
+
+export declare function $path<
+  Route extends keyof Routes,
+  Rest extends {
+    params: Routes[Route][\\"params\\"];
+    query?: Routes[Route][\\"query\\"];
+  }
+>(
+  ...args: Rest[\\"params\\"] extends Record<string, never>
+    ? [route: Route, query?: Rest[\\"query\\"]]
+    : [route: Route, params: Rest[\\"params\\"], query?: Rest[\\"query\\"]]
 ): string;
 
-export declare function $params(
-  route: \\"/chats/:season/:episode/:slug\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  season: string,
-  episode: string,
-  slug: string
-};
-export declare function $params(
-  route: \\"/chats/:season/:episode\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  season: string,
-  episode: string
-};
-export declare function $params(
-  route: \\"/people/:personId\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  personId: string
-};
-export declare function $params(
-  route: \\"/people/:personId/:planId/remove-plan\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  personId: string,
-  planId: string
-};
-export declare function $params(
-  route: \\"/:lang?/about\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  lang?: string
-};
-export declare function $params(
-  route: \\"/posts/:id\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  id: string
-};
-export declare function $params(
-  route: \\"/s/:query\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  query: string
-};
-export declare function $params(
-  route: \\"/admin/episodes/:id\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  id: string
-};
-export declare function $params(
-  route: \\"/admin/episodes/:id/comments\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  id: string
-};
-export declare function $params(
-  route: \\"/jokes/:jokeId\\",
-  params: { readonly [key: string]: string | undefined }
-): {
-  jokeId: string
-};
+export declare function $params<
+  Route extends keyof RoutesWithParams,
+  Params extends RoutesWithParams[Route][\\"params\\"]
+>(
+    route: Route,
+    params: { readonly [key: string]: string | undefined }
+): {[K in keyof Params]: string};
 
 }
 
