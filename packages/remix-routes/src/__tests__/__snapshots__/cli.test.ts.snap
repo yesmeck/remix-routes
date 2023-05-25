@@ -133,6 +133,15 @@ exports[`build 1`] = `
       query: ExportedQuery<import('../app/routes/credits').SearchParams>,
     };
   
+    \\"/posts/*\\": {
+      params: {
+      
+        \\"*\\": string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/posts/$').SearchParams>,
+    };
+  
     \\"/admin\\": {
       params: {
       
