@@ -1,5 +1,13 @@
 # remix-routes
 
+## 1.4.2
+
+### Patch Changes
+
+- 6a316bf: fix: allow query to be omitted when its type contains only optional keys
+- Updated dependencies [6a316bf]
+  - typescript-remix-routes-plugin@1.0.1
+
 ## 1.4.1
 
 ### Patch Changes
