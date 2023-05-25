@@ -1,134 +1,220 @@
 // Vitest Snapshot v1
 
 exports[`build 1`] = `
-"
-declare module \\"remix-routes\\" {
+"declare module \\"remix-routes\\" {
+  type IsAny<T> = (
+    unknown extends T
+      ? [keyof T] extends [never] ? false : true
+      : false
+  );
+  type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
+  type ExportedQuery<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
+  type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
 
-type IsAny<T> = (
-  unknown extends T
-    ? [keyof T] extends [never] ? false : true
-    : false
-);
-type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
-type ExportedQuery<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
-type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
+  export interface Routes {
+  
+    \\"/\\": {
+      params: {
       
-
-export interface Routes {
-  \\"/\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/root').SearchParams>,
-  };
-  \\"/chats/:season/:episode/:slug\\": {
-    params: { season: string | number; episode: string | number; slug: string | number },
-    query: ExportedQuery<import('../app/routes/chats.$season.$episode.$slug').SearchParams>,
-  };
-  \\"/chats/:season/:episode\\": {
-    params: { season: string | number; episode: string | number },
-    query: ExportedQuery<import('../app/routes/chats.$season.$episode').SearchParams>,
-  };
-  \\"/people/:personId\\": {
-    params: { personId: string | number },
-    query: ExportedQuery<import('../app/routes/people/$personId').SearchParams>,
-  };
-  \\"/people/:personId/:planId/remove-plan\\": {
-    params: { personId: string | number; planId: string | number },
-    query: ExportedQuery<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>,
-  };
-  \\"/blog/rss.xml\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/blog.rss[.]xml').SearchParams>,
-  };
-  \\"/:lang?/about\\": {
-    params: { lang?: string | number },
-    query: ExportedQuery<import('../app/routes/($lang)/about').SearchParams>,
-  };
-  \\"/posts/delete\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/posts/delete').SearchParams>,
-  };
-  \\"/auth\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/auth/__auth').SearchParams>,
-  };
-  \\"/auth/login\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/auth/__auth/login').SearchParams>,
-  };
-  \\"/posts\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/posts/index').SearchParams>,
-  };
-  \\"/posts/:id\\": {
-    params: { id: string | number },
-    query: ExportedQuery<import('../app/routes/posts/$id').SearchParams>,
-  };
-  \\"/s/:query\\": {
-    params: { query: string | number },
-    query: ExportedQuery<import('../app/routes/s.$query').SearchParams>,
-  };
-  \\"/credits\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/credits').SearchParams>,
-  };
-  \\"/admin\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/admin').SearchParams>,
-  };
-  \\"/admin/episodes\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/admin/episodes/index').SearchParams>,
-  };
-  \\"/admin/episodes/:id\\": {
-    params: { id: string | number },
-    query: ExportedQuery<import('../app/routes/admin/episodes/$id').SearchParams>,
-  };
-  \\"/admin/episodes/:id/comments\\": {
-    params: { id: string | number },
-    query: ExportedQuery<import('../app/routes/admin/episodes/$id/comments').SearchParams>,
-  };
-  \\"/admin/episodes/new\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/admin/episodes/new').SearchParams>,
-  };
-  \\"/jokes\\": {
-    params: {  },
-    query: ExportedQuery<import('../app/routes/jokes').SearchParams>,
-  };
-  \\"/jokes/:jokeId\\": {
-    params: { jokeId: string | number },
-    query: ExportedQuery<import('../app/routes/jokes/$jokeId').SearchParams>,
-  };
-}
-
-type RoutesWithParams = Pick<
-  Routes,
-  {
-    [K in keyof Routes]: Routes[K][\\"params\\"] extends Record<string, never> ? never : K
-  }[keyof Routes]
->;
-
-export declare function $path<
-  Route extends keyof Routes,
-  Rest extends {
-    params: Routes[Route][\\"params\\"];
-    query?: Routes[Route][\\"query\\"];
+      },
+      query: ExportedQuery<import('../app/root').SearchParams>,
+    };
+  
+    \\"/chats/:season/:episode/:slug\\": {
+      params: {
+      
+        season: string | number;
+      
+        episode: string | number;
+      
+        slug: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/chats.$season.$episode.$slug').SearchParams>,
+    };
+  
+    \\"/chats/:season/:episode\\": {
+      params: {
+      
+        season: string | number;
+      
+        episode: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/chats.$season.$episode').SearchParams>,
+    };
+  
+    \\"/people/:personId\\": {
+      params: {
+      
+        personId: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/people/$personId').SearchParams>,
+    };
+  
+    \\"/people/:personId/:planId/remove-plan\\": {
+      params: {
+      
+        personId: string | number;
+      
+        planId: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>,
+    };
+  
+    \\"/blog/rss.xml\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/blog.rss[.]xml').SearchParams>,
+    };
+  
+    \\"/:lang?/about\\": {
+      params: {
+      
+        lang?: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/($lang)/about').SearchParams>,
+    };
+  
+    \\"/posts/delete\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/posts/delete').SearchParams>,
+    };
+  
+    \\"/auth\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/auth/__auth').SearchParams>,
+    };
+  
+    \\"/auth/login\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/auth/__auth/login').SearchParams>,
+    };
+  
+    \\"/posts\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/posts/index').SearchParams>,
+    };
+  
+    \\"/posts/:id\\": {
+      params: {
+      
+        id: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/posts/$id').SearchParams>,
+    };
+  
+    \\"/s/:query\\": {
+      params: {
+      
+        query: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/s.$query').SearchParams>,
+    };
+  
+    \\"/credits\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/credits').SearchParams>,
+    };
+  
+    \\"/admin\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin').SearchParams>,
+    };
+  
+    \\"/admin/episodes\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin/episodes/index').SearchParams>,
+    };
+  
+    \\"/admin/episodes/:id\\": {
+      params: {
+      
+        id: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin/episodes/$id').SearchParams>,
+    };
+  
+    \\"/admin/episodes/:id/comments\\": {
+      params: {
+      
+        id: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin/episodes/$id/comments').SearchParams>,
+    };
+  
+    \\"/admin/episodes/new\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin/episodes/new').SearchParams>,
+    };
+  
+    \\"/jokes\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/jokes').SearchParams>,
+    };
+  
+    \\"/jokes/:jokeId\\": {
+      params: {
+      
+        jokeId: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/jokes/$jokeId').SearchParams>,
+    };
+  
   }
->(
-  ...args: Rest[\\"params\\"] extends Record<string, never>
-    ? [route: Route, query?: Rest[\\"query\\"]]
-    : [route: Route, params: Rest[\\"params\\"], query?: Rest[\\"query\\"]]
-): string;
 
-export declare function $params<
-  Route extends keyof RoutesWithParams,
-  Params extends RoutesWithParams[Route][\\"params\\"]
->(
-    route: Route,
-    params: { readonly [key: string]: string | undefined }
-): {[K in keyof Params]: string};
+  type RoutesWithParams = Pick<
+    Routes,
+    {
+      [K in keyof Routes]: Routes[K][\\"params\\"] extends Record<string, never> ? never : K
+    }[keyof Routes]
+  >;
 
-}
+  export declare function $path<
+    Route extends keyof Routes,
+    Rest extends {
+      params: Routes[Route][\\"params\\"];
+      query?: Routes[Route][\\"query\\"];
+    }
+  >(
+    ...args: Rest[\\"params\\"] extends Record<string, never>
+      ? [route: Route, query?: Rest[\\"query\\"]]
+      : [route: Route, params: Rest[\\"params\\"], query?: Rest[\\"query\\"]]
+  ): string;
 
-"
+  export declare function $params<
+    Route extends keyof RoutesWithParams,
+    Params extends RoutesWithParams[Route][\\"params\\"]
+  >(
+      route: Route,
+      params: { readonly [key: string]: string | undefined }
+  ): {[K in keyof Params]: string};
+}"
 `;

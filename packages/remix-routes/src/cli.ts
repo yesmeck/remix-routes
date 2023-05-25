@@ -6,6 +6,8 @@ import chokidar from 'chokidar';
 import type { ConfigRoute } from '@remix-run/dev/dist/config/routes';
 import mkdirp from 'mkdirp';
 import slash from 'slash';
+import ejs from 'ejs';
+import { template } from './template';
 
 let readConfig: typeof import('@remix-run/dev/dist/config').readConfig;
 
@@ -100,25 +102,13 @@ function watch(remixRoot: string, outputDirPath: string) {
 }
 
 function generate(routesInfo: RoutesInfo, remixRoot: string, outputDirPath: string) {
-  const tsCode =
-    [
-      `
-declare module "remix-routes" {
-
-type IsAny<T> = (
-  unknown extends T
-    ? [keyof T] extends [never] ? false : true
-    : false
-);
-type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
-type ExportedQuery<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
-type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
-      `,
-      generateRouteDefinition(routesInfo),
-      generatePathDefinition(),
-      generateParamsDefinition(),
-      "}",
-    ].join('\n\n') + '\n\n';
+  const tsCode = ejs.render(template, {
+    routes: Object.entries(routesInfo).map(([route, { fileName, params }]) => ({
+      route,
+      params,
+      fileName: slash(fileName.replace(/\.tsx?$/, '')),
+    }))
+  });
 
   const outputPath = path.join(
     remixRoot,
@@ -129,53 +119,6 @@ type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
     mkdirp.sync(outputPath);
   }
   fs.writeFileSync(path.join(outputPath, 'remix-routes.d.ts'), tsCode);
-}
-
-function generateRouteDefinition(routesInfo: RoutesInfo) {
-  const code: string[] = ['export interface Routes {'];
-  Object.entries(routesInfo).forEach(([route, { fileName, params }]) => {
-    const lines = [`  "${route}": {`];
-    const paramsType = params.map(
-      (param) => `${param}: string | number`,
-    );
-    lines.push(`    params: { ${paramsType.join('; ')} },`);
-    lines.push(`    query: ExportedQuery<import('../app/${slash(fileName.replace(/\.tsx?$/, ''))}').SearchParams>,`)
-    lines.push('  };')
-    code.push(lines.join('\n'));
-  });
-  code.push("}");
-  code.push('');
-  code.push(`type RoutesWithParams = Pick<
-  Routes,
-  {
-    [K in keyof Routes]: Routes[K]["params"] extends Record<string, never> ? never : K
-  }[keyof Routes]
->;`);
-  return code.join('\n');
-}
-
-function generatePathDefinition() {
-  return `export declare function $path<
-  Route extends keyof Routes,
-  Rest extends {
-    params: Routes[Route]["params"];
-    query?: Routes[Route]["query"];
-  }
->(
-  ...args: Rest["params"] extends Record<string, never>
-    ? [route: Route, query?: Rest["query"]]
-    : [route: Route, params: Rest["params"], query?: Rest["query"]]
-): string;`
-}
-
-function generateParamsDefinition() {
-  return `export declare function $params<
-  Route extends keyof RoutesWithParams,
-  Params extends RoutesWithParams[Route]["params"]
->(
-    route: Route,
-    params: { readonly [key: string]: string | undefined }
-): {[K in keyof Params]: string};`;
 }
 
 function parse(routes: ConfigRoute[]) {
