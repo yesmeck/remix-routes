@@ -9,7 +9,8 @@ test('$path', () => {
   expectTypeOf($path('/posts')).toEqualTypeOf<string>();
   expectTypeOf($path('/posts', { foo: "bar" })).toEqualTypeOf<string>();
   expectTypeOf($path('/posts/:id', { id: 1 }, { view: "list", sort: 'price' })).toEqualTypeOf<string>();
-  expectTypeOf($path('/:lang?/about', { lang: "en" })).toEqualTypeOf<string>();
+  expectTypeOf($path('/posts/*', { "*": "bar" })).toEqualTypeOf<string>();
+  expectTypeOf($path('/:lang?/about', { "lang": "en" })).toEqualTypeOf<string>();
   expectTypeOf($path('/admin')).toEqualTypeOf<string>();
   expectTypeOf($path('/admin', { foo: "bar" })).toEqualTypeOf<string>();
 });

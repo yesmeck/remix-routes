@@ -129,8 +129,8 @@ function parse(routes: ConfigRoute[]) {
       paramNames.push(
         ...route.path
           .split('/')
-          .filter((seg) => seg.startsWith(':'))
-          .map((param) => param.replace(':', '')),
+          .filter((seg) => seg.startsWith(':') || seg == '*')
+          .map((param) => param.replace(':', '').replace('*', '"*"')),
       )
     );
   });
