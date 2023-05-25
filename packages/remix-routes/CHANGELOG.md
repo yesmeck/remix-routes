@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.4.3
+
+### Patch Changes
+
+- e46b116: fix: gnerate correct params for catchall routes
+
 ## 1.4.2
 
 ### Patch Changes
