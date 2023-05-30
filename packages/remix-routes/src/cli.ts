@@ -107,7 +107,7 @@ function generate(routesInfo: RoutesInfo, remixRoot: string, outputDirPath: stri
       route,
       params,
       fileName: slash(fileName.replace(/\.tsx?$/, '')),
-    }))
+    })).sort((a, b) => a.route.localeCompare(b.route)),
   });
 
   const outputPath = path.join(
