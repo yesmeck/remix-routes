@@ -59,21 +59,21 @@ async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
     );
     routes.forEach((route) => {
       let currentPath = parentPath;
-      if (route.path) {
+      if (route.id === 'root') {
+        routesInfo['/'] = {
+          fileName: route.file,
+          params: [],
+        };
+      } else {
         currentPath = [...currentPath, route];
         const fullPath = currentPath.reduce(
-          (acc, curr) => [acc, trimSlash(curr.path!)].join('/'),
+          (acc, curr) => [acc, trimSlash(curr.path)].filter(p => p != undefined).join('/'),
           '',
         );
         const paramsNames = parse(currentPath);
         routesInfo[fullPath] = {
           fileName: route.file,
           params: paramsNames
-        };
-      } else if (route.id === 'root') {
-        routesInfo['/'] = {
-          fileName: route.file,
-          params: [],
         };
       }
       handleRoutesRecursive(route.id, currentPath);
@@ -149,6 +149,7 @@ if (require.main === module) {
   })();
 }
 
-function trimSlash(path: string) {
+function trimSlash(path?: string) {
+  if (!path) return path;
   return path.replace(/\/+$/, '');
 }
