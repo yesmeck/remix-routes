@@ -33,7 +33,7 @@ exports[`build v1 routes 1`] = `
       params: {
       
       },
-      query: ExportedQuery<import('../app/routes/admin').SearchParams>,
+      query: ExportedQuery<import('../app/routes/admin/index').SearchParams>,
     };
   
     \\"/admin/episodes\\": {
@@ -58,7 +58,7 @@ exports[`build v1 routes 1`] = `
         id: string | number;
       
       },
-      query: ExportedQuery<import('../app/routes/admin/episodes/$id/comments').SearchParams>,
+      query: ExportedQuery<import('../app/routes/admin/episodes/$id/comments/index').SearchParams>,
     };
   
     \\"/admin/episodes/new\\": {
@@ -124,7 +124,7 @@ exports[`build v1 routes 1`] = `
       params: {
       
       },
-      query: ExportedQuery<import('../app/routes/jokes').SearchParams>,
+      query: ExportedQuery<import('../app/routes/jokes/index').SearchParams>,
     };
   
     \\"/jokes/:jokeId\\": {
@@ -261,7 +261,7 @@ exports[`build v2 routes 1`] = `
       params: {
       
       },
-      query: ExportedQuery<import('../app/routes/admin').SearchParams>,
+      query: ExportedQuery<import('../app/routes/admin._index').SearchParams>,
     };
   
     \\"/admin/episodes\\": {
@@ -277,7 +277,7 @@ exports[`build v2 routes 1`] = `
         id: string | number;
       
       },
-      query: ExportedQuery<import('../app/routes/admin.episodes.$id').SearchParams>,
+      query: ExportedQuery<import('../app/routes/admin.episodes.$id._index').SearchParams>,
     };
   
     \\"/admin/episodes/:id/comments\\": {
@@ -352,7 +352,7 @@ exports[`build v2 routes 1`] = `
       params: {
       
       },
-      query: ExportedQuery<import('../app/routes/jokes').SearchParams>,
+      query: ExportedQuery<import('../app/routes/jokes._index').SearchParams>,
     };
   
     \\"/jokes/:jokeId\\": {
