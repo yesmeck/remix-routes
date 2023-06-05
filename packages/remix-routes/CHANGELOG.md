@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.4.4
+
+### Patch Changes
+
+- 5a8c6cb: fix: resolve correct route index file
+
 ## 1.4.3
 
 ### Patch Changes
