@@ -28,7 +28,7 @@ export const template = `declare module "remix-routes" {
     }[keyof Routes]
   >;
 
-  export declare function $path<
+  export function $path<
     Route extends keyof Routes,
     Rest extends {
       params: Routes[Route]["params"];
@@ -40,7 +40,7 @@ export const template = `declare module "remix-routes" {
       : [route: Route, params: Rest["params"], query?: Rest["query"]]
   ): string;
 
-  export declare function $params<
+  export function $params<
     Route extends keyof RoutesWithParams,
     Params extends RoutesWithParams[Route]["params"]
   >(
