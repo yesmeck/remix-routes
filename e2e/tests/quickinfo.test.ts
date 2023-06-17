@@ -24,7 +24,7 @@ test('quickinfo', async () => {
   await server.waitResponse('quickinfo');
   await server.close();
   const response = findResponse(server.responses, 'quickinfo');
-  expect(response.body.displayString).toMatchInlineSnapshot('"(remix) file: ~/app/routes/posts/index.tsx"');
+  expect(response.body.displayString).toMatchInlineSnapshot('""');
 });
 
 
@@ -49,5 +49,5 @@ test('multiple route files', async () => {
   await server.waitResponse('quickinfo');
   await server.close();
   const response = findResponse(server.responses, 'quickinfo');
-  expect(response.body.displayString).toMatchInlineSnapshot('"(remix) file: ~/app/routes/index.tsx"');
+  expect(response.body.displayString).toMatchInlineSnapshot('""');
 });

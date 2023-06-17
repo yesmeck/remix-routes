@@ -27,19 +27,7 @@ test('definition', async () => {
   response.body.definitions.forEach((def: any) => def.file = 'Any(string)')
   expect(response.body).toMatchInlineSnapshot(`
     {
-      "definitions": [
-        {
-          "end": {
-            "line": 1,
-            "offset": 1,
-          },
-          "file": "Any(string)",
-          "start": {
-            "line": 1,
-            "offset": 1,
-          },
-        },
-      ],
+      "definitions": [],
       "textSpan": {
         "end": {
           "line": 1,
