@@ -206,7 +206,7 @@ exports[`build v1 routes 1`] = `
     }[keyof Routes]
   >;
 
-  export declare function $path<
+  export function $path<
     Route extends keyof Routes,
     Rest extends {
       params: Routes[Route][\\"params\\"];
@@ -218,7 +218,7 @@ exports[`build v1 routes 1`] = `
       : [route: Route, params: Rest[\\"params\\"], query?: Rest[\\"query\\"]]
   ): string;
 
-  export declare function $params<
+  export function $params<
     Route extends keyof RoutesWithParams,
     Params extends RoutesWithParams[Route][\\"params\\"]
   >(
@@ -434,7 +434,7 @@ exports[`build v2 routes 1`] = `
     }[keyof Routes]
   >;
 
-  export declare function $path<
+  export function $path<
     Route extends keyof Routes,
     Rest extends {
       params: Routes[Route][\\"params\\"];
@@ -446,7 +446,7 @@ exports[`build v2 routes 1`] = `
       : [route: Route, params: Rest[\\"params\\"], query?: Rest[\\"query\\"]]
   ): string;
 
-  export declare function $params<
+  export function $params<
     Route extends keyof RoutesWithParams,
     Params extends RoutesWithParams[Route][\\"params\\"]
   >(
