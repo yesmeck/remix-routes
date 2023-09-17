@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.4.5
+
+### Patch Changes
+
+- bcaf2ce: fix: remove inner declare
+
 ## 1.4.4
 
 ### Patch Changes
