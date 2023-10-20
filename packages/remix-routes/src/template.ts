@@ -1,12 +1,8 @@
 export const template = `declare module "remix-routes" {
-  type IsAny<T> = (
-    unknown extends T
-      ? [keyof T] extends [never] ? false : true
-      : false
-  );
   type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
-  type ExportedQuery<T> = IsAny<T> extends true ? URLSearchParamsInit : T;
-  type Query<T> = IsAny<T> extends true ? [URLSearchParamsInit?] : [T];
+  // symbol won't be a key of SearchParams
+  type IsSearchParams<T> = symbol extends keyof T ? false : true;
+  type ExportedQuery<T> = IsSearchParams<T> extends true ? T : URLSearchParamsInit;
 
   export interface Routes {
   <% routes.forEach(({ route, params, fileName }) => { %>
