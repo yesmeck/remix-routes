@@ -5,7 +5,9 @@ exports[`build v1 routes 1`] = `
   type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
   // symbol won't be a key of SearchParams
   type IsSearchParams<T> = symbol extends keyof T ? false : true;
-  type ExportedQuery<T> = IsSearchParams<T> extends true ? T : URLSearchParamsInit;
+  
+    type ExportedQuery<T> = IsSearchParams<T> extends true ? T : URLSearchParamsInit;
+  
 
   export interface Routes {
   
@@ -229,7 +231,9 @@ exports[`build v2 routes 1`] = `
   type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
   // symbol won't be a key of SearchParams
   type IsSearchParams<T> = symbol extends keyof T ? false : true;
-  type ExportedQuery<T> = IsSearchParams<T> extends true ? T : URLSearchParamsInit;
+  
+    type ExportedQuery<T> = IsSearchParams<T> extends true ? T : URLSearchParamsInit;
+  
 
   export interface Routes {
   
