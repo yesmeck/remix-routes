@@ -140,6 +140,7 @@ export default function Component() {
 ## Command Line Options
 
 - `-w`: Watch for changes and automatically rebuild.
+- `-s`: Enale strict mode. In strict mode only routes that define `SearchParams` type are allowed to have query string.
 - `-o`: Specify the output path for `remix-routes.d.ts`. Defaults to `./node_modules` if arg is not given.
 
 ## TypeScript Integration

@@ -23,6 +23,7 @@ $ remix-routes
 
 Options
 --watch, -w  Watch for routes changes
+--strict, -s  Enable strict mode
 --outputDirPath, -o Specify the output path for "remix-routes.d.ts". Defaults to "./node_modules" if arg is not given.
 `;
 
@@ -33,6 +34,10 @@ const cli = meow(helpText, {
     watch: {
       type: 'boolean',
       alias: 'w',
+    },
+    strict: {
+      type: 'boolean',
+      alias: 's',
     },
     outputDirPath: {
       type: 'string',
@@ -83,26 +88,27 @@ async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
   return routesInfo;
 }
 
-export async function build(remixRoot: string, outputDirPath: string) {
+export async function build(remixRoot: string, flags: typeof cli.flags) {
   const routesInfo = await buildHelpers(remixRoot);
-  generate(routesInfo, remixRoot, outputDirPath);
+  generate(routesInfo, remixRoot, flags);
 }
 
-function watch(remixRoot: string, outputDirPath: string) {
-  build(remixRoot, outputDirPath);
+function watch(remixRoot: string, flags: typeof cli.flags) {
+  build(remixRoot, flags);
   chokidar
     .watch([
       path.join(remixRoot, 'app/routes/**/*.{ts,tsx}'),
       path.join(remixRoot, 'remix.config.js'),
     ])
     .on('change', () => {
-      build(remixRoot, outputDirPath);
+      build(remixRoot, flags);
     });
   console.log('Watching for routes changes...');
 }
 
-function generate(routesInfo: RoutesInfo, remixRoot: string, outputDirPath: string) {
+function generate(routesInfo: RoutesInfo, remixRoot: string, flags: typeof cli.flags) {
   const tsCode = ejs.render(template, {
+    strictMode: flags.strict,
     routes: Object.entries(routesInfo).map(([route, { fileName, params }]) => ({
       route,
       params,
@@ -112,7 +118,7 @@ function generate(routesInfo: RoutesInfo, remixRoot: string, outputDirPath: stri
 
   const outputPath = path.join(
     remixRoot,
-    outputDirPath,
+    flags.outputDirPath,
   );
 
   if (!fs.existsSync(outputPath)) {
@@ -141,10 +147,12 @@ if (require.main === module) {
   (async function () {
     const remixRoot = process.env.REMIX_ROOT || process.cwd();
 
+    console.log(cli.flags);
+
     if (cli.flags.watch) {
-      watch(remixRoot, cli.flags.outputDirPath);
+      watch(remixRoot, cli.flags);
     } else {
-      build(remixRoot, cli.flags.outputDirPath);
+      build(remixRoot, cli.flags);
     }
   })();
 }
