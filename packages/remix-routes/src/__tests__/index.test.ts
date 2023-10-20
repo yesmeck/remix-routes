@@ -33,6 +33,12 @@ test('$path + optional route fragment', () => {
   expect($path('/:lang?/about', { lang: 'en' })).toBe('/en/about');
 });
 
+test('$path + catch all route', () => {
+  expect($path("/sign-in/*", { "*": "admin" })).toBe("/sign-in/admin");
+  expect($path("/sign-in/*")).toBe("/sign-in");
+  expect($path("/sign-in/*", { "*": "" })).toBe("/sign-in/");
+});
+
 test('$params', () => {
   expect($params('/posts/:id', { id: '1' })).toStrictEqual({ id: '1' });
 });
