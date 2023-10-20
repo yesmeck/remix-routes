@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.4.6
+
+### Patch Changes
+
+- 9bc5eee: fix catch all route
+
 ## 1.4.5
 
 ### Patch Changes
