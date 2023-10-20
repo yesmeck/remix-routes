@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.5.0
+
+### Minor Changes
+
+- 3324bfb: feat: introduce strict mode
+
 ## 1.4.7
 
 ### Patch Changes
