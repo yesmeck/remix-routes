@@ -1,5 +1,5 @@
 function includesParams(route: string) {
-  return route.indexOf('/:') > -1;
+  return route.indexOf('/:') > -1 || route.indexOf('/*') > -1;
 }
 
 export function $path(route: string, ...paramsOrQuery: Array<any>) {
@@ -12,7 +12,7 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
     | undefined = paramsOrQuery[0];
 
   if (includesParams(route)) {
-    const params: any = paramsOrQuery[0];
+    const params: any = paramsOrQuery[0] ?? {};
     query = paramsOrQuery[1];
     path = route.split('/').map(fragment => {
       if (fragment.indexOf(':') > -1) {
@@ -24,6 +24,12 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
           return params[paramName];
         }
         return null
+      }
+      if (fragment == "*") {
+        if ("*" in params) {
+          return params["*"];
+        }
+        return null;
       }
       return fragment;
     }).filter(f => f !== null).join('/');

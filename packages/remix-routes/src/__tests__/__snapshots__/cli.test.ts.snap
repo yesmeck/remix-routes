@@ -425,6 +425,15 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/s.$query').SearchParams>,
     };
   
+    \\"/sign-in/*\\": {
+      params: {
+      
+        \\"*\\": string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/sign-in.$').SearchParams>,
+    };
+  
   }
 
   type RoutesWithParams = Pick<
