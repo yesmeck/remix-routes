@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.4.7
+
+### Patch Changes
+
+- 33f6a67: fix SearchParams check
+
 ## 1.4.6
 
 ### Patch Changes
