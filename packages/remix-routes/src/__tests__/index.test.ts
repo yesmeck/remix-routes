@@ -22,13 +22,13 @@ test('$path + array query', () => {
   ).toBe('/posts/delete?id=1&id=2');
 });
 
-test("$path + undefined queries", () => {
-  expect($path("/posts", { order: undefined })).toBe("/posts");
-  expect($path("/posts", { order: undefined, filter: "draft" })).toBe(
-    "/posts?filter=draft"
+test('$path + undefined queries', () => {
+  expect($path('/posts', { order: undefined })).toBe('/posts');
+  expect($path('/posts', { order: undefined, filter: 'draft' })).toBe(
+    '/posts?filter=draft'
   );
-  expect($path("/posts", { order: undefined, isDraft: false })).toBe(
-    "/posts?isDraft=false"
+  expect($path('/posts', { order: undefined, isDraft: false })).toBe(
+    '/posts?isDraft=false'
   );
 });
 
@@ -44,9 +44,9 @@ test('$path + optional route fragment', () => {
 });
 
 test('$path + catch all route', () => {
-  expect($path("/sign-in/*", { "*": "admin" })).toBe("/sign-in/admin");
-  expect($path("/sign-in/*")).toBe("/sign-in");
-  expect($path("/sign-in/*", { "*": "" })).toBe("/sign-in/");
+  expect($path('/sign-in/*', { '*': 'admin' })).toBe('/sign-in/admin');
+  expect($path('/sign-in/*')).toBe('/sign-in');
+  expect($path('/sign-in/*', { '*': '' })).toBe('/sign-in/');
 });
 
 test('$params', () => {
