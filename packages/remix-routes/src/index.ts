@@ -48,7 +48,7 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
   }
   if (Object.keys(query).length === 0) return path;
   const searchParams = new URLSearchParams(query);
-  return path + '?'+ searchParams.toString();
+  return path + '?' + searchParams.toString();
 }
 
 export function $params(
