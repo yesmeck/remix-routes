@@ -22,6 +22,16 @@ test('$path + array query', () => {
   ).toBe('/posts/delete?id=1&id=2');
 });
 
+test("$path + undefined queries", () => {
+  expect($path("/posts", { order: undefined })).toBe("/posts");
+  expect($path("/posts", { order: undefined, filter: "draft" })).toBe(
+    "/posts?filter=draft"
+  );
+  expect($path("/posts", { order: undefined, isDraft: false })).toBe(
+    "/posts?isDraft=false"
+  );
+});
+
 test('$path + params + query', () => {
   expect($path('/posts/:id', { id: 1 }, { raw: 'true' })).toBe(
     '/posts/1?raw=true',
