@@ -14,7 +14,11 @@ let readConfig: typeof import('@remix-run/dev/dist/config').readConfig;
 try {
   readConfig = require('@remix-run/dev/config').readConfig;
 } catch (e) {
-  readConfig = require('@remix-run/dev/dist/config').readConfig;
+  try {
+    readConfig = require('@remix-run/dev/dist/config').readConfig;
+  } catch (e) {
+    readConfig = require('@vercel/remix-run-dev/dist/config').readConfig;
+  }
 }
 
 const helpText = `
