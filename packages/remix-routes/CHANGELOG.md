@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.5.1
+
+### Patch Changes
+
+- 189d768: add vercel support
+
 ## 1.5.0
 
 ### Minor Changes
