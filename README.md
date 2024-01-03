@@ -4,6 +4,8 @@
 
 https://user-images.githubusercontent.com/465125/205243864-3493733d-8586-405f-94eb-088fdb87fd23.mp4
 
+`remix-routes` also works with [`remix-modules`](https://github.com/yesmeck/remix-modules).
+
 ## Installation
 
 ```bash
