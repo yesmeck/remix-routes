@@ -56,9 +56,10 @@ type RoutesInfo = Record<string, {
   params: string[];
 }>
 
-async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
+async function buildHelpers(remixRoot: string): Promise<[RoutesInfo, string[]]> {
   const config = await readConfig(remixRoot);
   const routesInfo: RoutesInfo = {};
+  const routeIds: string[] = [];
   const handleRoutesRecursive = (
     parentId?: string,
     parentPath: ConfigRoute[] = [],
@@ -84,17 +85,18 @@ async function buildHelpers(remixRoot: string): Promise<RoutesInfo> {
           fileName: route.file,
           params: paramsNames
         };
+        routeIds.push(route.id);
       }
       handleRoutesRecursive(route.id, currentPath);
     });
   };
   handleRoutesRecursive();
-  return routesInfo;
+  return [routesInfo, routeIds] as const;
 }
 
 export async function build(remixRoot: string, flags: typeof cli.flags) {
-  const routesInfo = await buildHelpers(remixRoot);
-  generate(routesInfo, remixRoot, flags);
+  const [routesInfo, routeIds] = await buildHelpers(remixRoot);
+  generate(routesInfo, routeIds, remixRoot, flags);
 }
 
 function watch(remixRoot: string, flags: typeof cli.flags) {
@@ -110,7 +112,7 @@ function watch(remixRoot: string, flags: typeof cli.flags) {
   console.log('Watching for routes changes...');
 }
 
-function generate(routesInfo: RoutesInfo, remixRoot: string, flags: typeof cli.flags) {
+function generate(routesInfo: RoutesInfo, routeIds: string[], remixRoot: string, flags: typeof cli.flags) {
   const tsCode = ejs.render(template, {
     strictMode: flags.strict,
     routes: Object.entries(routesInfo).map(([route, { fileName, params }]) => ({
@@ -118,6 +120,7 @@ function generate(routesInfo: RoutesInfo, remixRoot: string, flags: typeof cli.f
       params,
       fileName: slash(fileName.replace(/\.tsx?$/, '')),
     })).sort((a, b) => a.route.localeCompare(b.route)),
+    routeIds
   });
 
   const outputPath = path.join(

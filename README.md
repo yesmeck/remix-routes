@@ -139,6 +139,20 @@ export default function Component() {
 }
 ```
 
+### $routeId helper for useRouteLoaderData route ids
+
+remix-routes exports the `RouteId` type definition with the list of all valid route ids for your repository, and has a helper function `$routeId` that tells typescript to restrict the given string to one of the valid RouteId values.
+
+```typescript
+import type { RouteId } from 'remix-routes';
+import type { loader as postsLoader } from './_layout.tsx';
+import { useRouteLoaderData } from '@remix-run/react';
+import { $routeId } from 'remix-routes';
+
+export default function Post() {
+  const postList = useRouteLoaderData<typeof postsLoader>($routeId('routes/posts/_layout'));
+```
+
 ## Command Line Options
 
 - `-w`: Watch for changes and automatically rebuild.

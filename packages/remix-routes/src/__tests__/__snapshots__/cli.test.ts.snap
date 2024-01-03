@@ -204,6 +204,32 @@ exports[`build v1 routes 1`] = `
     }[keyof Routes]
   >;
 
+  export type RouteId =
+    | 'routes/chats.$season.$episode.$slug'
+    | 'routes/chats.$season.$episode'
+    | 'routes/people/$personId'
+    | 'routes/people/$personId/$planId/remove-plan'
+    | 'routes/blog.rss[.]xml'
+    | 'routes/($lang)/about'
+    | 'routes/posts/delete'
+    | 'routes/auth/__auth'
+    | 'routes/auth/__auth/login'
+    | 'routes/posts/index'
+    | 'routes/posts/$id'
+    | 'routes/s.$query'
+    | 'routes/credits'
+    | 'routes/posts/$'
+    | 'routes/admin'
+    | 'routes/admin/episodes/index'
+    | 'routes/admin/episodes/$id'
+    | 'routes/admin/episodes/$id/comments'
+    | 'routes/admin/episodes/$id/comments/index'
+    | 'routes/admin/episodes/new'
+    | 'routes/admin/index'
+    | 'routes/jokes'
+    | 'routes/jokes/$jokeId'
+    | 'routes/jokes/index';
+
   export function $path<
     Route extends keyof Routes,
     Rest extends {
@@ -223,6 +249,8 @@ exports[`build v1 routes 1`] = `
       route: Route,
       params: { readonly [key: string]: string | undefined }
   ): {[K in keyof Params]: string};
+
+  export function $routeId(routeId: RouteId): RouteId;
 }"
 `;
 
@@ -439,6 +467,33 @@ exports[`build v2 routes 1`] = `
     }[keyof Routes]
   >;
 
+  export type RouteId =
+    | 'routes/chats_.$season.$episode'
+    | 'routes/chats_.$season.$episode.$slug'
+    | 'routes/people.$personId'
+    | 'routes/people.$personId.$planId.remove-plan'
+    | 'routes/blog.rss[.]xml'
+    | 'routes/($lang).about'
+    | 'routes/posts._index'
+    | 'routes/posts.delete'
+    | 'routes/auth._auth'
+    | 'routes/auth._auth.login'
+    | 'routes/posts.$id'
+    | 'routes/sign-in.$'
+    | 'routes/s.$query'
+    | 'routes/credits'
+    | 'routes/posts.$'
+    | 'routes/admin'
+    | 'routes/admin.episodes._index'
+    | 'routes/admin.episodes.$id'
+    | 'routes/admin.episodes.$id.comments'
+    | 'routes/admin.episodes.$id._index'
+    | 'routes/admin.episodes.new'
+    | 'routes/admin._index'
+    | 'routes/jokes'
+    | 'routes/jokes.$jokeId'
+    | 'routes/jokes._index';
+
   export function $path<
     Route extends keyof Routes,
     Rest extends {
@@ -458,5 +513,7 @@ exports[`build v2 routes 1`] = `
       route: Route,
       params: { readonly [key: string]: string | undefined }
   ): {[K in keyof Params]: string};
+
+  export function $routeId(routeId: RouteId): RouteId;
 }"
 `;

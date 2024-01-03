@@ -28,6 +28,9 @@ export const template = `declare module "remix-routes" {
     }[keyof Routes]
   >;
 
+  export type RouteId =<% routeIds.forEach((routeId) => { %>
+    | '<%- routeId %>'<% }) %>;
+
   export function $path<
     Route extends keyof Routes,
     Rest extends {
@@ -47,4 +50,6 @@ export const template = `declare module "remix-routes" {
       route: Route,
       params: { readonly [key: string]: string | undefined }
   ): {[K in keyof Params]: string};
+
+  export function $routeId(routeId: RouteId): RouteId;
 }`;

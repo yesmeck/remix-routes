@@ -50,3 +50,7 @@ export function $params(
 ) {
   return params;
 }
+
+export function $routeId(routeId: string) {
+  return routeId;
+}
