@@ -16,7 +16,7 @@ export const template = `declare module "remix-routes" {
         <%- param %>: string | number;
       <% }) %>
       },
-      query: ExportedQuery<import('../app/<%- fileName %>').SearchParams>,
+      query: ExportedQuery<import('<%- relativeAppDirPath %>/<%- fileName %>').SearchParams>,
     };
   <% }) %>
   }

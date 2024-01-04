@@ -16,3 +16,10 @@ test('build v2 routes', async () => {
     fs.readFileSync(path.resolve(__dirname, '../../fixture/v2/node_modules/remix-routes.d.ts'), 'utf8'),
   ).toMatchSnapshot();
 });
+
+test("build customPaths routes", async () => {
+  await build(path.resolve(__dirname, "../../fixture/customPaths"), { outputDirPath: "./types/remix-routes", watch: false, strict: false });
+  expect(
+    fs.readFileSync(path.resolve( __dirname, "../../fixture/customPaths/types/remix-routes/remix-routes.d.ts"), "utf8"),
+  ).toMatchSnapshot();
+});

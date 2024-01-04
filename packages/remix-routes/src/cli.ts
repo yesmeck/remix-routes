@@ -3,6 +3,7 @@ import meow from 'meow';
 import * as fs from 'fs';
 import * as path from 'path';
 import chokidar from 'chokidar';
+import type { RemixConfig } from "@remix-run/dev/dist/config";
 import type { ConfigRoute } from '@remix-run/dev/dist/config/routes';
 import mkdirp from 'mkdirp';
 import slash from 'slash';
@@ -56,8 +57,7 @@ type RoutesInfo = Record<string, {
   params: string[];
 }>
 
-async function buildHelpers(remixRoot: string): Promise<[RoutesInfo, string[]]> {
-  const config = await readConfig(remixRoot);
+async function buildHelpers(config: RemixConfig): Promise<[RoutesInfo, string[]]> {
   const routesInfo: RoutesInfo = {};
   const routeIds: string[] = [];
   const handleRoutesRecursive = (
@@ -95,15 +95,17 @@ async function buildHelpers(remixRoot: string): Promise<[RoutesInfo, string[]]> 
 }
 
 export async function build(remixRoot: string, flags: typeof cli.flags) {
-  const [routesInfo, routeIds] = await buildHelpers(remixRoot);
-  generate(routesInfo, routeIds, remixRoot, flags);
+  const config = await readConfig(remixRoot);
+  const [routesInfo, routeIds] = await buildHelpers(config);
+  generate(config, routesInfo, routeIds, remixRoot, flags);
 }
 
-function watch(remixRoot: string, flags: typeof cli.flags) {
+async function watch(remixRoot: string, flags: typeof cli.flags) {
   build(remixRoot, flags);
+  const { appDirectory } = await readConfig(remixRoot);
   chokidar
     .watch([
-      path.join(remixRoot, 'app/routes/**/*.{ts,tsx}'),
+      path.join(appDirectory, 'routes/**/*.{ts,tsx}'),
       path.join(remixRoot, 'remix.config.js'),
     ])
     .on('change', () => {
@@ -112,9 +114,16 @@ function watch(remixRoot: string, flags: typeof cli.flags) {
   console.log('Watching for routes changes...');
 }
 
-function generate(routesInfo: RoutesInfo, routeIds: string[], remixRoot: string, flags: typeof cli.flags) {
+function generate(config: RemixConfig, routesInfo: RoutesInfo, routeIds: string[], remixRoot: string, flags: typeof cli.flags) {
+  const outputPath = path.join(
+    remixRoot,
+    flags.outputDirPath,
+  );
+  const relativeAppDirPath = path.relative(outputPath, config.appDirectory);
+  console.log(relativeAppDirPath);
   const tsCode = ejs.render(template, {
     strictMode: flags.strict,
+    relativeAppDirPath,
     routes: Object.entries(routesInfo).map(([route, { fileName, params }]) => ({
       route,
       params,
@@ -122,11 +131,6 @@ function generate(routesInfo: RoutesInfo, routeIds: string[], remixRoot: string,
     })).sort((a, b) => a.route.localeCompare(b.route)),
     routeIds
   });
-
-  const outputPath = path.join(
-    remixRoot,
-    flags.outputDirPath,
-  );
 
   if (!fs.existsSync(outputPath)) {
     mkdirp.sync(outputPath);
@@ -152,7 +156,7 @@ function parse(routes: ConfigRoute[]) {
 
 if (require.main === module) {
   (async function () {
-    const remixRoot = process.env.REMIX_ROOT || process.cwd();
+    const remixRoot = process.env.REMIX_ROOT ?? process.cwd();
 
     console.log(cli.flags);
 
