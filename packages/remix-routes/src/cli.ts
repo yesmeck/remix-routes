@@ -120,7 +120,7 @@ function generate(config: RemixConfig, routesInfo: RoutesInfo, routeIds: string[
     flags.outputDirPath,
   );
   const relativeAppDirPath = slash(path.relative(outputPath, config.appDirectory));
-  console.log(relativeAppDirPath);
+  routeIds.sort((a, b) => a.localeCompare(b));
   const tsCode = ejs.render(template, {
     strictMode: flags.strict,
     relativeAppDirPath,
@@ -129,7 +129,7 @@ function generate(config: RemixConfig, routesInfo: RoutesInfo, routeIds: string[
       params,
       fileName: slash(fileName.replace(/\.tsx?$/, '')),
     })).sort((a, b) => a.route.localeCompare(b.route)),
-    routeIds
+    routeIds,
   });
 
   if (!fs.existsSync(outputPath)) {
