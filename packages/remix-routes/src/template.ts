@@ -16,7 +16,7 @@ export const template = `declare module "remix-routes" {
         <%- param %>: string | number;
       <% }) %>
       },
-      query: ExportedQuery<import('../app/<%- fileName %>').SearchParams>,
+      query: ExportedQuery<import('<%- relativeAppDirPath %>/<%- fileName %>').SearchParams>,
     };
   <% }) %>
   }
@@ -27,6 +27,9 @@ export const template = `declare module "remix-routes" {
       [K in keyof Routes]: Routes[K]["params"] extends Record<string, never> ? never : K
     }[keyof Routes]
   >;
+
+  export type RouteId =<% routeIds.forEach((routeId) => { %>
+    | '<%- routeId %>'<% }) %>;
 
   export function $path<
     Route extends keyof Routes,
@@ -47,4 +50,6 @@ export const template = `declare module "remix-routes" {
       route: Route,
       params: { readonly [key: string]: string | undefined }
   ): {[K in keyof Params]: string};
+
+  export function $routeId(routeId: RouteId): RouteId;
 }`;

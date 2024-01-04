@@ -38,6 +38,8 @@ jspm_packages/
 
 # TypeScript v1 declaration files
 typings/
+# Generated types
+remix-routes.d.ts
 
 # Optional npm cache directory
 .npm
