@@ -91,7 +91,7 @@ async function buildHelpers(remixRoot: string): Promise<[RoutesInfo, string[]]> 
     });
   };
   handleRoutesRecursive();
-  return [routesInfo, routeIds] as const;
+  return [routesInfo, routeIds];
 }
 
 export async function build(remixRoot: string, flags: typeof cli.flags) {
