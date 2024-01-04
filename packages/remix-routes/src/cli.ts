@@ -69,6 +69,7 @@ async function buildHelpers(config: RemixConfig): Promise<[RoutesInfo, string[]]
     );
     routes.forEach((route) => {
       let currentPath = parentPath;
+      routeIds.push(route.id);
       if (route.id === 'root') {
         routesInfo['/'] = {
           fileName: route.file,
@@ -85,7 +86,6 @@ async function buildHelpers(config: RemixConfig): Promise<[RoutesInfo, string[]]
           fileName: route.file,
           params: paramsNames
         };
-        routeIds.push(route.id);
       }
       handleRoutesRecursive(route.id, currentPath);
     });

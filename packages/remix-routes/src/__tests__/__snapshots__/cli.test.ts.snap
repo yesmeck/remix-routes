@@ -214,6 +214,7 @@ exports[`build customPaths routes 1`] = `
   >;
 
   export type RouteId =
+    | 'root'
     | 'routes/($lang).about'
     | 'routes/admin'
     | 'routes/admin._index'
@@ -469,6 +470,7 @@ exports[`build v1 routes 1`] = `
   >;
 
   export type RouteId =
+    | 'root'
     | 'routes/($lang)/about'
     | 'routes/admin'
     | 'routes/admin/episodes/$id'
@@ -732,6 +734,7 @@ exports[`build v2 routes 1`] = `
   >;
 
   export type RouteId =
+    | 'root'
     | 'routes/($lang).about'
     | 'routes/admin'
     | 'routes/admin._index'
