@@ -119,7 +119,7 @@ function generate(config: RemixConfig, routesInfo: RoutesInfo, routeIds: string[
     remixRoot,
     flags.outputDirPath,
   );
-  const relativeAppDirPath = path.relative(outputPath, config.appDirectory);
+  const relativeAppDirPath = slash(path.relative(outputPath, config.appDirectory));
   console.log(relativeAppDirPath);
   const tsCode = ejs.render(template, {
     strictMode: flags.strict,
