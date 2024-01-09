@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.6.1
+
+### Patch Changes
+
+- 76dfa3e: fix: remove question mark from optional segments
+
 ## 1.6.0
 
 ### Minor Changes
