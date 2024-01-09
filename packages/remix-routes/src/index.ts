@@ -15,11 +15,11 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
     const params: any = paramsOrQuery[0] ?? {};
     query = paramsOrQuery[1];
     path = route.split('/').map(fragment => {
+      if (fragment.indexOf('?') > -1) {
+        fragment = fragment.slice(0, -1);
+      }
       if (fragment.indexOf(':') > -1) {
         let paramName = fragment.slice(1);
-        if (paramName.indexOf('?') > -1) {
-          paramName = paramName.slice(0, -1);
-        }
         if (paramName in params) {
           return params[paramName];
         }

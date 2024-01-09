@@ -39,6 +39,10 @@ test('$path + catch all route', () => {
   expect($path("/sign-in/*", { "*": "" })).toBe("/sign-in/");
 });
 
+test('optional segment', () => {
+  expect($path('/tree?/:tree?', { tree: 'main' })).toBe('/tree/main');
+});
+
 test('$params', () => {
   expect($params('/posts/:id', { id: '1' })).toStrictEqual({ id: '1' });
 });
