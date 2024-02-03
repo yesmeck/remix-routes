@@ -3,7 +3,7 @@ import { DEFAULT_OUTPUT_DIR_PATH, build } from './build';
 
 interface PluginConfig {
   strict?: boolean;
-  outputDirPath?: string;
+  outDir?: string;
 }
 
 const RemixPluginContextName = '__remixPluginContext';
@@ -19,7 +19,7 @@ export function remixRoutes(pluginConfig: PluginConfig = {}): Vite.Plugin {
     if (!ctx) {
       return;
     }
-    build(rootDirectory, ctx.remixConfig, { strict: pluginConfig.strict, outputDirPath: pluginConfig.outputDirPath || DEFAULT_OUTPUT_DIR_PATH });
+    build(rootDirectory, ctx.remixConfig, { strict: pluginConfig.strict, outputDirPath: pluginConfig.outDir || DEFAULT_OUTPUT_DIR_PATH });
   }
 
   async function reloadCtx() {
