@@ -27,6 +27,7 @@
   "author": "Wei Zhu",
   "license": "MIT",
   "devDependencies": {
+    "@remix-run/dev-1": "npm:@remix-run/dev@1.19.3",
     "@remix-run/dev": "^2.6.0",
     "@types/cli-table": "^0.3.0",
     "@types/ejs": "^3.1.2",

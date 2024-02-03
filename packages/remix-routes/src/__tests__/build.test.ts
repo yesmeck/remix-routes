@@ -10,8 +10,9 @@ function loadRemixConfig(rootDir: string) {
 }
 
 test('build v1 routes', async () => {
+  const readConfig = require('@remix-run/dev-1/dist/config').readConfig;
   const rootDir = path.resolve(__dirname, '../../fixture/v1');
-  const config = await loadRemixConfig(rootDir);
+  const config = await readConfig(rootDir);
 
   await build(rootDir, config, { outputDirPath: './node_modules', strict: false });
 
