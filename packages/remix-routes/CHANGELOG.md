@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.7.0
+
+### Minor Changes
+
+- 362ef03: feat: introduce vite plugin
+
 ## 1.6.2
 
 ### Patch Changes
