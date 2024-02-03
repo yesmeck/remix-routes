@@ -9,7 +9,7 @@
   "files": [
     "lib",
     "vite.js",
-    "vite.d.js",
+    "vite.d.ts",
     "!lib/__tests__"
   ],
   "scripts": {
