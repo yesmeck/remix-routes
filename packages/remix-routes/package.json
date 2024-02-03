@@ -1,6 +1,6 @@
 {
   "name": "remix-routes",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "Typesafe routing for Remix apps.",
   "main": "lib/index.js",
   "bin": {
