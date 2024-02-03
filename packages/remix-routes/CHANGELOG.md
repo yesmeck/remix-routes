@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.6.2
+
+### Patch Changes
+
+- bb95601: fix: dedup prefix slashes
+
 ## 1.6.1
 
 ### Patch Changes
