@@ -14,6 +14,30 @@ $ npm add remix-routes
 
 ## Setup
 
+### With Vite
+
+Add `remix-routes` plugin to your `vite.config.ts`:
+
+```javascript
+import { defineConfig } from "vite";
+import { unstable_vitePlugin as remix } from "@remix-run/dev";
+import { remixRoutes } from "remix-routes/vite";
+
+export default defineConfig({
+  plugins: [
+    remix(),
+    remixRoutes(options?)
+  ],
+});
+```
+
+Supported config options:
+
+- `strict: boolean`
+- `outDir: string`
+
+### Without Vite
+
 Add `remix-routes` to your dev and build script in `package.json`.
 
 **With [`concurrently`](https://www.npmjs.com/package/concurrently) package:**

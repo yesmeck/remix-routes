@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { $path, $params } from '../index';
+import { $path, $params } from '..';
 
 test('$path', () => {
   expect($path('/posts')).toBe('/posts');
