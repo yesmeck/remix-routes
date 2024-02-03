@@ -283,11 +283,66 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/root').SearchParams>,
     };
   
+    \\"/:lang?/about\\": {
+      params: {
+      
+        lang?: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/($lang)/about').SearchParams>,
+    };
+  
     \\"/admin\\": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/admin/index').SearchParams>,
+    };
+  
+    \\"/admin/episodes\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin/episodes/index').SearchParams>,
+    };
+  
+    \\"/admin/episodes/:id\\": {
+      params: {
+      
+        id: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin/episodes/$id').SearchParams>,
+    };
+  
+    \\"/admin/episodes/:id/comments\\": {
+      params: {
+      
+        id: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin/episodes/$id/comments/index').SearchParams>,
+    };
+  
+    \\"/admin/episodes/new\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/admin/episodes/new').SearchParams>,
+    };
+  
+    \\"/auth\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/auth/__auth').SearchParams>,
+    };
+  
+    \\"/auth/login\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/auth/__auth/login').SearchParams>,
     };
   
     \\"/blog/rss.xml\\": {
@@ -335,11 +390,65 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/jokes/index').SearchParams>,
     };
   
+    \\"/jokes/:jokeId\\": {
+      params: {
+      
+        jokeId: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/jokes/$jokeId').SearchParams>,
+    };
+  
+    \\"/people/:personId\\": {
+      params: {
+      
+        personId: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/people/$personId').SearchParams>,
+    };
+  
+    \\"/people/:personId/:planId/remove-plan\\": {
+      params: {
+      
+        personId: string | number;
+      
+        planId: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>,
+    };
+  
     \\"/posts\\": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/posts/index').SearchParams>,
+    };
+  
+    \\"/posts/:id\\": {
+      params: {
+      
+        id: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/posts/$id').SearchParams>,
+    };
+  
+    \\"/posts/*\\": {
+      params: {
+      
+        \\"*\\": string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/posts/$').SearchParams>,
+    };
+  
+    \\"/posts/delete\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/posts/delete').SearchParams>,
     };
   
     \\"/s/:query\\": {
@@ -362,13 +471,29 @@ exports[`build v1 routes 1`] = `
 
   export type RouteId =
     | 'root'
+    | 'routes/($lang)/about'
     | 'routes/admin'
+    | 'routes/admin/episodes/$id'
+    | 'routes/admin/episodes/$id/comments'
+    | 'routes/admin/episodes/$id/comments/index'
+    | 'routes/admin/episodes/index'
+    | 'routes/admin/episodes/new'
+    | 'routes/admin/index'
+    | 'routes/auth/__auth'
+    | 'routes/auth/__auth/login'
     | 'routes/blog.rss[.]xml'
     | 'routes/chats.$season.$episode'
     | 'routes/chats.$season.$episode.$slug'
     | 'routes/credits'
     | 'routes/jokes'
-    | 'routes/posts'
+    | 'routes/jokes/$jokeId'
+    | 'routes/jokes/index'
+    | 'routes/people/$personId'
+    | 'routes/people/$personId/$planId/remove-plan'
+    | 'routes/posts/$'
+    | 'routes/posts/$id'
+    | 'routes/posts/delete'
+    | 'routes/posts/index'
     | 'routes/s.$query';
 
   export function $path<
@@ -599,6 +724,15 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/sign-in.$').SearchParams>,
     };
   
+    \\"/somewhere/cool/*\\": {
+      params: {
+      
+        \\"*\\": string | number;
+      
+      },
+      query: ExportedQuery<import('../app/catchall').SearchParams>,
+    };
+  
   }
 
   type RoutesWithParams = Pick<
@@ -609,6 +743,7 @@ exports[`build v2 routes 1`] = `
   >;
 
   export type RouteId =
+    | 'catchall'
     | 'root'
     | 'routes/($lang).about'
     | 'routes/admin'
