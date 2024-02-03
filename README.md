@@ -16,7 +16,7 @@ $ npm add remix-routes
 
 ### With Vite
 
-Add `remix-routes` to your `vite.config.ts`:
+Add `remix-routes` plugin to your `vite.config.ts`:
 
 ```javascript
 import { defineConfig } from "vite";
