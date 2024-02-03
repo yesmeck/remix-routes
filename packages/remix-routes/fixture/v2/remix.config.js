@@ -10,4 +10,9 @@ module.exports = {
   future: {
     v2_routeConvention: true,
   },
+  routes(defineRoutes) {
+    return defineRoutes((route) => {
+      route("/somewhere/cool/*", "catchall.tsx");
+    });
+  },
 };

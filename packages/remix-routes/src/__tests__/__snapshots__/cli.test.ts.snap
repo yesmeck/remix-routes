@@ -724,6 +724,15 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/sign-in.$').SearchParams>,
     };
   
+    \\"/somewhere/cool/*\\": {
+      params: {
+      
+        \\"*\\": string | number;
+      
+      },
+      query: ExportedQuery<import('../app/catchall').SearchParams>,
+    };
+  
   }
 
   type RoutesWithParams = Pick<
@@ -734,6 +743,7 @@ exports[`build v2 routes 1`] = `
   >;
 
   export type RouteId =
+    | 'catchall'
     | 'root'
     | 'routes/($lang).about'
     | 'routes/admin'

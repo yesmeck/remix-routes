@@ -77,10 +77,10 @@ async function buildHelpers(config: RemixConfig): Promise<[RoutesInfo, string[]]
         };
       } else {
         currentPath = [...currentPath, route];
-        const fullPath = currentPath.reduce(
-          (acc, curr) => [acc, trimSlash(curr.path)].filter(p => p != undefined).join('/'),
+        const fullPath = dedupPrefixSlash(currentPath.reduce(
+          (acc, curr) => [acc, trimSuffixSlash(curr.path)].filter(p => p != undefined).join('/'),
           '',
-        );
+        ));
         const paramsNames = parse(currentPath);
         routesInfo[fullPath] = {
           fileName: route.file,
@@ -168,7 +168,11 @@ if (require.main === module) {
   })();
 }
 
-function trimSlash(path?: string) {
+function dedupPrefixSlash(path: string) {
+  return path.replace(/^\/+/, '/');
+}
+
+function trimSuffixSlash(path?: string) {
   if (!path) return path;
   return path.replace(/\/+$/, '');
 }
