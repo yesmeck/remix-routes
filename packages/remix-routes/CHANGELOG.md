@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.7.1
+
+### Patch Changes
+
+- c5c5728: fix vite plugin type
+
 ## 1.7.0
 
 ### Minor Changes
