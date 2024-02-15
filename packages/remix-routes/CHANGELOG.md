@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.7.2
+
+### Patch Changes
+
+- 0107e70: handle optional static path segments [#88](https://github.com/yesmeck/remix-routes/pull/88) [@rossipedia](https://github.com/rossipedia)
+
 ## 1.7.1
 
 ### Patch Changes
