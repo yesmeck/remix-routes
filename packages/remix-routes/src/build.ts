@@ -46,16 +46,40 @@ async function buildHelpers(config: RemixConfig): Promise<[RoutesInfo, string[]]
           '',
         ));
         const paramsNames = parse(currentPath);
-        routesInfo[fullPath] = {
-          fileName: route.file,
-          params: paramsNames
-        };
+        // Expand out the paths into all of the possible variants, taking into
+        // account optional segments that aren't params/dynamic.
+        for (const pathVariant of expandOptionalStaticSegments(fullPath)) {
+          routesInfo[pathVariant] = {
+            fileName: route.file,
+            params: paramsNames
+          };
+        }
       }
       handleRoutesRecursive(route.id, currentPath);
     });
   };
   handleRoutesRecursive();
   return [routesInfo, routeIds];
+}
+
+function expandOptionalStaticSegments(path: string) {
+  // Split the path at the point where `/` is the next char (positive lookahead regex)
+  const segments = path.split(/(?=\/)/g);
+  // This turns '/foo/bar' -> ['/foo', '/bar']
+  let paths = [''];
+  for (const e of segments) {
+    if (!e.endsWith('?') || e.startsWith('/:')) {
+      // If a given segment is not optional or dynamic, then we just append it to
+      // each path variant we have so far: ['/foo'] => ['/foo/bar']
+      paths = paths.map((p) => p + e);
+    } else {
+      // If a given segment is optional, we append a copy of the existing paths
+      // with the optional segment appended:
+      // ['/foo'] => ['/foo', '/foo/bar']
+      paths.push(...paths.map((p) => p + e.slice(0, -1)));
+    }
+  }
+  return paths;
 }
 
 export async function build(remixRoot: string, remixConfig: RemixConfig, options: Options) {

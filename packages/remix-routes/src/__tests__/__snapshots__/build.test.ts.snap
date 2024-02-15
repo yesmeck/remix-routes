@@ -118,6 +118,13 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/credits').SearchParams>,
     };
   
+    \\"/home\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../../src/routes/(static).home').SearchParams>,
+    };
+  
     \\"/jokes\\": {
       params: {
       
@@ -204,6 +211,13 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/sign-in.$').SearchParams>,
     };
   
+    \\"/static/home\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../../src/routes/(static).home').SearchParams>,
+    };
+  
   }
 
   type RoutesWithParams = Pick<
@@ -216,6 +230,7 @@ exports[`build customPaths routes 1`] = `
   export type RouteId =
     | 'root'
     | 'routes/($lang).about'
+    | 'routes/(static).home'
     | 'routes/admin'
     | 'routes/admin._index'
     | 'routes/admin.episodes._index'
@@ -383,6 +398,13 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/credits').SearchParams>,
     };
   
+    \\"/home\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/(static)/home').SearchParams>,
+    };
+  
     \\"/jokes\\": {
       params: {
       
@@ -460,6 +482,13 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/s.$query').SearchParams>,
     };
   
+    \\"/static/home\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/(static)/home').SearchParams>,
+    };
+  
   }
 
   type RoutesWithParams = Pick<
@@ -472,6 +501,7 @@ exports[`build v1 routes 1`] = `
   export type RouteId =
     | 'root'
     | 'routes/($lang)/about'
+    | 'routes/(static)/home'
     | 'routes/admin'
     | 'routes/admin/episodes/$id'
     | 'routes/admin/episodes/$id/comments'
@@ -638,6 +668,13 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/credits').SearchParams>,
     };
   
+    \\"/home\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/(static).home').SearchParams>,
+    };
+  
     \\"/jokes\\": {
       params: {
       
@@ -733,6 +770,13 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/catchall').SearchParams>,
     };
   
+    \\"/static/home\\": {
+      params: {
+      
+      },
+      query: ExportedQuery<import('../app/routes/(static).home').SearchParams>,
+    };
+  
   }
 
   type RoutesWithParams = Pick<
@@ -746,6 +790,7 @@ exports[`build v2 routes 1`] = `
     | 'catchall'
     | 'root'
     | 'routes/($lang).about'
+    | 'routes/(static).home'
     | 'routes/admin'
     | 'routes/admin._index'
     | 'routes/admin.episodes._index'
