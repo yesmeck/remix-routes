@@ -20,7 +20,7 @@ Add `remix-routes` plugin to your `vite.config.ts`:
 
 ```javascript
 import { defineConfig } from "vite";
-import { unstable_vitePlugin as remix } from "@remix-run/dev";
+import { vitePlugin as remix } from "@remix-run/dev";
 import { remixRoutes } from "remix-routes/vite";
 
 export default defineConfig({
