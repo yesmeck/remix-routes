@@ -154,11 +154,12 @@ export const action: ActionFunction = async ({ params }) => {
 remix-routes also export all route type definitions for your convenience.
 
 ```typescript
-import type { Routes } from 'remix-routes';
 import { useParams } from "remix";
+import { $params } from 'remix-routes';
 
 export default function Component() {
-  const { id } = useParams<Routes['/posts/:id']['params']>();
+  const params = useParams();
+  const { id } = $params("/posts/:id", params);
   ...
 }
 ```
