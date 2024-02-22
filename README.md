@@ -140,6 +140,7 @@ export const loader = async (request) => {
 
 ```typescript
 import type { ActionFunction } from 'remix';
+import { useParams } from "remix";
 import { $params } from 'remix-routes'; // <-- Import $params helper.
 
 export const action: ActionFunction = async ({ params }) => {
@@ -147,18 +148,10 @@ export const action: ActionFunction = async ({ params }) => {
 
   // ...
 }
-```
-
-### Route type definitions
-
-remix-routes also export all route type definitions for your convenience.
-
-```typescript
-import type { Routes } from 'remix-routes';
-import { useParams } from "remix";
 
 export default function Component() {
-  const { id } = useParams<Routes['/posts/:id']['params']>();
+  const params = useParams();
+  const { id } = $params("/posts/:id/update", params);
   ...
 }
 ```
