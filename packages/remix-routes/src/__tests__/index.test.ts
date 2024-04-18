@@ -30,6 +30,7 @@ test('$path + params + query', () => {
 
 test('$path + optional route fragment', () => {
   expect($path('/:lang?/about', {})).toBe('/about');
+  expect($path('/:lang?/about', { lang: undefined })).toBe('/about');
   expect($path('/:lang?/about', { lang: 'en' })).toBe('/en/about');
 });
 
