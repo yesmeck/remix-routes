@@ -20,7 +20,7 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
       }
       if (fragment.indexOf(':') > -1) {
         let paramName = fragment.slice(1);
-        if (paramName in params) {
+        if (paramName in params && params[paramName] !== undefined) {
           return params[paramName];
         }
         return null
