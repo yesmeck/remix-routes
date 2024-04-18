@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.7.3
+
+### Patch Changes
+
+- 8df17e3: fix: ignore undefined path params
+
 ## 1.7.2
 
 ### Patch Changes
