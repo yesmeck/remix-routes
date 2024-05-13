@@ -9,7 +9,7 @@
     "watch": "pnpm run --parallel watch",
     "build": "pnpm run --parallel build",
     "ci:version": "changeset version",
-    "ci:publish": "pnpm publish -r"
+    "ci:publish": "pnpm publish -r --no-git-checks"
   },
   "keywords": [],
   "author": "",
