@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.7.4
+
+### Patch Changes
+
+- fc65605: fix: default declaration
+
 ## 1.7.3
 
 ### Patch Changes
