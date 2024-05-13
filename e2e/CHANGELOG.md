@@ -4,6 +4,13 @@
 
 ### Patch Changes
 
+- Updated dependencies [fc65605]
+  - remix-routes@1.7.4
+
+## null
+
+### Patch Changes
+
 - Updated dependencies [8df17e3]
   - remix-routes@1.7.3
 
