@@ -19,9 +19,9 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
         fragment = fragment.slice(0, -1);
       }
       if (fragment.indexOf(':') > -1) {
-        let paramName = fragment.slice(1);
+        let [paramName, extension] = fragment.slice(1).split('.');
         if (paramName in params && params[paramName] !== undefined) {
-          return params[paramName];
+          return params[paramName] + (extension ? '.' + extension : '');
         }
         return null
       }
