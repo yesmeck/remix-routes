@@ -619,7 +619,7 @@ exports[`build v2 routes 1`] = `
     "/api/:id.json": {
       params: {
       
-        id.json: string | number;
+        id: string | number;
       
       },
       query: ExportedQuery<import('../app/routes/api.$id[.]json').SearchParams>,

@@ -9,6 +9,10 @@ test('$path + params', () => {
   expect($path('/posts/:id', { id: 1 })).toBe('/posts/1');
 });
 
+test('$path + params + escape periods', () => {
+  expect($path('/posts/:id.json', { id: 1 })).toBe('/posts/1.json');
+});
+
 test('$path + query', () => {
   expect($path('/posts', { order: 'desc' })).toBe('/posts?order=desc');
 });
