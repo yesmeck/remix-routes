@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.7.5
+
+### Patch Changes
+
+- 3673f55: fix: param with escaped periods
+
 ## 1.7.4
 
 ### Patch Changes
