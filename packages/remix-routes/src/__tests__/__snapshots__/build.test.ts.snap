@@ -1,7 +1,7 @@
-// Vitest Snapshot v1
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`build customPaths routes 1`] = `
-"declare module \\"remix-routes\\" {
+"declare module "remix-routes" {
   type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
   // symbol won't be a key of SearchParams
   type IsSearchParams<T> = symbol extends keyof T ? false : true;
@@ -11,14 +11,14 @@ exports[`build customPaths routes 1`] = `
 
   export interface Routes {
   
-    \\"/\\": {
+    "/": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/root').SearchParams>,
     };
   
-    \\"/:lang?/about\\": {
+    "/:lang?/about": {
       params: {
       
         lang?: string | number;
@@ -27,21 +27,21 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/($lang).about').SearchParams>,
     };
   
-    \\"/admin\\": {
+    "/admin": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/admin._index').SearchParams>,
     };
   
-    \\"/admin/episodes\\": {
+    "/admin/episodes": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/admin.episodes._index').SearchParams>,
     };
   
-    \\"/admin/episodes/:id\\": {
+    "/admin/episodes/:id": {
       params: {
       
         id: string | number;
@@ -50,7 +50,7 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/admin.episodes.$id._index').SearchParams>,
     };
   
-    \\"/admin/episodes/:id/comments\\": {
+    "/admin/episodes/:id/comments": {
       params: {
       
         id: string | number;
@@ -59,35 +59,35 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/admin.episodes.$id.comments').SearchParams>,
     };
   
-    \\"/admin/episodes/new\\": {
+    "/admin/episodes/new": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/admin.episodes.new').SearchParams>,
     };
   
-    \\"/auth\\": {
+    "/auth": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/auth._auth').SearchParams>,
     };
   
-    \\"/auth/login\\": {
+    "/auth/login": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/auth._auth.login').SearchParams>,
     };
   
-    \\"/blog/rss.xml\\": {
+    "/blog/rss.xml": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/blog.rss[.]xml').SearchParams>,
     };
   
-    \\"/chats/:season/:episode\\": {
+    "/chats/:season/:episode": {
       params: {
       
         season: string | number;
@@ -98,7 +98,7 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/chats_.$season.$episode').SearchParams>,
     };
   
-    \\"/chats/:season/:episode/:slug\\": {
+    "/chats/:season/:episode/:slug": {
       params: {
       
         season: string | number;
@@ -111,28 +111,28 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/chats_.$season.$episode.$slug').SearchParams>,
     };
   
-    \\"/credits\\": {
+    "/credits": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/credits').SearchParams>,
     };
   
-    \\"/home\\": {
+    "/home": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/(static).home').SearchParams>,
     };
   
-    \\"/jokes\\": {
+    "/jokes": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/jokes._index').SearchParams>,
     };
   
-    \\"/jokes/:jokeId\\": {
+    "/jokes/:jokeId": {
       params: {
       
         jokeId: string | number;
@@ -141,7 +141,7 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/jokes.$jokeId').SearchParams>,
     };
   
-    \\"/people/:personId\\": {
+    "/people/:personId": {
       params: {
       
         personId: string | number;
@@ -150,7 +150,7 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/people.$personId').SearchParams>,
     };
   
-    \\"/people/:personId/:planId/remove-plan\\": {
+    "/people/:personId/:planId/remove-plan": {
       params: {
       
         personId: string | number;
@@ -161,14 +161,14 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/people.$personId.$planId.remove-plan').SearchParams>,
     };
   
-    \\"/posts\\": {
+    "/posts": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/posts._index').SearchParams>,
     };
   
-    \\"/posts/:id\\": {
+    "/posts/:id": {
       params: {
       
         id: string | number;
@@ -177,23 +177,23 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/posts.$id').SearchParams>,
     };
   
-    \\"/posts/*\\": {
+    "/posts/*": {
       params: {
       
-        \\"*\\": string | number;
+        "*": string | number;
       
       },
       query: ExportedQuery<import('../../src/routes/posts.$').SearchParams>,
     };
   
-    \\"/posts/delete\\": {
+    "/posts/delete": {
       params: {
       
       },
       query: ExportedQuery<import('../../src/routes/posts.delete').SearchParams>,
     };
   
-    \\"/s/:query\\": {
+    "/s/:query": {
       params: {
       
         query: string | number;
@@ -202,16 +202,16 @@ exports[`build customPaths routes 1`] = `
       query: ExportedQuery<import('../../src/routes/s.$query').SearchParams>,
     };
   
-    \\"/sign-in/*\\": {
+    "/sign-in/*": {
       params: {
       
-        \\"*\\": string | number;
+        "*": string | number;
       
       },
       query: ExportedQuery<import('../../src/routes/sign-in.$').SearchParams>,
     };
   
-    \\"/static/home\\": {
+    "/static/home": {
       params: {
       
       },
@@ -223,7 +223,7 @@ exports[`build customPaths routes 1`] = `
   type RoutesWithParams = Pick<
     Routes,
     {
-      [K in keyof Routes]: Routes[K][\\"params\\"] extends Record<string, never> ? never : K
+      [K in keyof Routes]: Routes[K]["params"] extends Record<string, never> ? never : K
     }[keyof Routes]
   >;
 
@@ -259,18 +259,18 @@ exports[`build customPaths routes 1`] = `
   export function $path<
     Route extends keyof Routes,
     Rest extends {
-      params: Routes[Route][\\"params\\"];
-      query?: Routes[Route][\\"query\\"];
+      params: Routes[Route]["params"];
+      query?: Routes[Route]["query"];
     }
   >(
-    ...args: Rest[\\"params\\"] extends Record<string, never>
-      ? [route: Route, query?: Rest[\\"query\\"]]
-      : [route: Route, params: Rest[\\"params\\"], query?: Rest[\\"query\\"]]
+    ...args: Rest["params"] extends Record<string, never>
+      ? [route: Route, query?: Rest["query"]]
+      : [route: Route, params: Rest["params"], query?: Rest["query"]]
   ): string;
 
   export function $params<
     Route extends keyof RoutesWithParams,
-    Params extends RoutesWithParams[Route][\\"params\\"]
+    Params extends RoutesWithParams[Route]["params"]
   >(
       route: Route,
       params: { readonly [key: string]: string | undefined }
@@ -281,7 +281,7 @@ exports[`build customPaths routes 1`] = `
 `;
 
 exports[`build v1 routes 1`] = `
-"declare module \\"remix-routes\\" {
+"declare module "remix-routes" {
   type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
   // symbol won't be a key of SearchParams
   type IsSearchParams<T> = symbol extends keyof T ? false : true;
@@ -291,14 +291,14 @@ exports[`build v1 routes 1`] = `
 
   export interface Routes {
   
-    \\"/\\": {
+    "/": {
       params: {
       
       },
       query: ExportedQuery<import('../app/root').SearchParams>,
     };
   
-    \\"/:lang?/about\\": {
+    "/:lang?/about": {
       params: {
       
         lang?: string | number;
@@ -307,21 +307,21 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/($lang)/about').SearchParams>,
     };
   
-    \\"/admin\\": {
+    "/admin": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/admin/index').SearchParams>,
     };
   
-    \\"/admin/episodes\\": {
+    "/admin/episodes": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/admin/episodes/index').SearchParams>,
     };
   
-    \\"/admin/episodes/:id\\": {
+    "/admin/episodes/:id": {
       params: {
       
         id: string | number;
@@ -330,7 +330,7 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/admin/episodes/$id').SearchParams>,
     };
   
-    \\"/admin/episodes/:id/comments\\": {
+    "/admin/episodes/:id/comments": {
       params: {
       
         id: string | number;
@@ -339,35 +339,35 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/admin/episodes/$id/comments/index').SearchParams>,
     };
   
-    \\"/admin/episodes/new\\": {
+    "/admin/episodes/new": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/admin/episodes/new').SearchParams>,
     };
   
-    \\"/auth\\": {
+    "/auth": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/auth/__auth').SearchParams>,
     };
   
-    \\"/auth/login\\": {
+    "/auth/login": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/auth/__auth/login').SearchParams>,
     };
   
-    \\"/blog/rss.xml\\": {
+    "/blog/rss.xml": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/blog.rss[.]xml').SearchParams>,
     };
   
-    \\"/chats/:season/:episode\\": {
+    "/chats/:season/:episode": {
       params: {
       
         season: string | number;
@@ -378,7 +378,7 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/chats.$season.$episode').SearchParams>,
     };
   
-    \\"/chats/:season/:episode/:slug\\": {
+    "/chats/:season/:episode/:slug": {
       params: {
       
         season: string | number;
@@ -391,28 +391,28 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/chats.$season.$episode.$slug').SearchParams>,
     };
   
-    \\"/credits\\": {
+    "/credits": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/credits').SearchParams>,
     };
   
-    \\"/home\\": {
+    "/home": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/(static)/home').SearchParams>,
     };
   
-    \\"/jokes\\": {
+    "/jokes": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/jokes/index').SearchParams>,
     };
   
-    \\"/jokes/:jokeId\\": {
+    "/jokes/:jokeId": {
       params: {
       
         jokeId: string | number;
@@ -421,7 +421,7 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/jokes/$jokeId').SearchParams>,
     };
   
-    \\"/people/:personId\\": {
+    "/people/:personId": {
       params: {
       
         personId: string | number;
@@ -430,7 +430,7 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/people/$personId').SearchParams>,
     };
   
-    \\"/people/:personId/:planId/remove-plan\\": {
+    "/people/:personId/:planId/remove-plan": {
       params: {
       
         personId: string | number;
@@ -441,14 +441,14 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/people/$personId/$planId/remove-plan').SearchParams>,
     };
   
-    \\"/posts\\": {
+    "/posts": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/posts/index').SearchParams>,
     };
   
-    \\"/posts/:id\\": {
+    "/posts/:id": {
       params: {
       
         id: string | number;
@@ -457,23 +457,23 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/posts/$id').SearchParams>,
     };
   
-    \\"/posts/*\\": {
+    "/posts/*": {
       params: {
       
-        \\"*\\": string | number;
+        "*": string | number;
       
       },
       query: ExportedQuery<import('../app/routes/posts/$').SearchParams>,
     };
   
-    \\"/posts/delete\\": {
+    "/posts/delete": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/posts/delete').SearchParams>,
     };
   
-    \\"/s/:query\\": {
+    "/s/:query": {
       params: {
       
         query: string | number;
@@ -482,7 +482,7 @@ exports[`build v1 routes 1`] = `
       query: ExportedQuery<import('../app/routes/s.$query').SearchParams>,
     };
   
-    \\"/static/home\\": {
+    "/static/home": {
       params: {
       
       },
@@ -494,7 +494,7 @@ exports[`build v1 routes 1`] = `
   type RoutesWithParams = Pick<
     Routes,
     {
-      [K in keyof Routes]: Routes[K][\\"params\\"] extends Record<string, never> ? never : K
+      [K in keyof Routes]: Routes[K]["params"] extends Record<string, never> ? never : K
     }[keyof Routes]
   >;
 
@@ -529,18 +529,18 @@ exports[`build v1 routes 1`] = `
   export function $path<
     Route extends keyof Routes,
     Rest extends {
-      params: Routes[Route][\\"params\\"];
-      query?: Routes[Route][\\"query\\"];
+      params: Routes[Route]["params"];
+      query?: Routes[Route]["query"];
     }
   >(
-    ...args: Rest[\\"params\\"] extends Record<string, never>
-      ? [route: Route, query?: Rest[\\"query\\"]]
-      : [route: Route, params: Rest[\\"params\\"], query?: Rest[\\"query\\"]]
+    ...args: Rest["params"] extends Record<string, never>
+      ? [route: Route, query?: Rest["query"]]
+      : [route: Route, params: Rest["params"], query?: Rest["query"]]
   ): string;
 
   export function $params<
     Route extends keyof RoutesWithParams,
-    Params extends RoutesWithParams[Route][\\"params\\"]
+    Params extends RoutesWithParams[Route]["params"]
   >(
       route: Route,
       params: { readonly [key: string]: string | undefined }
@@ -551,7 +551,7 @@ exports[`build v1 routes 1`] = `
 `;
 
 exports[`build v2 routes 1`] = `
-"declare module \\"remix-routes\\" {
+"declare module "remix-routes" {
   type URLSearchParamsInit = string | string[][] | Record<string, string> | URLSearchParams;
   // symbol won't be a key of SearchParams
   type IsSearchParams<T> = symbol extends keyof T ? false : true;
@@ -561,14 +561,14 @@ exports[`build v2 routes 1`] = `
 
   export interface Routes {
   
-    \\"/\\": {
+    "/": {
       params: {
       
       },
       query: ExportedQuery<import('../app/root').SearchParams>,
     };
   
-    \\"/:lang?/about\\": {
+    "/:lang?/about": {
       params: {
       
         lang?: string | number;
@@ -577,21 +577,21 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/($lang).about').SearchParams>,
     };
   
-    \\"/admin\\": {
+    "/admin": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/admin._index').SearchParams>,
     };
   
-    \\"/admin/episodes\\": {
+    "/admin/episodes": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/admin.episodes._index').SearchParams>,
     };
   
-    \\"/admin/episodes/:id\\": {
+    "/admin/episodes/:id": {
       params: {
       
         id: string | number;
@@ -600,7 +600,7 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/admin.episodes.$id._index').SearchParams>,
     };
   
-    \\"/admin/episodes/:id/comments\\": {
+    "/admin/episodes/:id/comments": {
       params: {
       
         id: string | number;
@@ -609,35 +609,44 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/admin.episodes.$id.comments').SearchParams>,
     };
   
-    \\"/admin/episodes/new\\": {
+    "/admin/episodes/new": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/admin.episodes.new').SearchParams>,
     };
   
-    \\"/auth\\": {
+    "/api/:id.json": {
+      params: {
+      
+        id.json: string | number;
+      
+      },
+      query: ExportedQuery<import('../app/routes/api.$id[.]json').SearchParams>,
+    };
+  
+    "/auth": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/auth._auth').SearchParams>,
     };
   
-    \\"/auth/login\\": {
+    "/auth/login": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/auth._auth.login').SearchParams>,
     };
   
-    \\"/blog/rss.xml\\": {
+    "/blog/rss.xml": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/blog.rss[.]xml').SearchParams>,
     };
   
-    \\"/chats/:season/:episode\\": {
+    "/chats/:season/:episode": {
       params: {
       
         season: string | number;
@@ -648,7 +657,7 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/chats_.$season.$episode').SearchParams>,
     };
   
-    \\"/chats/:season/:episode/:slug\\": {
+    "/chats/:season/:episode/:slug": {
       params: {
       
         season: string | number;
@@ -661,28 +670,28 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/chats_.$season.$episode.$slug').SearchParams>,
     };
   
-    \\"/credits\\": {
+    "/credits": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/credits').SearchParams>,
     };
   
-    \\"/home\\": {
+    "/home": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/(static).home').SearchParams>,
     };
   
-    \\"/jokes\\": {
+    "/jokes": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/jokes._index').SearchParams>,
     };
   
-    \\"/jokes/:jokeId\\": {
+    "/jokes/:jokeId": {
       params: {
       
         jokeId: string | number;
@@ -691,7 +700,7 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/jokes.$jokeId').SearchParams>,
     };
   
-    \\"/people/:personId\\": {
+    "/people/:personId": {
       params: {
       
         personId: string | number;
@@ -700,7 +709,7 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/people.$personId').SearchParams>,
     };
   
-    \\"/people/:personId/:planId/remove-plan\\": {
+    "/people/:personId/:planId/remove-plan": {
       params: {
       
         personId: string | number;
@@ -711,14 +720,14 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/people.$personId.$planId.remove-plan').SearchParams>,
     };
   
-    \\"/posts\\": {
+    "/posts": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/posts._index').SearchParams>,
     };
   
-    \\"/posts/:id\\": {
+    "/posts/:id": {
       params: {
       
         id: string | number;
@@ -727,23 +736,23 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/posts.$id').SearchParams>,
     };
   
-    \\"/posts/*\\": {
+    "/posts/*": {
       params: {
       
-        \\"*\\": string | number;
+        "*": string | number;
       
       },
       query: ExportedQuery<import('../app/routes/posts.$').SearchParams>,
     };
   
-    \\"/posts/delete\\": {
+    "/posts/delete": {
       params: {
       
       },
       query: ExportedQuery<import('../app/routes/posts.delete').SearchParams>,
     };
   
-    \\"/s/:query\\": {
+    "/s/:query": {
       params: {
       
         query: string | number;
@@ -752,25 +761,25 @@ exports[`build v2 routes 1`] = `
       query: ExportedQuery<import('../app/routes/s.$query').SearchParams>,
     };
   
-    \\"/sign-in/*\\": {
+    "/sign-in/*": {
       params: {
       
-        \\"*\\": string | number;
+        "*": string | number;
       
       },
       query: ExportedQuery<import('../app/routes/sign-in.$').SearchParams>,
     };
   
-    \\"/somewhere/cool/*\\": {
+    "/somewhere/cool/*": {
       params: {
       
-        \\"*\\": string | number;
+        "*": string | number;
       
       },
       query: ExportedQuery<import('../app/catchall').SearchParams>,
     };
   
-    \\"/static/home\\": {
+    "/static/home": {
       params: {
       
       },
@@ -782,7 +791,7 @@ exports[`build v2 routes 1`] = `
   type RoutesWithParams = Pick<
     Routes,
     {
-      [K in keyof Routes]: Routes[K][\\"params\\"] extends Record<string, never> ? never : K
+      [K in keyof Routes]: Routes[K]["params"] extends Record<string, never> ? never : K
     }[keyof Routes]
   >;
 
@@ -798,6 +807,7 @@ exports[`build v2 routes 1`] = `
     | 'routes/admin.episodes.$id._index'
     | 'routes/admin.episodes.$id.comments'
     | 'routes/admin.episodes.new'
+    | 'routes/api.$id[.]json'
     | 'routes/auth._auth'
     | 'routes/auth._auth.login'
     | 'routes/blog.rss[.]xml'
@@ -819,18 +829,18 @@ exports[`build v2 routes 1`] = `
   export function $path<
     Route extends keyof Routes,
     Rest extends {
-      params: Routes[Route][\\"params\\"];
-      query?: Routes[Route][\\"query\\"];
+      params: Routes[Route]["params"];
+      query?: Routes[Route]["query"];
     }
   >(
-    ...args: Rest[\\"params\\"] extends Record<string, never>
-      ? [route: Route, query?: Rest[\\"query\\"]]
-      : [route: Route, params: Rest[\\"params\\"], query?: Rest[\\"query\\"]]
+    ...args: Rest["params"] extends Record<string, never>
+      ? [route: Route, query?: Rest["query"]]
+      : [route: Route, params: Rest["params"], query?: Rest["query"]]
   ): string;
 
   export function $params<
     Route extends keyof RoutesWithParams,
-    Params extends RoutesWithParams[Route][\\"params\\"]
+    Params extends RoutesWithParams[Route]["params"]
   >(
       route: Route,
       params: { readonly [key: string]: string | undefined }
