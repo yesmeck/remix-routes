@@ -12,6 +12,7 @@ import { template } from './template';
 interface Options {
   strict?: boolean;
   outputDirPath: string;
+  basename?: string; // Add basename to Options interface
 }
 
 type RoutesInfo = Record<string, {
@@ -21,7 +22,7 @@ type RoutesInfo = Record<string, {
 
 export const DEFAULT_OUTPUT_DIR_PATH = './node_modules'
 
-async function buildHelpers(config: RemixConfig): Promise<[RoutesInfo, string[]]> {
+async function buildHelpers(config: RemixConfig, basename: string = ''): Promise<[RoutesInfo, string[]]> { // Add basename parameter to buildHelpers function
   const routesInfo: RoutesInfo = {};
   const routeIds: string[] = [];
   const handleRoutesRecursive = (
@@ -83,7 +84,7 @@ function expandOptionalStaticSegments(path: string) {
 }
 
 export async function build(remixRoot: string, remixConfig: RemixConfig, options: Options) {
-  const [routesInfo, routeIds] = await buildHelpers(remixConfig);
+  const [routesInfo, routeIds] = await buildHelpers(remixConfig, options.basename); // Pass basename to buildHelpers
   generate(remixRoot, remixConfig, routesInfo, routeIds, options);
 }
 
@@ -112,7 +113,7 @@ function generate(remixRoot: string, remixConfig: RemixConfig, routesInfo: Route
     strictMode: options.strict,
     relativeAppDirPath,
     routes: Object.entries(routesInfo).map(([route, { fileName, params }]) => ({
-      route,
+      route: options.basename ? `${options.basename}${route}` : route, // Prepend basename to route
       params,
       fileName: slash(fileName.replace(/\.tsx?$/, '')),
     })).sort((a, b) => a.route.localeCompare(b.route)),
