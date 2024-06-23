@@ -26,7 +26,10 @@ import { remixRoutes } from "remix-routes/vite";
 export default defineConfig({
   plugins: [
     remix(),
-    remixRoutes(options?)
+    remixRoutes({
+      // Optional configuration for basename
+      basename: "/basepath", // Specify the basename here
+    })
   ],
 });
 ```
@@ -35,6 +38,7 @@ Supported config options:
 
 - `strict: boolean`
 - `outDir: string`
+- `basename: string` <!---> - Specify the basename for your routes.
 
 ### Without Vite
 

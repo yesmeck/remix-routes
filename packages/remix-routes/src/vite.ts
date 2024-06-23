@@ -4,6 +4,7 @@ import { DEFAULT_OUTPUT_DIR_PATH, build } from './build';
 interface PluginConfig {
   strict?: boolean;
   outDir?: string;
+  basename?: string; // Add basename to PluginConfig
 }
 
 const RemixPluginContextName = '__remixPluginContext';
@@ -19,7 +20,8 @@ export function remixRoutes(pluginConfig: PluginConfig = {}): Vite.Plugin {
     if (!ctx) {
       return;
     }
-    build(rootDirectory, ctx.remixConfig, { strict: pluginConfig.strict, outputDirPath: pluginConfig.outDir || DEFAULT_OUTPUT_DIR_PATH });
+    // Utilize the basename parameter when generating paths
+    build(rootDirectory, ctx.remixConfig, { strict: pluginConfig.strict, outputDirPath: pluginConfig.outDir || DEFAULT_OUTPUT_DIR_PATH, basename: pluginConfig.basename });
   }
 
   async function reloadCtx() {
@@ -41,6 +43,10 @@ export function remixRoutes(pluginConfig: PluginConfig = {}): Vite.Plugin {
       }
       rootDirectory = config.root;
       ctx = (config as any)[RemixPluginContextName];
+      // Extract basename from the Remix plugin options and pass it to generateTypeFile
+      if (remixPlugin.options && remixPlugin.options.basename) {
+        pluginConfig.basename = remixPlugin.options.basename;
+      }
       generateTypeFile();
     },
     async watchChange(id, change) {
