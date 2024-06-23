@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.7.6
+
+### Patch Changes
+
+- fda48f2: fix: use never for empty params
+
 ## 1.7.5
 
 ### Patch Changes
