@@ -3,19 +3,17 @@ export const template = `declare module "remix-routes" {
   // symbol won't be a key of SearchParams
   type IsSearchParams<T> = symbol extends keyof T ? false : true;
   <% if (strictMode) { %>
-    type ExportedQuery<T> = IsSearchParams<T> extends true ? T : never;
+  type ExportedQuery<T> = IsSearchParams<T> extends true ? T : never;
   <% } else { %>
-    type ExportedQuery<T> = IsSearchParams<T> extends true ? T : URLSearchParamsInit;
+  type ExportedQuery<T> = IsSearchParams<T> extends true ? T : URLSearchParamsInit;
   <% } %>
 
   export interface Routes {
   <% routes.forEach(({ route, params, fileName }) => { %>
     "<%- route %>": {
-      params: {
-      <% params.forEach(param => { %>
-        <%- param %>: string | number;
-      <% }) %>
-      },
+      params: <% if (params.length > 0) { %>{
+        <% params.forEach(param => { %><%- param %>: string | number;<% }) %>
+      } <% } else { %>never<% } %>,
       query: ExportedQuery<import('<%- relativeAppDirPath %>/<%- fileName %>').SearchParams>,
     };
   <% }) %>
