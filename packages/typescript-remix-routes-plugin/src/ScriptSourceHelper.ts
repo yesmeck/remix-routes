@@ -1,4 +1,4 @@
-import * as ts from 'typescript/lib/tsserverlibrary';
+import * as ts from 'typescript';
 import { findNode } from './nodes';
 
 export class ScriptSourceHelper {

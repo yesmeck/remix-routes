@@ -22,7 +22,7 @@
   "dependencies": {
     "resolve": "^1.22.0",
     "slash": "3",
-    "typescript": "^4.4.3"
+    "typescript": "^5.5.3"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.9.0",

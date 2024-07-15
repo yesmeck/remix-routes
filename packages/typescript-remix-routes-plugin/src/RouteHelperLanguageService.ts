@@ -1,5 +1,5 @@
 import path from 'path';
-import * as ts from 'typescript/lib/tsserverlibrary';
+import * as ts from 'typescript';
 import { LanguageService } from './LanguageService';
 import { RemixProject } from './RemixProject';
 import { RouteContext } from './RouteContext';

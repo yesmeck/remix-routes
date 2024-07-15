@@ -1,12 +1,10 @@
-import type tss from 'typescript/lib/tsserverlibrary';
+import type ts from 'typescript/lib/tsserverlibrary';
 import { LanguageServiceLogger } from './LanguageServiceLogger';
 import { RemixProject } from './RemixProject';
 import { RouteHelperLanguageService } from './RouteHelperLanguageService';
 import { ScriptSourceHelper } from './ScriptSourceHelper';
 
-function init(modules: { typescript: typeof tss }) {
-  const ts = modules.typescript;
-
+function init(modules: { typescript: typeof ts }): ts.server.PluginModule {
   function create(info: ts.server.PluginCreateInfo) {
     const logger = new LanguageServiceLogger(info);
     // Set up decorator object
@@ -32,7 +30,7 @@ function init(modules: { typescript: typeof tss }) {
     const routeHelperLanguageService = new RouteHelperLanguageService(
       info.project,
       remixProject,
-      new ScriptSourceHelper(ts, info.project),
+      new ScriptSourceHelper(modules.typescript, info.project)
     );
 
     return routeHelperLanguageService.decorate(proxy);
