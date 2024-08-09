@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as ts from 'typescript/lib/tsserverlibrary';
+import * as ts from 'typescript';
 
 export function hasModuleImported(sourceFile: any, module: string) {
   return sourceFile.imports.some((token: any) => token.text === module);

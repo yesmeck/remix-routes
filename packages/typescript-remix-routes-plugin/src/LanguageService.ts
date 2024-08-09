@@ -1,4 +1,4 @@
-import * as ts from 'typescript/lib/tsserverlibrary';
+import * as ts from 'typescript';
 import { RouteContext } from './RouteContext';
 
 type LanguageServiceMethodWrapper<K extends keyof ts.LanguageService> = (

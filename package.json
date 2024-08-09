@@ -17,6 +17,6 @@
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
     "typescript-remix-routes-plugin": "workspace:*",
-    "vitest": "^1.6.0"
+    "vitest": "^2.0.0"
   }
 }

@@ -2,7 +2,7 @@ import type { RemixConfig } from '@remix-run/dev/dist/config';
 import type { ConfigRoute } from '@remix-run/dev/dist/config/routes';
 import { EventEmitter } from 'events';
 import * as path from 'path';
-import ts from 'typescript/lib/tsserverlibrary';
+import ts from 'typescript';
 import { trimSlash } from './helpers';
 import { LanguageServiceLogger } from './LanguageServiceLogger';
 import { requireModule, resolveTypings } from './module';

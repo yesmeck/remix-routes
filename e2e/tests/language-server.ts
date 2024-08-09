@@ -84,7 +84,9 @@ class TSServer {
 }
 
 export function findResponse(responses: any[], name: string) {
-  return responses.find((response) => response.command === name || response.event === name);
+  return responses.find(
+    (response) => response.command === name || response.event === name,
+  );
 }
 
 export function createServer() {
