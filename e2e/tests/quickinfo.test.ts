@@ -19,13 +19,13 @@ $path('/posts');
   await server.waitEvent('projectLoadingFinish');
   server.send({
     command: 'quickinfo',
-    arguments: { file, offset: 6, line: 3 },
+    arguments: { file, offset: 8, line: 3 },
   });
   await server.waitResponse('quickinfo');
   await server.close();
   const response = findResponse(server.responses, 'quickinfo');
   expect(response.body.displayString).toMatchInlineSnapshot(
-    '"(remix) file: ~/app/routes/posts/index.tsx"'
+    '"(remix) file: ~/app/routes/posts/index.tsx"',
   );
 });
 
@@ -51,6 +51,6 @@ $path('/');
   await server.close();
   const response = findResponse(server.responses, 'quickinfo');
   expect(response.body.displayString).toMatchInlineSnapshot(
-    '"(remix) file: ~/app/routes/index.tsx"'
+    '"(remix) file: ~/app/routes/index.tsx"',
   );
 });
