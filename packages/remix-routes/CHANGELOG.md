@@ -1,5 +1,11 @@
 # remix-routes
 
+## 1.7.7
+
+### Patch Changes
+
+- f14162d: remove typescript from dependencies
+
 ## 1.7.6
 
 ### Patch Changes
