@@ -16,16 +16,16 @@ importers:
         version: link:packages/typescript-remix-routes-plugin
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0
+        version: 1.6.0(@types/node@18.16.14)
 
   e2e:
     dependencies:
       '@remix-run/node':
         specifier: ^1.9.0
-        version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
+        version: 1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@remix-run/react':
         specifier: ^1.9.0
-        version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
+        version: 1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react:
         specifier: ^18.0.0
         version: 18.2.0
@@ -35,7 +35,7 @@ importers:
     devDependencies:
       '@remix-run/dev':
         specifier: ^1.9.0
-        version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
+        version: 1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/react':
         specifier: ^18.0.9
         version: 18.0.25
@@ -66,13 +66,10 @@ importers:
       slash:
         specifier: '3'
         version: 3.0.0
-      typescript-remix-routes-plugin:
-        specifier: workspace:*
-        version: link:../typescript-remix-routes-plugin
     devDependencies:
       '@remix-run/dev':
         specifier: ^2.6.0
-        version: 2.6.0(@types/node@16.11.17)(typescript@4.5.4)(vite@3.2.4)
+        version: 2.6.0(@types/node@16.11.17)(typescript@4.5.4)(vite@3.2.4(@types/node@16.11.17))
       '@remix-run/dev-1':
         specifier: npm:@remix-run/dev@1.19.3
         version: '@remix-run/dev@1.19.3(@types/node@16.11.17)'
@@ -118,7 +115,7 @@ importers:
     devDependencies:
       '@remix-run/dev':
         specifier: ^1.9.0
-        version: 1.9.0(react-dom@18.2.0)(react@18.2.0)
+        version: 1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@types/node':
         specifier: ^18.16.14
         version: 18.16.14
@@ -8949,7 +8946,7 @@ snapshots:
       - ts-node
       - utf-8-validate
 
-  '@remix-run/dev@1.9.0(react-dom@18.2.0)(react@18.2.0)':
+  '@remix-run/dev@1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/core': 7.18.6
       '@babel/plugin-syntax-jsx': 7.18.6(@babel/core@7.18.6)
@@ -8959,7 +8956,7 @@ snapshots:
       '@babel/types': 7.20.7
       '@esbuild-plugins/node-modules-polyfill': 0.1.4(esbuild@0.16.3)
       '@npmcli/package-json': 2.0.0
-      '@remix-run/server-runtime': 1.9.0(react-dom@18.2.0)(react@18.2.0)
+      '@remix-run/server-runtime': 1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       arg: 5.0.2
       cacache: 15.3.0
       chalk: 4.1.2
@@ -8974,7 +8971,7 @@ snapshots:
       get-port: 5.1.1
       gunzip-maybe: 1.4.2
       inquirer: 8.2.4
-      jscodeshift: 0.13.1(@babel/preset-env@7.18.6)
+      jscodeshift: 0.13.1(@babel/preset-env@7.18.6(@babel/core@7.18.6))
       jsesc: 3.0.2
       json5: 2.2.1
       lodash: 4.17.21
@@ -9003,7 +9000,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@remix-run/dev@2.6.0(@types/node@16.11.17)(typescript@4.5.4)(vite@3.2.4)':
+  '@remix-run/dev@2.6.0(@types/node@16.11.17)(typescript@4.5.4)(vite@3.2.4(@types/node@16.11.17))':
     dependencies:
       '@babel/core': 7.22.1
       '@babel/generator': 7.22.3
@@ -9057,9 +9054,10 @@ snapshots:
       set-cookie-parser: 2.6.0
       tar-fs: 2.1.1
       tsconfig-paths: 4.0.0
+      ws: 7.5.6
+    optionalDependencies:
       typescript: 4.5.4
       vite: 3.2.4(@types/node@16.11.17)
-      ws: 7.5.6
     transitivePeerDependencies:
       - '@types/node'
       - bluebird
@@ -9073,9 +9071,9 @@ snapshots:
       - ts-node
       - utf-8-validate
 
-  '@remix-run/node@1.9.0(react-dom@18.2.0)(react@18.2.0)':
+  '@remix-run/node@1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@remix-run/server-runtime': 1.9.0(react-dom@18.2.0)(react@18.2.0)
+      '@remix-run/server-runtime': 1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@remix-run/web-fetch': 4.3.2
       '@remix-run/web-file': 3.0.2
       '@remix-run/web-stream': 1.0.3
@@ -9098,14 +9096,15 @@ snapshots:
       cookie-signature: 1.2.0
       source-map-support: 0.5.21
       stream-slice: 0.1.2
+    optionalDependencies:
       typescript: 4.5.4
 
-  '@remix-run/react@1.9.0(react-dom@18.2.0)(react@18.2.0)':
+  '@remix-run/react@1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@remix-run/router': 1.1.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-router-dom: 6.5.0(react-dom@18.2.0)(react@18.2.0)
+      react-router-dom: 6.5.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
 
   '@remix-run/router@1.1.0': {}
 
@@ -9122,7 +9121,7 @@ snapshots:
       set-cookie-parser: 2.6.0
       source-map: 0.7.4
 
-  '@remix-run/server-runtime@1.9.0(react-dom@18.2.0)(react@18.2.0)':
+  '@remix-run/server-runtime@1.9.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@remix-run/router': 1.1.0
       '@types/cookie': 0.4.1
@@ -9141,6 +9140,7 @@ snapshots:
       cookie: 0.6.0
       set-cookie-parser: 2.6.0
       source-map: 0.7.4
+    optionalDependencies:
       typescript: 4.5.4
 
   '@remix-run/web-blob@3.0.4':
@@ -11566,7 +11566,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  jscodeshift@0.13.1(@babel/preset-env@7.18.6):
+  jscodeshift@0.13.1(@babel/preset-env@7.18.6(@babel/core@7.18.6)):
     dependencies:
       '@babel/core': 7.18.6
       '@babel/parser': 7.18.8
@@ -12730,8 +12730,9 @@ snapshots:
   postcss-load-config@4.0.1(postcss@8.4.24):
     dependencies:
       lilconfig: 2.1.0
-      postcss: 8.4.24
       yaml: 2.3.1
+    optionalDependencies:
+      postcss: 8.4.24
 
   postcss-modules-extract-imports@3.0.0(postcss@8.4.24):
     dependencies:
@@ -12921,7 +12922,7 @@ snapshots:
 
   react-refresh@0.14.0: {}
 
-  react-router-dom@6.5.0(react-dom@18.2.0)(react@18.2.0):
+  react-router-dom@6.5.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@remix-run/router': 1.1.0
       react: 18.2.0
@@ -13996,13 +13997,13 @@ snapshots:
       - supports-color
       - terser
 
-  vite-node@1.6.0:
+  vite-node@1.6.0(@types/node@18.16.14):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.2.11
+      vite: 5.2.11(@types/node@18.16.14)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -14015,39 +14016,40 @@ snapshots:
 
   vite@3.2.4(@types/node@16.11.17):
     dependencies:
-      '@types/node': 16.11.17
       esbuild: 0.15.15
       postcss: 8.4.19
       resolve: 1.22.1
       rollup: 2.79.1
     optionalDependencies:
+      '@types/node': 16.11.17
       fsevents: 2.3.2
 
   vite@3.2.4(@types/node@18.16.14):
     dependencies:
-      '@types/node': 18.16.14
       esbuild: 0.15.15
       postcss: 8.4.19
       resolve: 1.22.1
       rollup: 2.79.1
     optionalDependencies:
+      '@types/node': 18.16.14
       fsevents: 2.3.2
 
   vite@4.3.9(@types/node@16.11.17):
     dependencies:
-      '@types/node': 16.11.17
       esbuild: 0.17.6
       postcss: 8.4.24
       rollup: 3.23.0
     optionalDependencies:
+      '@types/node': 16.11.17
       fsevents: 2.3.2
 
-  vite@5.2.11:
+  vite@5.2.11(@types/node@18.16.14):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.17.2
     optionalDependencies:
+      '@types/node': 18.16.14
       fsevents: 2.3.3
 
   vitest@0.23.4:
@@ -14071,7 +14073,7 @@ snapshots:
       - supports-color
       - terser
 
-  vitest@1.6.0:
+  vitest@1.6.0(@types/node@18.16.14):
     dependencies:
       '@vitest/expect': 1.6.0
       '@vitest/runner': 1.6.0
@@ -14090,9 +14092,11 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.8.0
       tinypool: 0.8.4
-      vite: 5.2.11
-      vite-node: 1.6.0
+      vite: 5.2.11(@types/node@18.16.14)
+      vite-node: 1.6.0(@types/node@18.16.14)
       why-is-node-running: 2.2.2
+    optionalDependencies:
+      '@types/node': 18.16.14
     transitivePeerDependencies:
       - less
       - lightningcss
