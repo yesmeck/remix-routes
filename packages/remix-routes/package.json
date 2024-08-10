@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "chokidar": "^3.5.2",
-    "ejs": "^3.1.9",
+    "ejs": "^3.1.10",
     "meow": "9.0.0",
     "mkdirp": "^1.0.4",
     "slash": "3"
