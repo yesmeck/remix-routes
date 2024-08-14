@@ -41,19 +41,29 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
 
   const searchParams = new URLSearchParams();
 
+  const appendParams = (key: string, value: string) => {
+	if (value !== undefined && value !== null) {
+	  searchParams.append(key, value);
+	}
+  }
+
   if (Array.isArray(query)) {
-	query.forEach(([key, value]) => searchParams.append(key, value));
-  } else {
+	query.forEach(([key, value]) => appendParams(key, value));
+  } else if (typeof query === "object") {
 	Object.entries(query).forEach(([key, value]) => {
 	  if (Array.isArray(value)) {
-		value.forEach(v => searchParams.append(key, v));
+		value.forEach(v => appendParams(key, v));
 	  } else {
-		searchParams.append(key, value);
+		appendParams(key, value);
 	  }
 	});
   }
+  
+  if (searchParams.size > 0) {
+	return path + "?" + searchParams.toString();
+  }
 
-  return path + "?" + searchParams.toString();
+  return path;
 }
 
 export function $params(
