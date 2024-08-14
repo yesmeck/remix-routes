@@ -59,8 +59,10 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
     });
   }
 
-  if (searchParams.toString().length > 0) {
-    return path + "?" + searchParams.toString();
+  const searchParamsString = searchParams.toString();
+
+  if (searchParamsString) {
+    return path + "?" + searchParamsString;
   }
 
   return path;
