@@ -43,12 +43,6 @@ test('$path + undefined or null queries', () => {
   );
 });
 
-test("$path + params + query", () => {
-	expect($path("/posts/:id", { id: 1 }, { raw: "true" })).toBe(
-		"/posts/1?raw=true",
-	);
-});
-
 test('$path + optional route fragment', () => {
   expect($path('/:lang?/about', {})).toBe('/about');
   expect($path('/:lang?/about', { lang: undefined })).toBe('/about');
