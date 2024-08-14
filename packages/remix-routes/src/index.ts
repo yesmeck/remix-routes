@@ -39,9 +39,21 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
     return path;
   }
 
-  const searchParams = new URLSearchParams(query);
+  const searchParams = new URLSearchParams();
 
-  return path + '?' + searchParams.toString();
+  if (Array.isArray(query)) {
+	  query.forEach((param) => searchParams.append(param[0], param[1]));
+  } else {
+	for (const [key, value] of Object.entries(query)) {
+	  if (Array.isArray(value)) {
+	    value.forEach((v) => searchParams.append(key, v));
+	  } else {
+	    searchParams.append(key, value);
+	  }
+	}
+  }
+
+  return path + "?" + searchParams.toString();
 }
 
 export function $params(
