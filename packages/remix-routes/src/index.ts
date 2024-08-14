@@ -46,7 +46,7 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
 		searchParams.append(key, value);
 	}
   } 
-  
+
   if (Array.isArray(query)) {
 	query.forEach(([key, value]) => appendParams(key, value));
   } else if (typeof query === "object") {
@@ -57,8 +57,10 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
 		}
 	  });
     }
-  
-  return path + "?" + searchParams.toString();
+  if (searchParams.toString().length > 0) {
+    return path + "?" + searchParams.toString();
+  }
+  return path;
 }
 
 export function $params(
