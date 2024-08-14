@@ -62,7 +62,7 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
 	if (searchParams.toString().length > 0) {
 		return path + "?" + searchParams.toString();
 	}
-	
+
   return path;
 }
 
