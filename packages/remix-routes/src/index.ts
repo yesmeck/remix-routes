@@ -39,9 +39,33 @@ export function $path(route: string, ...paramsOrQuery: Array<any>) {
     return path;
   }
 
-  const searchParams = new URLSearchParams(query);
+  const searchParams = new URLSearchParams();
 
-  return path + '?' + searchParams.toString();
+  const appendParams = (key: string, value: string) => {
+    if (value !== undefined && value !== null) {
+      searchParams.append(key, value);
+    }
+  } 
+
+  if (Array.isArray(query)) {
+    query.forEach(([key, value]) => appendParams(key, value));
+  } else if (typeof query === "object") {
+    Object.entries(query).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach(v => appendParams(key, v));
+      } else {
+        appendParams(key, value);
+      }
+    });
+  }
+
+  const searchParamsString = searchParams.toString();
+
+  if (searchParamsString) {
+    return path + "?" + searchParamsString;
+  }
+
+  return path;
 }
 
 export function $params(

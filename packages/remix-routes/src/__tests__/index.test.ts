@@ -1,5 +1,5 @@
-import { test, expect } from 'vitest';
-import { $path, $params } from '..';
+import { expect, test } from 'vitest';
+import { $params, $path } from '..';
 
 test('$path', () => {
   expect($path('/posts')).toBe('/posts');
@@ -24,11 +24,22 @@ test('$path + array query', () => {
       ['id', '2'],
     ]),
   ).toBe('/posts/delete?id=1&id=2');
+  expect($path('/posts/delete', {id: ['1', '2']})).toBe('/posts/delete?id=1&id=2');
 });
 
 test('$path + params + query', () => {
   expect($path('/posts/:id', { id: 1 }, { raw: 'true' })).toBe(
     '/posts/1?raw=true',
+  );
+});
+
+test('$path + undefined or null queries', () => {
+  expect($path('/posts', { order: undefined })).toBe('/posts');
+  expect($path('/posts', { order: undefined, filter: 'draft' })).toBe(
+    '/posts?filter=draft'
+  );
+  expect($path('/posts', { order: undefined, filter: null, isDraft: false })).toBe(
+    '/posts?isDraft=false'
   );
 });
 
